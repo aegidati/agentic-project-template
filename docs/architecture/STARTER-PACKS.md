@@ -9,20 +9,106 @@ A **starter pack** is a pre-configured template that provides:
 - **Suggested ADR-001** for architecture strategy
 - **Build & run instructions**
 
+## Starter Ecosystem Overview
+
+The platform includes the following starter packs:
+
+- **agentic-clean-backend** - Backend service with Clean Architecture
+- **agentic-react-spa** - React single-page application for web clients
+- **agentic-flutter-client** - Flutter application for cross-platform clients (mobile, web, desktop)
+- **agentic-postgres-dev** - PostgreSQL database infrastructure setup
+- **agentic-api-contracts-openapi** - OpenAPI contract definitions for API integration
+- **agentic-fullstack-composition** - Orchestration layer for full-stack applications
+
+## Standard Installation Locations
+
+Each starter pack installs into a specific directory under `app/`:
+
+| Starter Pack | Installation Path |
+|---|---|
+| agentic-clean-backend | `app/backend` |
+| agentic-react-spa | `app/web` |
+| agentic-flutter-client | `app/client` |
+| agentic-postgres-dev | `app/infra` |
+| agentic-api-contracts-openapi | `app/contracts` |
+| agentic-fullstack-composition | `app/composition` |
+
 ## Available Starter Packs
 
-> This section will be populated as starter packs are created.
+### Clean Backend Starter
 
-| Starter Pack | Stack | Status | Repository |
-|---|---|---|---|
-| (To be added) | (To be added) | (To be added) | (To be added) |
+Provides a backend service built with Clean Architecture principles.
 
-**Examples of potential starter packs**:
-- `.NET 8 Clean Architecture API`
-- `Python FastAPI with AsyncIO`
-- `Node.js Express with TypeScript`
-- `Java Spring Boot Microservice`
-- `React + Node.js Full Stack`
+**Purpose**: RESTful API or backend service with domain-driven design
+
+**Architecture Layers**:
+- Domain: Business logic and entities
+- Application: Use cases and application services
+- Infrastructure: Data persistence, external integrations
+- API: HTTP controllers and endpoints
+
+**Installation**: `app/backend`
+
+### React SPA Starter
+
+Provides a React-based single-page application for web clients.
+
+**Purpose**: Modern web client application
+
+**Architecture**:
+- Component-based architecture
+- State management
+- API integration via contracts
+- Responsive design
+
+**Configuration**: Uses `API_BASE_URL` for backend integration
+
+**Installation**: `app/web`
+
+### Flutter Client Starter
+
+Provides a Flutter application for cross-platform client development.
+
+**Purpose**: Cross-platform client supporting mobile (iOS/Android), web, and desktop
+
+**Architecture Layers**:
+```
+lib/
+  domain/          # Business entities and logic
+  application/     # Use cases and services
+  infrastructure/  # Data sources, API clients
+  presentation/    # UI widgets and screens
+```
+
+**Integration**: Connects to backend via API contracts defined in `app/contracts`
+
+**Configuration**: Uses `API_BASE_URL` environment variable for backend endpoint
+
+**Installation**: `app/client`
+
+### PostgreSQL Dev Starter
+
+Provides database infrastructure setup for PostgreSQL.
+
+**Purpose**: Local development database with migrations and seeding
+
+**Installation**: `app/infra`
+
+### API Contracts Starter
+
+Provides OpenAPI specification for API contracts.
+
+**Purpose**: Contract-first API design and client generation
+
+**Installation**: `app/contracts`
+
+### Fullstack Composition Starter
+
+Provides orchestration for full-stack applications.
+
+**Purpose**: Docker Compose and deployment configuration
+
+**Installation**: `app/composition`
 
 ## How to Install a Starter Pack
 
@@ -89,6 +175,23 @@ To create a starter pack for your team:
    - Known limitations or choices
 4. **Test**: Install it using one of the three methods above on a test repository.
 5. **Add to registry**: Update this file with the new starter pack link.
+
+## Client Architecture
+
+The platform supports two client starter packs:
+
+**React SPA** (`app/web`):
+- Web-only client
+- Runs in browsers
+- Modern JavaScript/TypeScript ecosystem
+
+**Flutter Client** (`app/client`):
+- Cross-platform: mobile, web, desktop
+- Single codebase for all platforms
+- Dart language
+- Clean Architecture layers
+
+Both clients integrate with the backend via OpenAPI contracts in `app/contracts`.
 
 ## Example Starter Pack Structure
 
