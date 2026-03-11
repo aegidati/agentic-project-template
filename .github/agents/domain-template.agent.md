@@ -160,3 +160,7 @@ See: [Domain Template Guide](./README.md)
 **Authority**: Ubiquitous language (domain terminology)  
 **Language**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
 **Best Practice**: Domain-Driven Design (Evans)
+
+Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
+
+Use docs/routing/AGENT-ROUTING.md to determine when this agent is primary, supporting, or not applicable.

@@ -89,3 +89,7 @@ FEATURE-ORCHESTRATOR:
 **Tool Compliance**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
 **Governance Reference**: [AGENTIC-WORKFLOW.md](../docs/governance/AGENTIC-WORKFLOW.md)  
 **Process Reference**: [CHANGE-MANAGEMENT.md](../docs/governance/CHANGE-MANAGEMENT.md)
+
+Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
+
+Use docs/routing/AGENT-ROUTING.md to determine when this agent is primary, supporting, or not applicable.

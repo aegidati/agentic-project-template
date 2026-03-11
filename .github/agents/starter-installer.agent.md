@@ -99,3 +99,7 @@ Always:
 - state which files are created or merged
 - state which checks were performed
 - state any follow-up action still required
+
+Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
+
+Use docs/routing/AGENT-ROUTING.md to determine when this agent is primary, supporting, or not applicable.

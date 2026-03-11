@@ -135,3 +135,7 @@ NAVIGATOR:
 **Reference**: [UX-GUIDELINES.md](../docs/ux/UX-GUIDELINES.md), [ROUTING-MAP.md](../docs/routing/ROUTING-MAP.md)  
 **Standards**: WCAG 2.1 AA minimum  
 **Language**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)
+
+Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
+
+Use docs/routing/AGENT-ROUTING.md to determine when this agent is primary, supporting, or not applicable.

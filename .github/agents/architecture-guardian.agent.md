@@ -110,3 +110,7 @@ GUARDIAN:
 **Tool Compliance**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
 **Reference Documents**: `docs/adr/*`, [ARCHITECTURE-REQUIREMENTS.md](../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)  
 **Authority Source**: [ADR-TEMPLATE.md](../docs/adr/ADR-TEMPLATE.md)
+
+Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
+
+Use docs/routing/AGENT-ROUTING.md to determine when this agent is primary, supporting, or not applicable.
