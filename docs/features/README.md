@@ -13,7 +13,8 @@ docs/features/
 │   ├── 01-PLAN.md                 # Technical design & approach
 │   ├── 02-TEST-STRATEGY.md        # Test cases & coverage
 │   ├── 03-IMPLEMENTATION-LOG.md   # Execution progress & decisions
-│   ├── 04-LOCK.md                 # Sign-off & completion
+│   ├── 04-REVIEW.md               # Validation, sign-off, lessons learned
+│   ├── 05-DONE.md                 # Final completion & release readiness
 │   └── MOD-XX-<CHANGE>.md         # (Optional) Modifications to existing feature
 ```
 
@@ -55,14 +56,22 @@ Document **execution**:
 - Test execution results
 - Lessons learned
 
-### Phase 4: LOCK
+### Phase 4: REVIEW
 **Owner**: Tech Lead / Project Lead
 
-Sign-off when **Definition of Done** is met:
+Validate and sign-off when **Definition of Done** is met:
 - Verify all acceptance criteria addressed
 - Confirm test evidence collected
 - Document deviations from plan
 - Lessons learned for future features
+
+### Phase 5: DONE
+**Owner**: Product / Tech Lead
+
+Finalize feature completion:
+- Confirm all Definition of Done criteria are satisfied
+- Ensure documentation is complete and current
+- Mark feature ready for release
 
 ### Modifications (MOD documents)
 **For changes to existing features**:
@@ -111,7 +120,7 @@ docs/features/<EPIC-NAME>/
     ...
 ```
 
-Each story within an epic follows the same 4-phase lifecycle.
+Each story within an epic follows the same lifecycle.
 
 ## Definition of Done
 
@@ -120,7 +129,7 @@ A feature is **Done** when it meets all criteria in [docs/governance/DEFINITION-
 ## Custom Agents
 
 These agents enforce the feature lifecycle:
-- **feature-orchestrator**: Ensures REQUEST → PLAN → TEST → IMPL → LOCK order
+- **feature-orchestrator**: Ensures REQUEST → PLAN → TEST → IMPL → REVIEW → DONE order
 - **documentation-guardian**: Validates completeness and quality
 - **test-designer**: Reviews TEST-STRATEGY and validates evidence
 - **architecture-guardian**: Checks ADR alignment

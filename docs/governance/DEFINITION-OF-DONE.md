@@ -7,7 +7,8 @@ A feature is **Done** when ALL of the following criteria are met:
 - ✓ PLAN document completed ([01-PLAN.md](../features/README.md))
 - ✓ TEST-STRATEGY document completed ([02-TEST-STRATEGY.md](../features/README.md))
 - ✓ IMPLEMENTATION-LOG document completed ([03-IMPLEMENTATION-LOG.md](../features/README.md))
-- ✓ LOCK document prepared and signed off ([04-LOCK.md](../features/README.md))
+- ✓ REVIEW document prepared and signed off ([04-REVIEW.md](../features/README.md))
+- ✓ DONE document completed ([05-DONE.md](../features/README.md))
 
 ## Code Quality
 - ✓ Code follows naming conventions (English, consistent)
@@ -35,8 +36,9 @@ A feature is **Done** when ALL of the following criteria are met:
 - ✓ Feature Lead/PO approves REQUEST
 - ✓ Tech Lead approves PLAN and ADR alignment
 - ✓ QA approves TEST-STRATEGY execution
-- ✓ Tech Lead signs LOCK document
+- ✓ Tech Lead signs REVIEW document
+- ✓ Product/Tech Lead confirms DONE status
 
 ## Notes
 - Each project may refine this list, but these baseline criteria must be respected.
-- Modifications to existing features must follow [CHANGE-MANAGEMENT.md](./CHANGE-MANAGEMENT.md) before LOCK.
+- Modifications to existing features must follow [CHANGE-MANAGEMENT.md](./CHANGE-MANAGEMENT.md) before REVIEW and DONE.
