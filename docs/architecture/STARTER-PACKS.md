@@ -117,11 +117,11 @@ Provides orchestration for full-stack applications.
 Provides easy updates if the starter pack evolves.
 
 ```bash
-# Add starter pack to app/ folder
-git subtree add --prefix app/ <STARTER-PACK-URL> <BRANCH>
+# Add starter pack to its canonical subdirectory under app/
+git subtree add --prefix <TARGET-PATH> <STARTER-PACK-URL> <BRANCH>
 
-# Example:
-git subtree add --prefix app/ https://github.com/your-org/starter-dotnet main
+# Example (backend):
+git subtree add --prefix app/backend https://github.com/your-org/agentic-clean-backend main
 ```
 
 After installation:
@@ -137,14 +137,14 @@ Simple manual approach for smaller projects.
 # Download starter pack
 git clone <STARTER-PACK-URL> temp-starter
 
-# Copy contents to app/
-cp -r temp-starter/* app/
+# Copy contents to canonical target path
+cp -r temp-starter/* <TARGET-PATH>/
 
 # Clean up
 rm -rf temp-starter
 
 # Commit
-git add app/
+git add <TARGET-PATH>
 git commit -m "Install <STARTER-PACK-NAME>"
 ```
 
@@ -157,6 +157,14 @@ Some starter packs may provide a bootstrap script:
 ```
 
 Consult the starter pack documentation for details.
+
+Canonical starter targets:
+- `agentic-clean-backend` -> `app/backend`
+- `agentic-react-spa` -> `app/web`
+- `agentic-flutter-client` -> `app/client`
+- `agentic-api-contracts-api` -> `app/contracts`
+- `agentic-postgres-dev` -> `app/infra`
+- `agentic-fullstack-composition` -> `app/composition`
 
 ## Creating Your Own Starter Pack
 

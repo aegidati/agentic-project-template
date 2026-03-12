@@ -120,6 +120,7 @@ Example starter repositories:
 
 agentic-clean-backend  
 agentic-react-spa  
+agentic-flutter-client  
 agentic-postgres-dev  
 agentic-api-contracts-api  
 agentic-fullstack-composition  
@@ -175,11 +176,12 @@ All projects created from the template must follow a standard architecture layou
 
 Starter packs are installed into the following canonical paths:
 
-clean-backend → app/backend  
-react-spa → app/web  
-postgres-dev → app/infra  
-api-contracts-openapi → app/contracts  
-fullstack-composition → app/composition  
+agentic-clean-backend → app/backend  
+agentic-react-spa → app/web  
+agentic-flutter-client → app/client  
+agentic-postgres-dev → app/infra  
+agentic-api-contracts-api → app/contracts  
+agentic-fullstack-composition → app/composition  
 
 This ensures architectural consistency across projects.
 
@@ -192,6 +194,7 @@ After installing architecture starters the project structure becomes:
 app/  
  backend/  
  web/  
+ client/  
  infra/  
  contracts/  
  composition/  

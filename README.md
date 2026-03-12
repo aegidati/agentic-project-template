@@ -19,8 +19,14 @@ This is a **template repository** that provides:
 
 1. **Select an architecture**:
    - Review [docs/architecture/STARTER-PACKS.md](docs/architecture/STARTER-PACKS.md)
-   - Choose a starter pack
-   - Install into `app/` folder
+   - Choose one or more starters
+   - Install each starter into its canonical subdirectory under `app/`:
+     - `agentic-clean-backend` -> `app/backend`
+     - `agentic-react-spa` -> `app/web`
+     - `agentic-flutter-client` -> `app/client`
+     - `agentic-api-contracts-api` -> `app/contracts`
+     - `agentic-postgres-dev` -> `app/infra`
+     - `agentic-fullstack-composition` -> `app/composition`
 
 2. **Document your architecture**:
    - Create `docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md`
@@ -32,7 +38,7 @@ This is a **template repository** that provides:
 
 ### For Template Maintainers
 
-- See [BOOTSTRAP.md](BOOTSTRAP.md) for the full specification
+- See [docs/platform/AI-PLATFORM-BOOTSTRAP.md](docs/platform/AI-PLATFORM-BOOTSTRAP.md) for bootstrap guidance
 
 ## Key Directories
 
@@ -66,14 +72,17 @@ Install a starter pack to provide your technology stack. Every decision is docum
 See: [docs/architecture/ARCHITECTURE-ONBOARDING.md](docs/architecture/ARCHITECTURE-ONBOARDING.md)
 
 ### Custom Agents
-Five agents enforce governance:
+The repository currently includes the following agents:
+- **starter-installer**: Assembles official starters in canonical paths
 - **feature-orchestrator**: Manages feature lifecycle
 - **architecture-guardian**: Protects ADRs and architecture
+- **documentation-guardian**: Maintains documentation quality
 - **test-designer**: Creates test strategies
 - **ux-navigator**: Ensures UX consistency
-- **documentation-guardian**: Maintains doc quality
+- **domain-template**: Supports domain modeling templates
+- **project-auditor**: Audits structure and release readiness
 
-See: [.github/agents/](github/agents/)
+See: [.github/agents/](.github/agents/)
 
 ### Definition of Done
 Clear, enforceable criteria for feature completion.
@@ -97,7 +106,7 @@ See: [docs/governance/LANGUAGE-POLICY.md](docs/governance/LANGUAGE-POLICY.md)
 | **Architectural standards** | [docs/architecture/ARCHITECTURE-REQUIREMENTS.md](docs/architecture/ARCHITECTURE-REQUIREMENTS.md) |
 | **Making decisions** | [docs/adr/ADR-TEMPLATE.md](docs/adr/ADR-TEMPLATE.md), [ADR-INDEX.md](docs/adr/ADR-INDEX.md) |
 | **Applying changes safely** | [docs/governance/CHANGE-MANAGEMENT.md](docs/governance/CHANGE-MANAGEMENT.md) |
-| **Full specification** | [BOOTSTRAP.md](BOOTSTRAP.md) |
+| **Bootstrap guidance** | [docs/platform/AI-PLATFORM-BOOTSTRAP.md](docs/platform/AI-PLATFORM-BOOTSTRAP.md) |
 
 ## License
 

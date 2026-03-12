@@ -1,317 +1,138 @@
-# Agent Routing
+# Documentation Routing Map
 
-This document defines how requests should be routed across the AI agents of the Agentic development platform.
+This document defines where to look first for each documentation topic in this repository.
 
-The goal is to ensure that each request is handled by the most appropriate agent, while preserving architecture integrity, documentation quality, testing discipline, and UX consistency.
-
----
-
-# 1. Routing Principles
-
-Requests must be routed to the agent that owns the primary responsibility for the problem.
-
-If the request affects multiple areas, one agent becomes the primary agent and may consult supporting agents.
-
-Agents must not override responsibilities owned by another agent.
+It is the authoritative map for resolving documentation ownership and source precedence.
 
 ---
 
-# 2. Primary Routing Table
+# 1. Documentation Categories
 
-## Starter installation and project assembly
+The documentation system is organized into these categories:
 
-Primary agent:
-
-- starter-installer
-
-Use when:
-
-- installing one or more official starters
-- assembling a new project from the template
-- checking starter path conflicts
-- validating project structure after starter installation
-
-Supporting agents:
-
-- architecture-guardian
-- documentation-guardian
+- Platform and ecosystem
+- Governance and process
+- Architecture and structure
+- Architecture decisions (ADR)
+- Feature lifecycle artifacts
+- Agent system and request routing
+- Domain templates
+- UX guidance
 
 ---
 
-## Feature planning and lifecycle coordination
+# 2. Authoritative Documents
 
-Primary agent:
+Use this table to identify the primary source for each topic.
 
-- feature-orchestrator
-
-Use when:
-
-- starting a new feature
-- converting a request into a plan
-- coordinating feature lifecycle phases
-- checking whether workflow phases are missing
-
-Supporting agents:
-
-- architecture-guardian
-- test-designer
-- documentation-guardian
-- ux-navigator
-- domain-template
+| Category | Primary Authoritative Documents | Secondary References |
+|---|---|---|
+| Platform and ecosystem | `docs/platform/AI-DEVELOPMENT-PLAYBOOK.md`, `docs/platform/PLATFORM-ARCHITECTURE.md`, `docs/platform/STARTER-ECOSYSTEM.md` | `README.md`, `docs/platform/README.md` |
+| Governance and process | `docs/governance/PROJECT-CONSTITUTION.md`, `docs/governance/AGENTIC-WORKFLOW.md`, `docs/governance/DEFINITION-OF-DONE.md`, `docs/governance/CHANGE-MANAGEMENT.md` | `README.md` |
+| Architecture and structure | `docs/architecture/ARCHITECTURE-REQUIREMENTS.md`, `docs/architecture/PROJECT-STRUCTURE.md`, `docs/architecture/ARCHITECTURE-ONBOARDING.md`, `docs/architecture/STARTER-PACKS.md` | `docs/architecture/ARCHITECTURE-SNAPSHOT.md`, `app/README.md` |
+| Architecture decisions (ADR) | `docs/adr/ADR-INDEX.md`, `docs/adr/ADR-TEMPLATE.md`, project ADR files in `docs/adr/` | `docs/architecture/ARCHITECTURE-SNAPSHOT.md` |
+| Feature lifecycle artifacts | `docs/features/README.md`, `docs/governance/AGENTIC-WORKFLOW.md` | `docs/governance/DEFINITION-OF-DONE.md` |
+| Agent system and request routing | `docs/platform/AGENT-RESPONSIBILITIES.md`, `docs/routing/AGENT-ROUTING.md`, `docs/routing/REQUEST-PATTERNS.md` | `README.md`, `.github/agents/` |
+| Documentation routing rules | `docs/routing/ROUTING-MAP.md` | none |
+| Domain templates | `docs/domain-templates/README.md`, domain files under `docs/domain-templates/**` | `docs/architecture/ARCHITECTURE-REQUIREMENTS.md` |
+| UX guidance | `docs/ux/UX-GUIDELINES.md` | feature docs under `docs/features/` |
 
 ---
 
-## Architecture validation and ADR decisions
+# 3. Routing Rules by Topic
 
-Primary agent:
+Use these rules to select the correct source quickly.
 
-- architecture-guardian
+## Starter installation and canonical paths
 
-Use when:
+Read first:
 
-- evaluating architecture impact
-- deciding whether an ADR is needed
-- checking architecture consistency
-- reviewing structural changes
-- validating module boundaries
+- `docs/architecture/STARTER-PACKS.md`
+- `docs/platform/STARTER-ECOSYSTEM.md`
 
-Supporting agents:
+Then verify onboarding usage in:
 
-- feature-orchestrator
-- starter-installer
-- domain-template
+- `docs/architecture/ARCHITECTURE-ONBOARDING.md`
+- `app/README.md`
 
----
+Canonical starter paths:
 
-## Documentation review and completeness
+- `agentic-clean-backend` -> `app/backend`
+- `agentic-react-spa` -> `app/web`
+- `agentic-flutter-client` -> `app/client`
+- `agentic-api-contracts-api` -> `app/contracts`
+- `agentic-postgres-dev` -> `app/infra`
+- `agentic-fullstack-composition` -> `app/composition`
 
-Primary agent:
+## Workflow, quality gates, and release readiness
 
-- documentation-guardian
+Read first:
 
-Use when:
+- `docs/governance/AGENTIC-WORKFLOW.md`
+- `docs/governance/DEFINITION-OF-DONE.md`
+- `docs/governance/RELEASE-CHECKLIST.md`
 
-- reviewing documentation quality
-- checking documentation completeness
-- validating feature docs
-- checking change documentation
-- reviewing release readiness from a documentation perspective
+## Architecture constraints and structural decisions
 
-Supporting agents:
+Read first:
 
-- feature-orchestrator
-- architecture-guardian
-- test-designer
+- `docs/architecture/ARCHITECTURE-REQUIREMENTS.md`
+- `docs/architecture/PROJECT-STRUCTURE.md`
 
----
+If a decision must be recorded:
 
-## Test strategy and coverage planning
+- `docs/adr/ADR-TEMPLATE.md`
+- `docs/adr/ADR-INDEX.md`
 
-Primary agent:
+## Agent ownership and request routing
 
-- test-designer
+Read first:
 
-Use when:
+- `docs/platform/AGENT-RESPONSIBILITIES.md`
+- `docs/routing/AGENT-ROUTING.md`
+- `docs/routing/REQUEST-PATTERNS.md`
 
-- defining test strategy
-- proposing test cases
-- checking whether acceptance criteria are testable
-- validating Definition of Done from a testing perspective
+## Domain modeling guidance
 
-Supporting agents:
+Read first:
 
-- feature-orchestrator
-- architecture-guardian
-- ux-navigator
+- `docs/domain-templates/README.md`
+- selected bounded-context files under `docs/domain-templates/**`
 
----
+Keep governance/process rules in governance docs, not in domain models.
 
-## UX review and navigation consistency
+## UX guidance
 
-Primary agent:
+Read first:
 
-- ux-navigator
-
-Use when:
-
-- reviewing user flows
-- checking navigation consistency
-- validating UI/UX decisions
-- identifying UX regressions
-
-Supporting agents:
-
-- feature-orchestrator
-- documentation-guardian
+- `docs/ux/UX-GUIDELINES.md`
 
 ---
 
-## Domain modeling and bounded context templates
+# 4. Conflict Resolution Between Sources
 
-Primary agent:
+When documents disagree, apply this precedence order.
 
-- domain-template
+1. Governance and constitution documents in `docs/governance/`
+2. ADR decisions in `docs/adr/` (accepted ADRs override generic guidance)
+3. Architecture requirements in `docs/architecture/`
+4. Platform and routing documents in `docs/platform/` and `docs/routing/`
+5. Local guidance in `README.md` and `app/README.md`
 
-Use when:
+Additional resolution rules:
 
-- defining a new domain module
-- creating a bounded context structure
-- proposing domain entities and aggregates
-- extending domain templates
-
-Supporting agents:
-
-- architecture-guardian
-- feature-orchestrator
-
----
-
-# 3. Escalation Rules
-
-Escalate to architecture-guardian when:
-
-- a request changes system structure
-- a request introduces a new module or boundary
-- a request may require an ADR
-
-Escalate to documentation-guardian when:
-
-- a request changes project rules
-- a request modifies workflow or architecture decisions
-- a request introduces new feature behavior that must be documented
-
-Escalate to test-designer when:
-
-- acceptance criteria are unclear
-- testability is uncertain
-- Definition of Done validation is required
-
-Escalate to ux-navigator when:
-
-- UI flows change
-- navigation changes
-- user-facing interactions are affected
-
-Escalate to domain-template when:
-
-- new domain concepts are introduced
-- a new bounded context is needed
-- domain language becomes inconsistent
+- If `README.md` conflicts with specialized docs, specialized docs win.
+- If two specialized docs conflict at the same level, prefer the one closer to the topic scope:
+	- starter topic -> `docs/architecture/STARTER-PACKS.md`
+	- agent routing topic -> `docs/routing/AGENT-ROUTING.md`
+	- workflow topic -> `docs/governance/AGENTIC-WORKFLOW.md`
+- If an accepted ADR conflicts with a non-ADR document, the ADR wins.
+- If no authoritative source exists, create or update the relevant source document before extending secondary docs.
 
 ---
 
-# 4. Routing by Request Pattern
+# 5. Maintenance Rules for This Map
 
-Use starter-installer for requests like:
-
-- install agentic-clean-backend
-- add react starter
-- assemble backend + web + infra + composition
-- verify starter compatibility
-- detect starter conflicts
-
-Use feature-orchestrator for requests like:
-
-- plan this feature
-- create the implementation workflow
-- generate a feature plan
-- check missing lifecycle steps
-
-Use architecture-guardian for requests like:
-
-- do we need an ADR?
-- validate architecture impact
-- review this structural change
-- check if this violates architecture rules
-
-Use documentation-guardian for requests like:
-
-- review documentation completeness
-- check which docs are missing
-- validate feature documentation
-- prepare docs for release
-
-Use test-designer for requests like:
-
-- define test strategy
-- propose test cases
-- validate acceptance criteria
-- check Definition of Done from a testing perspective
-
-Use ux-navigator for requests like:
-
-- review navigation flow
-- validate UX consistency
-- check user journey coherence
-- inspect UX regressions
-
-Use domain-template for requests like:
-
-- propose a domain model
-- create a bounded context template
-- design domain structure for a new module
-
----
-
-# 5. Authority Rules
-
-If multiple agents are relevant, the following authority rules apply.
-
-Project structure authority:
-
-- starter-installer
-
-Feature lifecycle authority:
-
-- feature-orchestrator
-
-Architecture authority:
-
-- architecture-guardian
-
-Documentation authority:
-
-- documentation-guardian
-
-Testing authority:
-
-- test-designer
-
-UX authority:
-
-- ux-navigator
-
-Domain modeling authority:
-
-- domain-template
-
-No agent should override the authority of another agent in its own responsibility area.
-
----
-
-# 6. Default Multi-Agent Workflow
-
-For a typical feature request, use this sequence:
-
-1. feature-orchestrator
-2. architecture-guardian
-3. domain-template if domain changes are needed
-4. test-designer
-5. ux-navigator if user-facing changes are involved
-6. documentation-guardian
-
-For a new project assembly request, use this sequence:
-
-1. starter-installer
-2. architecture-guardian
-3. documentation-guardian
-
----
-
-# 7. Routing Constraints
-
-- Do not use governance agents for starter installation.
-- Do not use starter-installer for feature planning.
-- Do not use documentation-guardian as architecture authority.
-- Do not use ux-navigator for backend-only changes unless there is a user-facing impact.
-- Do not use domain-template for implementation details outside domain modeling.
+- Update this map when new documentation categories are added.
+- Keep this map focused on source ownership and precedence.
+- Do not duplicate full process or architecture content here.

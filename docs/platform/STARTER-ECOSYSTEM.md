@@ -60,6 +60,7 @@ Example starter repositories:
 
 agentic-clean-backend  
 agentic-react-spa  
+agentic-flutter-client  
 agentic-postgres-dev  
 agentic-api-contracts-api  
 agentic-fullstack-composition  
@@ -105,11 +106,12 @@ All projects must follow the same architecture layout.
 
 Starter packs are installed into these canonical paths.
 
-clean-backend → app/backend  
-react-spa → app/web  
-postgres-dev → app/infra  
-api-contracts-openapi → app/contracts  
-fullstack-composition → app/composition  
+agentic-clean-backend → app/backend  
+agentic-react-spa → app/web  
+agentic-flutter-client → app/client  
+agentic-postgres-dev → app/infra  
+agentic-api-contracts-api → app/contracts  
+agentic-fullstack-composition → app/composition  
 
 This layout ensures that all projects share a consistent architecture.
 
@@ -122,6 +124,7 @@ After installing the architecture starters a project should have the following l
 app/  
  backend/  
  web/  
+ client/  
  infra/  
  contracts/  
  composition/  
@@ -150,13 +153,16 @@ Layers:
 react-spa  
 Provides the frontend application using React and Vite.
 
-postgres-dev  
+agentic-flutter-client  
+Provides a cross-platform client application using Flutter.
+
+agentic-postgres-dev  
 Provides a PostgreSQL development environment.
 
-api-contracts-openapi  
+agentic-api-contracts-api  
 Defines the API contracts using OpenAPI.
 
-fullstack-composition  
+agentic-fullstack-composition  
 Provides Docker Compose orchestration for the full system.
 
 ---

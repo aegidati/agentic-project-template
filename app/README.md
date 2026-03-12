@@ -6,17 +6,17 @@ This is the **canonical location** where architecture starter packs are installe
 
 In derived projects:
 
-1. Choose a starter pack from [starters/README.md](../starters/README.md)
+1. Choose one or more starters from [starters/README.md](../starters/README.md)
 2. Install using one of these methods:
 
 ### Option 1: Git Subtree (Recommended)
 ```bash
-git subtree add --prefix app/ <STARTER-PACK-URL> <BRANCH>
+git subtree add --prefix <TARGET-PATH> <STARTER-PACK-URL> <BRANCH>
 ```
 
 ### Option 2: Copy/Paste
 ```bash
-cp -r <starter-pack>/* app/
+cp -r <starter-pack>/* <TARGET-PATH>/
 ```
 
 ### Option 3: Script-Based
@@ -25,6 +25,14 @@ cp -r <starter-pack>/* app/
 ```
 
 See [docs/architecture/STARTER-PACKS.md](../docs/architecture/STARTER-PACKS.md) for detailed instructions.
+
+Canonical starter targets:
+- `agentic-clean-backend` -> `app/backend`
+- `agentic-react-spa` -> `app/web`
+- `agentic-flutter-client` -> `app/client`
+- `agentic-api-contracts-api` -> `app/contracts`
+- `agentic-postgres-dev` -> `app/infra`
+- `agentic-fullstack-composition` -> `app/composition`
 
 ## What Goes Here?
 
@@ -39,7 +47,7 @@ After installation, `app/` contains:
 ✓ **Do**: Keep `app/` structure clean and respect starter pack conventions  
 ✓ **Do**: Document changes to `app/` structure in ADRs  
 ✗ **Don't**: Store this directory in version control before starter pack selection  
-✗ **Don't**: Mix multiple starter packs in one `app/`  
+✗ **Don't**: Install multiple starters into the same subdirectory or overwrite owned paths without a merge plan  
 
 ## Ownership
 

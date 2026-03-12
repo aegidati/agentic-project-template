@@ -19,12 +19,20 @@ This template repository is **stack-agnostic**. To build a functional applicatio
 ### Step 2: Install Starter Pack
 Run the installation method specified in the starter pack:
 - **Copy/paste**: Manual directory copy
-- **Git subtree** (recommended): `git subtree add --prefix app/ <STARTER-REPO> main`
+- **Git subtree** (recommended): `git subtree add --prefix <TARGET-PATH> <STARTER-REPO> main`
 - **Script-based**: Follow starter pack bootstrap script
 
-Example (git subtree):
+Canonical starter targets:
+- `agentic-clean-backend` -> `app/backend`
+- `agentic-react-spa` -> `app/web`
+- `agentic-flutter-client` -> `app/client`
+- `agentic-api-contracts-api` -> `app/contracts`
+- `agentic-postgres-dev` -> `app/infra`
+- `agentic-fullstack-composition` -> `app/composition`
+
+Example (git subtree, backend):
 ```bash
-git subtree add --prefix app/ https://github.com/your-org/starter-dotnet-api main
+git subtree add --prefix app/backend https://github.com/your-org/agentic-clean-backend main
 ```
 
 ### Step 3: Create Project-Specific ADR-001

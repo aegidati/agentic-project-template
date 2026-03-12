@@ -21,7 +21,7 @@ The Customers domain encapsulates all business logic and concepts related to cus
 
 **Business Rules**:
 - Customer email must be unique
-- Customer status transitions must follow CHANGE-MANAGEMENT rules
+- Customer status transitions must follow allowed domain state transitions
 - Sensitive data (phone, address) stored separately in Profile entity
 
 ### Customer Profile
