@@ -156,7 +156,7 @@ TEST-DESIGNER:
   ✓ 8 integration tests pass (repository, email service)
   ✗ Coverage: 85% (exceeds 80% target)
   
-  → CUST-001 ready for feature lock
+   → CUST-001 ready for REVIEW and DONE flow
 
 USER: "Test failure in CUST-001 after merge"
 TEST-DESIGNER:

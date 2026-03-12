@@ -56,7 +56,7 @@ starters/                    # Metadata and references to starter packs
 ## Core Concepts
 
 ### Agentic Workflow
-Features undergo structured lifecycle: **REQUEST → PLAN → TEST → IMPLEMENTATION → LOCK**
+Features undergo structured lifecycle: **REQUEST → PLAN → TEST → IMPLEMENTATION → REVIEW → DONE**
 
 See: [docs/governance/AGENTIC-WORKFLOW.md](docs/governance/AGENTIC-WORKFLOW.md)
 

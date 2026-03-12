@@ -12,10 +12,10 @@ Manages the **feature development lifecycle**, ensuring adherence to the agentic
    - Blocks implementation without these artifacts
 
 2. **Coordinates Feature Work**
-   - Parses feature lifecycle documents
-   - Tracks progress (REQUEST → PLAN → TEST → IMPLEMENTATION → LOCK)
-   - Identifies blockers and escalates
-   - Reports status on demand
+  - Parses feature lifecycle documents
+  - Tracks progress (REQUEST → PLAN → TEST → IMPLEMENTATION → REVIEW → DONE)
+  - Identifies blockers and escalates
+  - Reports status on demand
 
 3. **Maintains Feature Index**
    - Scans `docs/features/` directory
@@ -23,16 +23,16 @@ Manages the **feature development lifecycle**, ensuring adherence to the agentic
    - Links related features and dependencies
 
 4. **Validates Definition of Done**
-   - Checks LOCK document completeness
-   - Verifies all acceptance criteria from REQUEST are addressed
-   - Confirms test evidence in IMPLEMENTATION-LOG
+  - Checks REVIEW and DONE document completeness
+  - Verifies all acceptance criteria from REQUEST are addressed
+  - Confirms test evidence in IMPLEMENTATION-LOG
 
 ## Activation Triggers
 
 - User asks: "Start working on feature <NAME>"
 - Feature branch created: `feature/<FEATURE-NAME>`
 - Pull request created with feature docs
-- User asks: "Is <FEATURE> ready to lock?"
+- User asks: "Is <FEATURE> ready for review?"
 
 ## Key Commands
 
@@ -40,13 +40,14 @@ Manages the **feature development lifecycle**, ensuring adherence to the agentic
 @feature-orchestrator start <FEATURE-NAME> [--epic <EPIC-NAME>]
 @feature-orchestrator status <FEATURE-NAME>
 @feature-orchestrator requirements <FEATURE-NAME>
-@feature-orchestrator lock <FEATURE-NAME>
-@feature-orchestrator list --status [planning|implementing|review|locked]
+@feature-orchestrator review <FEATURE-NAME>
+@feature-orchestrator done <FEATURE-NAME>
+@feature-orchestrator list --status [planning|implementing|reviewing|done]
 ```
 
 ## Rules
 
-- **No skipping phases**: REQUEST → PLAN → TEST → IMPLEMENTATION → LOCK (strictly)
+- **No skipping phases**: REQUEST → PLAN → TEST → IMPLEMENTATION → REVIEW → DONE (strictly)
 - **MOD documents required**: For any modification to existing features
 - **Architecture alignment**: Ask architecture-guardian about ADR impacts
 - **Test evidence required**: Code review must reference TEST-STRATEGY
@@ -79,7 +80,7 @@ FEATURE-ORCHESTRATOR:
 USER: [Completes IMPLEMENTATION-LOG.md]
 FEATURE-ORCHESTRATOR:
   → Feature meets Definition of Done
-  → Ready for LOCK document and sign-off
+  → Ready for REVIEW document, then DONE confirmation
 ```
 
 ---

@@ -36,8 +36,9 @@ Define rules for safely modifying existing features, ensuring minimal ripple eff
 - Deploy to staging (if applicable).
 - Monitor for side effects.
 
-### Step 4: Lock
-- Update original feature's 04-LOCK.md with MOD reference.
+### Step 4: Review and Done
+- Update original feature's 04-REVIEW.md with MOD reference.
+- Confirm feature completion in 05-DONE.md.
 - Document lessons learned.
 
 ## Safety Rules

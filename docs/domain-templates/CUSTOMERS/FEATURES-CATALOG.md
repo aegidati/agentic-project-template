@@ -20,7 +20,8 @@ For each feature, create:
 - `docs/features/CUST-XXX-<NAME>/01-PLAN.md`
 - `docs/features/CUST-XXX-<NAME>/02-TEST-STRATEGY.md`
 - `docs/features/CUST-XXX-<NAME>/03-IMPLEMENTATION-LOG.md`
-- `docs/features/CUST-XXX-<NAME>/04-LOCK.md`
+- `docs/features/CUST-XXX-<NAME>/04-REVIEW.md`
+- `docs/features/CUST-XXX-<NAME>/05-DONE.md`
 
 Follow [AGENTIC-WORKFLOW.md](../../governance/AGENTIC-WORKFLOW.md) for each feature development.
 

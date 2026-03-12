@@ -57,7 +57,7 @@ Maintains **documentation quality and completeness**, ensuring all artifacts are
 - **English only** in `docs/`: Except brainstorming notes
 - **Valid markdown**: All `.md` files must be syntactically correct
 - **No broken links**: Internal references must be resolvable
-- **Complete features**: All lifecycle artifacts required before LOCK
+- **Complete features**: All lifecycle artifacts required before REVIEW and DONE
 - **Consistent terminology**: Use Domain-Model terms consistently
 
 ## Documentation Quality Checklist
@@ -124,17 +124,18 @@ GUARDIAN:
   
   → Fix ADR reference and typo before proceeding
 
-USER: "LOCK feature CUST-001"
+USER: "Review feature CUST-001"
 GUARDIAN:
   Checking Definition of Done...
   ✓ 00-REQUEST.md complete
   ✓ 01-PLAN.md complete
   ✓ 02-TEST-STRATEGY.md complete
   ✓ 03-IMPLEMENTATION-LOG.md complete
-  ✓ 04-LOCK.md present
+  ✓ 04-REVIEW.md present
+  ✓ 05-DONE.md present
   
   → All documentation complete
-  → Feature ready for sign-off
+  → Feature ready for final sign-off and done confirmation
 ```
 
 ## Documentation Templates
