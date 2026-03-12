@@ -5,14 +5,14 @@ This document defines the development workflow using agentic assistance (GitHub 
 
 ## Feature Development Lifecycle
 
-### Phase 1: REQUEST
+### 00 REQUEST
 **Owner**: Product / Feature Lead  
 **Artifact**: `docs/features/<FEATURE-NAME>/00-REQUEST.md`
 
 - Describe the user story, acceptance criteria, and constraints.
 - No technical decisions yet.
 
-### Phase 2: PLAN
+### 01 PLAN
 **Owner**: Architect / Tech Lead (with Agent: Plan Mode)  
 **Artifact**: `docs/features/<FEATURE-NAME>/01-PLAN.md`
 
@@ -20,14 +20,14 @@ This document defines the development workflow using agentic assistance (GitHub 
 - Identify ADR implications.
 - Create implementation task breakdown.
 
-### Phase 3: TEST STRATEGY
+### 02 TEST STRATEGY
 **Owner**: QA / Developer (with Agent: Test Designer)  
 **Artifact**: `docs/features/<FEATURE-NAME>/02-TEST-STRATEGY.md`
 
 - Define test scope, test cases, and coverage targets.
 - Identify edge cases and failure modes.
 
-### Phase 4: IMPLEMENTATION
+### 03 IMPLEMENTATION
 **Owner**: Developer (with Agent: Feature Orchestrator)  
 **Artifact**: `docs/features/<FEATURE-NAME>/03-IMPLEMENTATION-LOG.md`
 
@@ -35,12 +35,21 @@ This document defines the development workflow using agentic assistance (GitHub 
 - Log key decisions and blockers.
 - Maintain alignment with test strategy.
 
-### Phase 5: LOCK
+### 04 REVIEW
 **Owner**: Tech Lead  
-**Artifact**: `docs/features/<FEATURE-NAME>/04-LOCK.md`
+**Artifact**: `docs/features/<FEATURE-NAME>/04-REVIEW.md`
 
+- Architecture, documentation, and test validation occurs.
 - Sign-off when feature meets Definition of Done.
 - Document lessons learned and deviations from plan.
+
+### 05 DONE
+**Owner**: Product / Tech Lead  
+**Artifact**: `docs/features/<FEATURE-NAME>/05-DONE.md`
+
+- Feature meets all Definition of Done criteria.
+- Documentation is complete and current.
+- Ready for release.
 
 ## Modification Workflow
 
