@@ -121,7 +121,7 @@ Example starter repositories:
 agentic-clean-backend  
 agentic-react-spa  
 agentic-postgres-dev  
-agentic-api-contracts-openapi  
+agentic-api-contracts-api  
 agentic-fullstack-composition  
 
 Optional starter repositories:

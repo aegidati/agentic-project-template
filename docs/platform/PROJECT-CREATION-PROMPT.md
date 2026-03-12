@@ -55,7 +55,7 @@ Examples:
 agentic-clean-backend → installs into `app/backend`  
 agentic-react-spa → installs into `app/web`  
 agentic-postgres-dev → installs into `app/infra`  
-agentic-api-contracts-openapi → installs into `app/contracts`  
+agentic-api-contracts-api → installs into `app/contracts`  
 agentic-fullstack-composition → installs into `app/composition`
 
 Each starter repository contains:

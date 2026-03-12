@@ -61,7 +61,7 @@ agentic-flutter-design-system
 agentic-postgres-dev
 → installs into app/infra
 
-agentic-api-contracts-openapi
+agentic-api-contracts-api
 → installs into app/contracts
 
 agentic-fullstack-composition

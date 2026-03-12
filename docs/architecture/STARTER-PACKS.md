@@ -17,7 +17,7 @@ The platform includes the following starter packs:
 - **agentic-react-spa** - React single-page application for web clients
 - **agentic-flutter-client** - Flutter application for cross-platform clients (mobile, web, desktop)
 - **agentic-postgres-dev** - PostgreSQL database infrastructure setup
-- **agentic-api-contracts-openapi** - OpenAPI contract definitions for API integration
+- **agentic-api-contracts-api** - OpenAPI contract definitions for API integration
 - **agentic-fullstack-composition** - Orchestration layer for full-stack applications
 
 ## Standard Installation Locations
@@ -30,7 +30,7 @@ Each starter pack installs into a specific directory under `app/`:
 | agentic-react-spa | `app/web` |
 | agentic-flutter-client | `app/client` |
 | agentic-postgres-dev | `app/infra` |
-| agentic-api-contracts-openapi | `app/contracts` |
+| agentic-api-contracts-api | `app/contracts` |
 | agentic-fullstack-composition | `app/composition` |
 
 ## Available Starter Packs

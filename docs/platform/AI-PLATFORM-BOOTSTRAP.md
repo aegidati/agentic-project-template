@@ -42,7 +42,7 @@ agentic-react-spa
 agentic-postgres-dev
 → app/infra
 
-agentic-api-contracts-openapi
+agentic-api-contracts-api
 → app/contracts
 
 agentic-fullstack-composition
