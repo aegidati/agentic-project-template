@@ -81,6 +81,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\postinstall-checks
 
 Checks are starter-dependent and run only for starters that are selected and/or installed.
 
+## First-Run Prompt Sequence
+
+Use the execution-ready first-run sequence after deriving a new repository:
+
+- [docs/platform/FIRST-RUN-PROMPT-SEQUENCE.md](docs/platform/FIRST-RUN-PROMPT-SEQUENCE.md)
+- Prompt files directory: [docs/platform/prompts/](docs/platform/prompts/)
+
 ## Key Directories
 
 ```

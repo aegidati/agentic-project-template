@@ -119,3 +119,10 @@ Keep the system:
 - minimal complexity
 
 Respond as a platform architect helping maintain this ecosystem.
+
+FIRST-RUN EXECUTION REFERENCE
+
+For derived repositories, use the standardized first-run bootstrap sequence:
+
+- docs/platform/FIRST-RUN-PROMPT-SEQUENCE.md
+- docs/platform/prompts/
