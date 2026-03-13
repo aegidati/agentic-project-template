@@ -100,6 +100,20 @@ Clear, enforceable criteria for feature completion.
 
 See: [docs/governance/DEFINITION-OF-DONE.md](docs/governance/DEFINITION-OF-DONE.md)
 
+## Platform Model
+
+Template
+↓
+Starter Repositories
+↓
+Generated Project
+↓
+Feature Lifecycle
+↓
+Production System
+
+The template defines governance rules and development structure for AI-assisted development.
+
 ## Language Policy
 
 - **Technical documentation**: English (copy-ready)
