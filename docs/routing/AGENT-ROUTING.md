@@ -46,6 +46,16 @@ Responsible for:
 
 ---
 
+feature-implementer
+
+Responsible for:
+
+- implementing approved features
+- executing implementation increments
+- producing implementation evidence and test execution results
+
+---
+
 architecture-guardian
 
 Responsible for:
@@ -127,6 +137,22 @@ domain-template
 
 ---
 
+Feature implementation
+
+Primary agent:
+
+feature-implementer
+
+Supporting agents:
+
+architecture-guardian  
+test-designer  
+documentation-guardian  
+ux-navigator (if user-facing)  
+domain-template (if domain changes)
+
+---
+
 Architecture evaluation
 
 Primary agent:
@@ -201,6 +227,7 @@ Escalate to architecture-guardian when:
 - a request modifies system structure
 - a request may require an ADR
 - module boundaries change
+- feature-implementer must escalate when implementation changes module boundaries or may require an ADR.
 
 Escalate to documentation-guardian when:
 
@@ -229,11 +256,12 @@ Escalate to domain-template when:
 A typical feature request follows this sequence:
 
 1 feature-orchestrator  
-2 architecture-guardian  
-3 domain-template (if domain changes exist)  
-4 test-designer  
-5 ux-navigator (if user-facing behavior changes)  
-6 documentation-guardian  
+2 feature-implementer  
+3 architecture-guardian  
+4 domain-template (if domain changes exist)  
+5 test-designer  
+6 ux-navigator (if user-facing behavior changes)  
+7 documentation-guardian  
 
 A typical project assembly request follows this sequence:
 

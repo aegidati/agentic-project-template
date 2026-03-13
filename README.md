@@ -134,6 +134,7 @@ See: [docs/architecture/ARCHITECTURE-ONBOARDING.md](docs/architecture/ARCHITECTU
 The repository currently includes the following agents:
 - **starter-installer**: Assembles official starters in canonical paths
 - **feature-orchestrator**: Manages feature lifecycle
+- **feature-implementer**: Executes approved features with strict implementation and evidence gates
 - **architecture-guardian**: Protects ADRs and architecture
 - **documentation-guardian**: Maintains documentation quality
 - **test-designer**: Creates test strategies

@@ -179,9 +179,77 @@ Expected outcome:
 
 ---
 
+# 2.1 Feature Implementation Requests
+
+## Pattern 6 — Implement an approved feature plan
+
+Request example:
+
+Implement feature-<id> based on REQUEST and PLAN artifacts.
+
+Primary agent:
+
+- feature-implementer
+
+Supporting agents:
+
+- architecture-guardian
+- test-designer
+- documentation-guardian
+- ux-navigator (if user-facing)
+- domain-template (if domain model changes)
+
+Documents to consult:
+
+- docs/features/<feature-id>/00-REQUEST.md
+- docs/features/<feature-id>/01-PLAN.md
+- docs/governance/AGENTIC-WORKFLOW.md
+- docs/governance/DEFINITION-OF-DONE.md
+- docs/architecture/ARCHITECTURE-REQUIREMENTS.md
+
+Expected outcome:
+
+- implementation increments are applied
+- tests are executed and reported
+- architecture boundary risks are escalated
+- implementation evidence is documented
+
+---
+
+## Pattern 7 — Review implementation readiness before merge
+
+Request example:
+
+Review whether this implemented feature is ready to move to DONE.
+
+Primary agent:
+
+- feature-implementer
+
+Supporting agents:
+
+- test-designer
+- documentation-guardian
+- architecture-guardian
+
+Documents to consult:
+
+- docs/features/<feature-id>/
+- docs/governance/DEFINITION-OF-DONE.md
+- docs/governance/AGENTIC-WORKFLOW.md
+- docs/architecture/ARCHITECTURE-SNAPSHOT.md
+
+Expected outcome:
+
+- pass/fail readiness assessment
+- missing tests/docs identified
+- final go/no-go recommendation with blockers
+
+---
+
 # 3. Architecture Requests
 
-## Pattern 6 — Evaluate architecture impact
+## Pattern 8 — Evaluate architecture impact
 
 Request example:
 
@@ -211,7 +279,7 @@ Expected outcome:
 
 ---
 
-## Pattern 7 — Check if an ADR is required
+## Pattern 9 — Check if an ADR is required
 
 Request example:
 
@@ -242,7 +310,7 @@ Expected outcome:
 
 # 4. Documentation Requests
 
-## Pattern 8 — Review documentation completeness
+## Pattern 10 — Review documentation completeness
 
 Request example:
 
@@ -273,7 +341,7 @@ Expected outcome:
 
 ---
 
-## Pattern 9 — Prepare documentation for release
+## Pattern 11 — Prepare documentation for release
 
 Request example:
 
@@ -306,7 +374,7 @@ Expected outcome:
 
 # 5. Testing Requests
 
-## Pattern 10 — Define test strategy
+## Pattern 12 — Define test strategy
 
 Request example:
 
@@ -337,7 +405,7 @@ Expected outcome:
 
 ---
 
-## Pattern 11 — Check testability of acceptance criteria
+## Pattern 13 — Check testability of acceptance criteria
 
 Request example:
 
@@ -366,7 +434,7 @@ Expected outcome:
 
 # 6. UX Requests
 
-## Pattern 12 — Review navigation consistency
+## Pattern 14 — Review navigation consistency
 
 Request example:
 
@@ -394,7 +462,7 @@ Expected outcome:
 
 ---
 
-## Pattern 13 — Validate user flow impact
+## Pattern 15 — Validate user flow impact
 
 Request example:
 
@@ -425,7 +493,7 @@ Expected outcome:
 
 # 7. Domain Modeling Requests
 
-## Pattern 14 — Create a domain template
+## Pattern 16 — Create a domain template
 
 Request example:
 
@@ -454,7 +522,7 @@ Expected outcome:
 
 ---
 
-## Pattern 15 — Review domain consistency
+## Pattern 17 — Review domain consistency
 
 Request example:
 
@@ -484,7 +552,7 @@ Expected outcome:
 
 # 8. Cross-Cutting Requests
 
-## Pattern 16 — Full feature readiness review
+## Pattern 18 — Full feature readiness review
 
 Request example:
 

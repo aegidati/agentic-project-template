@@ -23,6 +23,7 @@ Responsible for assembling and structuring the project.
 Responsible for guiding the development lifecycle.
 
 - feature-orchestrator
+- feature-implementer
 - test-designer
 
 ## Governance Agents
@@ -79,6 +80,32 @@ Authority:
 Related documents:
 
 docs/governance/AGENTIC-WORKFLOW.md
+
+---
+
+## feature-implementer
+
+Purpose:
+
+Implement approved features from lifecycle artifacts in a deterministic, test-first, architecture-safe way.
+
+Responsibilities:
+
+- translate approved feature plans into incremental code changes
+- implement and run feature-aligned tests
+- preserve module and layer boundaries during implementation
+- report blockers, assumptions, and implementation evidence
+- escalate architecture-impacting changes when needed
+
+Authority:
+
+- feature implementation execution
+
+Related documents:
+
+docs/governance/AGENTIC-WORKFLOW.md  
+docs/governance/DEFINITION-OF-DONE.md  
+docs/architecture/ARCHITECTURE-REQUIREMENTS.md
 
 ---
 
@@ -232,6 +259,10 @@ Domain modeling authority:
 
 domain-template
 
+Feature implementation execution:
+
+feature-implementer
+
 ---
 
 # 4. Typical Development Workflow
@@ -243,19 +274,22 @@ Example:
 1. feature-orchestrator  
    interprets the feature request
 
-2. architecture-guardian  
+2. feature-implementer  
+   executes approved implementation increments
+
+3. architecture-guardian  
    evaluates architecture impact
 
-3. domain-template  
+4. domain-template (if needed)  
    proposes domain model updates
 
-4. test-designer  
+5. test-designer  
    defines testing strategy
 
-5. ux-navigator  
+6. ux-navigator (if user-facing changes exist)  
    verifies UX consistency
 
-6. documentation-guardian  
+7. documentation-guardian
    validates documentation completeness
 
 ---
@@ -271,6 +305,13 @@ Use feature-orchestrator when:
 
 - starting a new feature
 - planning implementation
+
+Use feature-implementer when:
+
+- implementing approved features from REQUEST/PLAN
+- executing implementation increments
+- collecting test evidence
+- escalating architecture impact when needed
 
 Use architecture-guardian when:
 
