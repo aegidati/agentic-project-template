@@ -98,6 +98,10 @@ git subtree add --prefix=app/backend <repo-url> main --squash
 
 This installs the starter into the correct location while preserving the ability to update it later.
 
+After starter installation, run the template post-install validation workflow.
+Projects derived from this template inherit validation scripts and launcher from the template.
+Validation is starter-aware and evaluates only selected or installed modules.
+
 ---
 
 # STANDARD INSTALL LOCATIONS

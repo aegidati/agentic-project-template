@@ -40,6 +40,47 @@ This is a **template repository** that provides:
 
 - See [docs/platform/AI-PLATFORM-BOOTSTRAP.md](docs/platform/AI-PLATFORM-BOOTSTRAP.md) for bootstrap guidance
 
+## Validation (Post-Install)
+
+This template includes a starter-aware post-install validation workflow.
+
+Derived repositories inherit these validation scripts automatically when created from this template.
+Checks are starter-dependent and adapt to selected or installed modules instead of assuming a fixed stack.
+
+### Prerequisites
+
+- Node.js and npm for JavaScript/TypeScript starters
+- Docker Desktop for infra/composition starters
+- PowerShell on Windows
+
+### Run The Checks
+
+Windows launcher:
+
+```cmd
+.\scripts\run-checks.cmd
+```
+
+Direct PowerShell execution:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\postinstall-checks.ps1
+```
+
+Optional flags:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\postinstall-checks.ps1 -SkipNpmCiIfNodeModules -KeepInfraUp
+```
+
+### Result Labels
+
+- PASS: check executed successfully
+- FAIL: check executed and failed
+- SKIP: check not applicable or required tooling/starter not present
+
+Checks are starter-dependent and run only for starters that are selected and/or installed.
+
 ## Key Directories
 
 ```
@@ -147,4 +188,4 @@ All contributions must follow:
 ---
 
 **Status**: Template (architecture and code to be added in derived projects)  
-**Last Updated**: 2026-03-04
+**Last Updated**: 2026-03-13
