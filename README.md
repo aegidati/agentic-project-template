@@ -59,6 +59,17 @@ app/                         # Reserved for installed starter pack code (empty i
 starters/                    # Metadata and references to starter packs
 ```
 
+The `app/` directory is intentionally empty in the template.
+
+Application code appears only after installing starter packs.
+Starter packs populate the canonical subdirectories such as:
+
+- app/backend
+- app/web
+- app/contracts
+- app/infra
+- app/composition
+
 ## Core Concepts
 
 ### Agentic Workflow

@@ -12,7 +12,7 @@ Define the foundational principles and governance model for this agentic develop
 ## Project Scope
 - This is a **template repository** for agentic development.
 - It provides governance structure, not application code.
-- Derived projects must install a startup pack to add a specific architecture.
+- Derived projects must install a starter pack to add a specific architecture.
 
 ## Governance Model
 - All decisions are documented in [AGENTIC-WORKFLOW.md](./AGENTIC-WORKFLOW.md).

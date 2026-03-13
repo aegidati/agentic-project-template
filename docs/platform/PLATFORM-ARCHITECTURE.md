@@ -1,4 +1,14 @@
 # PLATFORM ARCHITECTURE
+
+NOTE
+
+This document describes a reference architecture used as an example within the platform documentation.
+
+The Agentic template itself is stack-agnostic.
+Projects created from this template may adopt different technology stacks depending on the selected starter packs.
+
+The purpose of this document is illustrative, not prescriptive.
+
 AI-Native Development Platform
 
 This document describes the architecture of the AI-native development platform used to create and maintain projects built with the AGENTIC ecosystem.
