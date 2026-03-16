@@ -3,16 +3,21 @@
 | Starter | Requires | Optional | Incompatible |
 | --- | --- | --- | --- |
 | agentic-clean-backend | agentic-api-contracts-api | agentic-postgres-dev | - |
+| agentic-dotnet-backend | agentic-api-contracts-api | agentic-postgres-dev | - |
 | agentic-react-spa | agentic-api-contracts-api | - | - |
+| agentic-angular-spa | agentic-api-contracts-api | - | - |
 | agentic-flutter-client | agentic-api-contracts-api | - | - |
 | agentic-api-contracts-api | - | - | - |
-| agentic-postgres-dev | agentic-clean-backend | - | - |
-| agentic-fullstack-composition | agentic-clean-backend + agentic-react-spa | agentic-postgres-dev | - |
+| agentic-postgres-dev | agentic-clean-backend or agentic-dotnet-backend | - | - |
+| agentic-fullstack-composition | (agentic-clean-backend + agentic-react-spa) or (agentic-dotnet-backend + agentic-angular-spa) | agentic-postgres-dev | mixed backend/web pairs not explicitly listed |
 
 Rules:
 
-Contracts should be installed before frontend or backend.
+Contracts should be installed before frontend or backend starters.
 
-Composition starter assumes backend and web starters are present.
+Composition starter assumes one of the supported homogeneous backend+web pairs is present:
+
+- agentic-clean-backend + agentic-react-spa
+- agentic-dotnet-backend + agentic-angular-spa
 
 Infrastructure starters are optional.
