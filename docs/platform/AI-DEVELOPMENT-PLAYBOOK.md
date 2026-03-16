@@ -61,7 +61,9 @@ Architecture is assembled using independent starter repositories.
 Examples:
 
 agentic-clean-backend  
+agentic-dotnet-backend  
 agentic-react-spa  
+agentic-angular-spa  
 agentic-flutter-client  
 agentic-api-contracts-api  
 agentic-postgres-dev  
@@ -77,6 +79,8 @@ client → app/client
 contracts → app/contracts  
 infra → app/infra  
 composition → app/composition  
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 Starter installation is managed by the **starter-installer agent**.
 
@@ -262,8 +266,8 @@ A new project is assembled using architecture starters.
 
 Example setup:
 
-backend starter  
-web starter  
+backend starter (clean-backend or dotnet-backend)  
+web starter (react-spa or angular-spa)  
 contracts starter  
 infra starter  
 composition starter  
@@ -300,7 +304,7 @@ Examples of effective prompts.
 
 Install backend starter:
 
-Install agentic-clean-backend and validate project structure.
+Install agentic-clean-backend or agentic-dotnet-backend and validate project structure.
 
 Plan feature:
 

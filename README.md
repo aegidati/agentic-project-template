@@ -22,11 +22,15 @@ This is a **template repository** that provides:
    - Choose one or more starters
    - Install each starter into its canonical subdirectory under `app/`:
      - `agentic-clean-backend` -> `app/backend`
+       - `agentic-dotnet-backend` -> `app/backend`
      - `agentic-react-spa` -> `app/web`
+       - `agentic-angular-spa` -> `app/web`
      - `agentic-flutter-client` -> `app/client`
      - `agentic-api-contracts-api` -> `app/contracts`
      - `agentic-postgres-dev` -> `app/infra`
      - `agentic-fullstack-composition` -> `app/composition`
+
+    Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 2. **Document your architecture**:
    - Create `docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md`
@@ -50,6 +54,7 @@ Checks are starter-dependent and adapt to selected or installed modules instead 
 ### Prerequisites
 
 - Node.js and npm for JavaScript/TypeScript starters
+- .NET SDK for .NET backend starters
 - Docker Desktop for infra/composition starters
 - PowerShell on Windows
 

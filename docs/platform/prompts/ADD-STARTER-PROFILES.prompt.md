@@ -144,6 +144,43 @@ Implement these profiles.
 
 ---
 
+### web-stack-angular
+
+- backend → `agentic-dotnet-backend` → `app/backend`
+- web → `agentic-angular-spa` → `app/web`
+- client → null → `app/client`
+- contracts → `agentic-api-contracts-api` → `app/contracts`
+- infra → `agentic-postgres-dev` → `app/infra`
+- composition → null → `app/composition`
+
+---
+
+### api-stack-dotnet
+
+- backend → `agentic-dotnet-backend` → `app/backend`
+- web → null → `app/web`
+- client → null → `app/client`
+- contracts → `agentic-api-contracts-api` → `app/contracts`
+- infra → `agentic-postgres-dev` → `app/infra`
+- composition → null → `app/composition`
+
+---
+
+### fullstack-angular-dotnet
+
+- backend → `agentic-dotnet-backend` → `app/backend`
+- web → `agentic-angular-spa` → `app/web`
+- client → `agentic-flutter-client` → `app/client`
+- contracts → `agentic-api-contracts-api` → `app/contracts`
+- infra → `agentic-postgres-dev` → `app/infra`
+- composition → `agentic-fullstack-composition` → `app/composition`
+
+---
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
+
+---
+
 ## Manual Starter Override
 
 The YAML must keep a manual `starters:` section.

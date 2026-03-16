@@ -26,7 +26,7 @@ This file complements:
 
 Request example:
 
-Install `agentic-clean-backend` into this project.
+Install `agentic-clean-backend` or `agentic-dotnet-backend` into this project.
 
 Primary agent:
 
@@ -58,7 +58,7 @@ Expected outcome:
 
 Request example:
 
-Assemble this project with `agentic-clean-backend`, `agentic-react-spa`, `agentic-postgres-dev`, and `agentic-fullstack-composition`.
+Assemble this project with `agentic-dotnet-backend`, `agentic-angular-spa`, `agentic-postgres-dev`, and `agentic-fullstack-composition`.
 
 Primary agent:
 
@@ -649,7 +649,7 @@ Expected outcome:
 
 ---
 
-## Pattern 17 — Validate project structure after major changes
+## Pattern 19 — Validate project structure after major changes
 
 Request example:
 

@@ -63,6 +63,9 @@ Installation order:
 | `mobile-stack` | Mobile-first application | contracts, backend, client, infra |
 | `api-stack` | Headless API/backend service | contracts, backend, infra |
 | `fullstack-stack` | Multi-client fullstack system | contracts, backend, web, client, infra, composition |
+| `web-stack-angular` | Browser-first web application (Angular + .NET backend) | contracts, backend, web, infra |
+| `api-stack-dotnet` | Headless API/backend service (.NET backend) | contracts, backend, infra |
+| `fullstack-angular-dotnet` | Multi-client fullstack system (Angular + .NET backend) | contracts, backend, web, client, infra, composition |
 
 ---
 
@@ -112,6 +115,39 @@ Use when both web and mobile clients are required with composition support.
 - infra -> `agentic-postgres-dev` -> `app/infra`
 - composition -> `agentic-fullstack-composition` -> `app/composition`
 
+## web-stack-angular
+
+Use when the primary client is an Angular browser SPA with .NET backend.
+
+- backend -> `agentic-dotnet-backend` -> `app/backend`
+- web -> `agentic-angular-spa` -> `app/web`
+- client -> `null` -> `app/client`
+- contracts -> `agentic-api-contracts-api` -> `app/contracts`
+- infra -> `agentic-postgres-dev` -> `app/infra`
+- composition -> `null` -> `app/composition`
+
+## api-stack-dotnet
+
+Use when no default UI starter is needed and backend is .NET.
+
+- backend -> `agentic-dotnet-backend` -> `app/backend`
+- web -> `null` -> `app/web`
+- client -> `null` -> `app/client`
+- contracts -> `agentic-api-contracts-api` -> `app/contracts`
+- infra -> `agentic-postgres-dev` -> `app/infra`
+- composition -> `null` -> `app/composition`
+
+## fullstack-angular-dotnet
+
+Use when both web and mobile clients are required with Angular + .NET backend and composition support.
+
+- backend -> `agentic-dotnet-backend` -> `app/backend`
+- web -> `agentic-angular-spa` -> `app/web`
+- client -> `agentic-flutter-client` -> `app/client`
+- contracts -> `agentic-api-contracts-api` -> `app/contracts`
+- infra -> `agentic-postgres-dev` -> `app/infra`
+- composition -> `agentic-fullstack-composition` -> `app/composition`
+
 ---
 
 # How To Choose A Profile
@@ -122,6 +158,9 @@ Use this quick rule:
 - Choose `mobile-stack` for mobile-first delivery.
 - Choose `api-stack` for service/API-only projects.
 - Choose `fullstack-stack` when multiple clients and local composition are needed.
+- Choose `web-stack-angular` for Angular web-first delivery.
+- Choose `api-stack-dotnet` for .NET service/API-only projects.
+- Choose `fullstack-angular-dotnet` when Angular web + .NET backend are required with local composition.
 
 If uncertain, start with `web-stack` and apply explicit overrides only when needed.
 
@@ -164,3 +203,5 @@ The `starter-installer` agent must resolve starters in this exact order:
 4. Install in canonical order and canonical paths.
 
 This preserves deterministic installation while keeping manual control available.
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.

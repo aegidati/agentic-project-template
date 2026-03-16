@@ -28,11 +28,15 @@ See [docs/architecture/STARTER-PACKS.md](../docs/architecture/STARTER-PACKS.md) 
 
 Canonical starter targets:
 - `agentic-clean-backend` -> `app/backend`
+- `agentic-dotnet-backend` -> `app/backend`
 - `agentic-react-spa` -> `app/web`
+- `agentic-angular-spa` -> `app/web`
 - `agentic-flutter-client` -> `app/client`
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
 - `agentic-fullstack-composition` -> `app/composition`
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 ## What Goes Here?
 

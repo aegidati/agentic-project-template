@@ -129,7 +129,9 @@ Each starter repository provides a reusable architecture module.
 Example starter repositories:
 
 agentic-clean-backend  
+agentic-dotnet-backend  
 agentic-react-spa  
+agentic-angular-spa  
 agentic-flutter-client  
 agentic-postgres-dev  
 agentic-api-contracts-api  
@@ -187,11 +189,15 @@ All projects created from the template must follow a standard architecture layou
 Starter packs are installed into the following canonical paths:
 
 agentic-clean-backend → app/backend  
+agentic-dotnet-backend → app/backend  
 agentic-react-spa → app/web  
+agentic-angular-spa → app/web  
 agentic-flutter-client → app/client  
 agentic-postgres-dev → app/infra  
 agentic-api-contracts-api → app/contracts  
 agentic-fullstack-composition → app/composition  
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 This ensures architectural consistency across projects.
 
@@ -219,7 +225,7 @@ This structure represents the fullstack application architecture.
 # TECHNOLOGY STACK
 
 Backend  
-Clean Architecture
+Clean Architecture starter or .NET backend starter
 
 Layers:
 
@@ -229,7 +235,7 @@ Layers:
 - presentation  
 
 Frontend  
-React SPA using Vite
+React SPA using Vite or Angular SPA
 
 Database  
 PostgreSQL
@@ -246,9 +252,9 @@ Docker Compose
 
 The runtime system consists of multiple services.
 
-Web Application (React SPA)  
+Web Application (React SPA or Angular SPA)  
 ↓  
-Backend API (Clean Architecture)  
+Backend API (Clean Architecture or .NET backend)  
 ↓  
 Database (PostgreSQL)
 

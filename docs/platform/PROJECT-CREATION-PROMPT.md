@@ -53,7 +53,10 @@ Each starter pack is a separate repository.
 Examples:
 
 agentic-clean-backend → installs into `app/backend`  
+agentic-dotnet-backend → installs into `app/backend`  
 agentic-react-spa → installs into `app/web`  
+agentic-angular-spa → installs into `app/web`  
+agentic-flutter-client → installs into `app/client`  
 agentic-postgres-dev → installs into `app/infra`  
 agentic-api-contracts-api → installs into `app/contracts`  
 agentic-fullstack-composition → installs into `app/composition`
@@ -75,6 +78,7 @@ After installing architecture starters the project layout must be:
 app/  
  backend/  
  web/  
+ client/  
  infra/  
  contracts/  
  composition/  
@@ -89,7 +93,7 @@ This structure represents the fullstack architecture of the project.
 # TECHNOLOGY STACK
 
 Backend  
-Clean Architecture
+Clean Architecture starter or .NET backend starter
 
 Layers:
 
@@ -99,7 +103,7 @@ Layers:
 - presentation  
 
 Frontend  
-React SPA (Vite)
+React SPA (Vite) or Angular SPA
 
 Database  
 PostgreSQL
@@ -139,10 +143,11 @@ Steps:
 
 2. Install architecture starter packs into the correct locations.
 
-clean-backend → app/backend  
-react-spa → app/web  
+clean-backend or dotnet-backend → app/backend  
+react-spa or angular-spa → app/web  
+flutter-client (optional) → app/client  
 postgres-dev → app/infra  
-api-contracts-openapi → app/contracts  
+api-contracts-api → app/contracts  
 fullstack-composition → app/composition  
 
 3. Verify that the final structure matches the fullstack layout.

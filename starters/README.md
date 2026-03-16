@@ -6,11 +6,18 @@ This directory contains **metadata and references** to available starter packs.
 
 ## Available Starter Packs
 
-> (To be populated as starter packs are created)
-
 | Starter Pack | Technology Stack | Installation | Status |
 |---|---|---|---|
-| (Examples coming soon) | | | |
+| agentic-clean-backend | Clean Architecture backend | `app/backend` | Official |
+| agentic-dotnet-backend | .NET backend | `app/backend` | Official |
+| agentic-react-spa | React SPA web client | `app/web` | Official |
+| agentic-angular-spa | Angular SPA web client | `app/web` | Official |
+| agentic-flutter-client | Flutter cross-platform client | `app/client` | Official |
+| agentic-api-contracts-api | OpenAPI contracts | `app/contracts` | Official |
+| agentic-postgres-dev | PostgreSQL development infra | `app/infra` | Official |
+| agentic-fullstack-composition | Fullstack Docker composition | `app/composition` | Official |
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 ## How to Use
 

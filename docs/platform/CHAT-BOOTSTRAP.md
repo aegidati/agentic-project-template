@@ -49,7 +49,13 @@ Current starter ecosystem:
 agentic-clean-backend
 → installs into app/backend
 
+agentic-dotnet-backend
+→ installs into app/backend
+
 agentic-react-spa
+→ installs into app/web
+
+agentic-angular-spa
 → installs into app/web
 
 agentic-flutter-client
@@ -116,6 +122,7 @@ presentation
 Frontend options
 
 React SPA (Vite)
+Angular SPA
 Flutter client (mobile/web/desktop)
 
 Design system
@@ -133,6 +140,8 @@ OpenAPI
 Runtime orchestration
 
 Docker Compose
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 ------------------------------------------------
 

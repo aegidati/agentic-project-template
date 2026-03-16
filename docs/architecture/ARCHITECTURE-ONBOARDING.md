@@ -24,15 +24,24 @@ Run the installation method specified in the starter pack:
 
 Canonical starter targets:
 - `agentic-clean-backend` -> `app/backend`
+- `agentic-dotnet-backend` -> `app/backend`
 - `agentic-react-spa` -> `app/web`
+- `agentic-angular-spa` -> `app/web`
 - `agentic-flutter-client` -> `app/client`
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
 - `agentic-fullstack-composition` -> `app/composition`
 
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
+
 Example (git subtree, backend):
 ```bash
 git subtree add --prefix app/backend https://github.com/your-org/agentic-clean-backend main
+```
+
+Example (git subtree, backend alternative):
+```bash
+git subtree add --prefix app/backend https://github.com/your-org/agentic-dotnet-backend main
 ```
 
 ### Step 3: Create Project-Specific ADR-001

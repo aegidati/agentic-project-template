@@ -36,7 +36,13 @@ Examples:
 agentic-clean-backend
 → app/backend
 
+agentic-dotnet-backend
+→ app/backend
+
 agentic-react-spa
+→ app/web
+
+agentic-angular-spa
 → app/web
 
 agentic-postgres-dev
@@ -69,11 +75,11 @@ docs/
 TECH STACK
 
 Backend
-Clean Architecture
-(domain / application / infrastructure / presentation)
+Clean Architecture starter or .NET backend starter
+(domain / application / infrastructure / presentation or equivalent layered backend structure)
 
 Frontend
-React SPA (Vite)
+React SPA (Vite) or Angular SPA
 
 Database
 PostgreSQL
