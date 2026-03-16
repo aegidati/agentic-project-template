@@ -1,7 +1,7 @@
 project:
   name: null
   template_version: "1.0"
-  profile: null   # allowed: web-stack, mobile-stack, api-stack, fullstack-stack
+  profile: null   # allowed: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet
 
 profiles:
   web-stack:
@@ -78,6 +78,72 @@ profiles:
         path: app/backend
       web:
         repo: agentic-react-spa
+        path: app/web
+      client:
+        repo: agentic-flutter-client
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: agentic-fullstack-composition
+        path: app/composition
+
+  web-stack-angular:
+    description: "Browser-first web application with Angular SPA, .NET backend, shared API contracts and development infrastructure."
+    starters:
+      backend:
+        repo: agentic-dotnet-backend
+        path: app/backend
+      web:
+        repo: agentic-angular-spa
+        path: app/web
+      client:
+        repo: null
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
+  api-stack-dotnet:
+    description: "Headless .NET backend/API project with contracts and development infrastructure."
+    starters:
+      backend:
+        repo: agentic-dotnet-backend
+        path: app/backend
+      web:
+        repo: null
+        path: app/web
+      client:
+        repo: null
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
+  fullstack-angular-dotnet:
+    description: "Multi-client product with .NET backend, Angular SPA, Flutter client, contracts, infrastructure and composition layer."
+    starters:
+      backend:
+        repo: agentic-dotnet-backend
+        path: app/backend
+      web:
+        repo: agentic-angular-spa
         path: app/web
       client:
         repo: agentic-flutter-client
