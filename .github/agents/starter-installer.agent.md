@@ -24,11 +24,15 @@ Given one or more requested starters, install them into the correct target paths
 ## Official starter map
 
 - agentic-clean-backend -> app/backend
+- agentic-dotnet-backend -> app/backend
 - agentic-react-spa -> app/web
+- agentic-angular-spa -> app/web
 - agentic-flutter-client -> app/client
 - agentic-api-contracts-api -> app/contracts
 - agentic-postgres-dev -> app/infra
 - agentic-fullstack-composition -> app/composition
+
+Backend and web are alternative starters per slot canonico (same canonical path, selectable starter).
 
 ## Sources of truth
 

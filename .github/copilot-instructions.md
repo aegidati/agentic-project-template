@@ -27,8 +27,8 @@ Architecture modules are installed using official starters.
 
 Starter mapping:
 
-agentic-clean-backend → app/backend  
-agentic-react-spa → app/web  
+agentic-clean-backend OR agentic-dotnet-backend → app/backend  
+agentic-react-spa OR agentic-angular-spa → app/web  
 agentic-flutter-client → app/client  
 agentic-api-contracts-api → app/contracts  
 agentic-postgres-dev → app/infra  

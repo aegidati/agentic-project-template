@@ -4,7 +4,7 @@ applyTo: "app/backend/**"
 
 # Backend Starter Instructions
 
-The backend area is owned by agentic-clean-backend unless explicitly extended by feature modules.
+The backend area is owned by the selected backend starter (agentic-clean-backend or agentic-dotnet-backend) unless explicitly extended by feature modules.
 
 Rules:
 - preserve Clean Architecture boundaries

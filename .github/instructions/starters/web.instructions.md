@@ -4,7 +4,7 @@ applyTo: "app/web/**"
 
 # Web Starter Instructions
 
-The web area is owned by agentic-react-spa.
+The web area is owned by the selected web starter (agentic-react-spa or agentic-angular-spa).
 
 Rules:
 - keep install path fixed at app/web
