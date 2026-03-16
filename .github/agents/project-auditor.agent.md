@@ -200,7 +200,7 @@ Escalate conceptually to other agents when needed:
 - testing issues -> test-designer
 - UX issues -> ux-navigator
 - starter installation issues -> starter-installer
-- domain modeling issues -> domain-template
+- domain modeling issues -> domain-template-agent
 
 You may reference these agents in the audit report, but remain the primary auditing agent.
 

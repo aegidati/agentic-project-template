@@ -152,7 +152,7 @@ Typical development sequence:
 2. architecture-guardian  
    evaluates architecture impact
 
-3. domain-template  
+3. domain-template-agent  
    proposes domain structures if needed
 
 4. test-designer  

@@ -30,7 +30,7 @@ Escalation owners:
 2. Documentation quality/completeness: `documentation-guardian`
 3. Testing strategy gaps: `test-designer`
 4. UX coherence for user-facing changes: `ux-navigator`
-5. Domain structure for new bounded contexts: `domain-template`
+5. Domain structure for new bounded contexts: `domain-template-agent`
 
 ## Strict Workflow
 

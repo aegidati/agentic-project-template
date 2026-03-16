@@ -201,7 +201,7 @@ When a domain changes:
 
 **Enforcement**:
 - Code reviews check terminology consistency
-- `@domain-template` agent validates ubiquitous language
+- `@domain-template-agent` agent validates ubiquitous language
 - Domain experts review new domain models
 
 ---
@@ -227,7 +227,7 @@ When a domain changes:
 
 ## Custom Agent Support
 
-`@domain-template` agent assists with:
+`@domain-template-agent` agent assists with:
 - Domain model validation
 - Ubiquitous language consistency
 - Cross-domain dependency analysis

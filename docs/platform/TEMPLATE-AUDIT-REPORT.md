@@ -60,7 +60,7 @@ Validated agent set:
 
 - architecture-guardian
 - documentation-guardian
-- domain-template
+- domain-template-agent
 - feature-orchestrator
 - project-auditor
 - starter-installer

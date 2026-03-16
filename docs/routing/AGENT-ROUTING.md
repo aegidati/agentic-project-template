@@ -116,7 +116,7 @@ Responsible for:
 
 ---
 
-domain-template
+domain-template-agent
 
 Responsible for:
 
@@ -136,7 +136,7 @@ starter-installer
 
 Supporting agents:
 
-architecture-guardian  
+architecture-guardian
 documentation-guardian
 
 ---
@@ -149,7 +149,7 @@ new-feature-agent
 
 Supporting agents:
 
-feature-orchestrator  
+feature-orchestrator
 documentation-guardian
 
 ---
@@ -162,8 +162,8 @@ feature-lifecycle-agent
 
 Supporting agents:
 
-feature-orchestrator  
-documentation-guardian  
+feature-orchestrator
+documentation-guardian
 test-designer
 
 ---
@@ -176,11 +176,11 @@ feature-orchestrator
 
 Supporting agents:
 
-architecture-guardian  
-test-designer  
-documentation-guardian  
-ux-navigator  
-domain-template
+architecture-guardian
+test-designer
+documentation-guardian
+ux-navigator
+domain-template-agent
 
 ---
 
@@ -192,11 +192,11 @@ feature-implementer
 
 Supporting agents:
 
-architecture-guardian  
-test-designer  
-documentation-guardian  
-ux-navigator (if user-facing)  
-domain-template (if domain changes)
+architecture-guardian
+test-designer
+documentation-guardian
+ux-navigator (if user-facing)
+domain-template-agent (if domain changes)
 
 ---
 
@@ -208,8 +208,8 @@ architecture-guardian
 
 Supporting agents:
 
-feature-orchestrator  
-domain-template
+feature-orchestrator
+domain-template-agent
 
 ---
 
@@ -221,8 +221,8 @@ documentation-guardian
 
 Supporting agents:
 
-feature-orchestrator  
-architecture-guardian  
+feature-orchestrator
+architecture-guardian
 test-designer
 
 ---
@@ -235,8 +235,8 @@ test-designer
 
 Supporting agents:
 
-feature-orchestrator  
-architecture-guardian  
+feature-orchestrator
+architecture-guardian
 ux-navigator
 
 ---
@@ -249,7 +249,7 @@ ux-navigator
 
 Supporting agents:
 
-feature-orchestrator  
+feature-orchestrator
 documentation-guardian
 
 ---
@@ -258,11 +258,11 @@ Domain modeling
 
 Primary agent:
 
-domain-template
+domain-template-agent
 
 Supporting agents:
 
-architecture-guardian  
+architecture-guardian
 feature-orchestrator
 
 ---
@@ -296,7 +296,7 @@ Escalate to ux-navigator when:
 - navigation changes
 - user-facing interactions change
 
-Escalate to domain-template when:
+Escalate to domain-template-agent when:
 
 - new domain concepts appear
 - a new bounded context is introduced
@@ -312,7 +312,7 @@ A typical feature request follows this sequence:
 3 feature-orchestrator (high-level coordination)  
 4 feature-implementer  
 5 architecture-guardian  
-6 domain-template (if domain changes exist)  
+6 domain-template-agent (if domain changes exist)  
 7 test-designer  
 8 ux-navigator (if user-facing behavior changes)  
 9 documentation-guardian  

@@ -34,7 +34,7 @@ Responsible for ensuring architectural and documentation integrity.
 
 - architecture-guardian
 - documentation-guardian
-- domain-template
+- domain-template-agent
 - ux-navigator
 
 ---
@@ -260,7 +260,7 @@ docs/routing/ROUTING-MAP.md
 
 ---
 
-## domain-template
+## domain-template-agent
 
 Purpose:
 
@@ -320,7 +320,7 @@ feature-lifecycle-agent
 
 Domain modeling authority:
 
-domain-template
+domain-template-agent
 
 Feature implementation execution:
 
@@ -349,7 +349,7 @@ Example:
 5. architecture-guardian  
    evaluates architecture impact
 
-6. domain-template (if needed)  
+6. domain-template-agent (if needed)  
    proposes domain model updates
 
 7. test-designer  
@@ -413,7 +413,7 @@ Use ux-navigator when:
 - reviewing UI changes
 - validating navigation structure
 
-Use domain-template when:
+Use domain-template-agent when:
 
 - creating a new domain module
 - defining a domain model

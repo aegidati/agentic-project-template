@@ -45,12 +45,12 @@ Manages **domain model design and evolution**, ensuring domain-driven design pri
 ## Key Commands
 
 ```
-@domain-template validate <FEATURE-NAME>
-@domain-template check-ubiquitous-language <TERM-OR-FILE>
-@domain-template domain-impact <CHANGE-DESCRIPTION>
-@domain-template suggest-events <FEATURE-OR-DOMAIN>
-@domain-template model-consistency [--domain <DOMAIN-NAME>]
-@domain-template create-template <DOMAIN-NAME> [--base <TEMPLATE>]
+@domain-template-agent validate <FEATURE-NAME>
+@domain-template-agent check-ubiquitous-language <TERM-OR-FILE>
+@domain-template-agent domain-impact <CHANGE-DESCRIPTION>
+@domain-template-agent suggest-events <FEATURE-OR-DOMAIN>
+@domain-template-agent model-consistency [--domain <DOMAIN-NAME>]
+@domain-template-agent create-template <DOMAIN-NAME> [--base <TEMPLATE>]
 ```
 
 ## Rules

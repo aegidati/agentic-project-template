@@ -195,7 +195,7 @@ Supporting agents:
 - test-designer
 - documentation-guardian
 - ux-navigator
-- domain-template
+- domain-template-agent
 
 Documents to consult:
 
@@ -260,7 +260,7 @@ Supporting agents:
 - test-designer
 - documentation-guardian
 - ux-navigator (if user-facing)
-- domain-template (if domain model changes)
+- domain-template-agent (if domain model changes)
 
 Documents to consult:
 
@@ -325,7 +325,7 @@ Primary agent:
 Supporting agents:
 
 - feature-orchestrator
-- domain-template
+- domain-template-agent
 
 Documents to consult:
 
@@ -564,7 +564,7 @@ Create a domain template for a new customers module.
 
 Primary agent:
 
-- domain-template
+- domain-template-agent
 
 Supporting agents:
 
@@ -593,7 +593,7 @@ Review whether this new domain concept is consistent with the existing domain mo
 
 Primary agent:
 
-- domain-template
+- domain-template-agent
 
 Supporting agents:
 
@@ -631,7 +631,7 @@ Supporting agents:
 - documentation-guardian
 - test-designer
 - ux-navigator
-- domain-template if domain changes exist
+- domain-template-agent if domain changes exist
 
 Documents to consult:
 
@@ -715,7 +715,7 @@ If the request is about user-facing flows or navigation, use:
 
 If the request is about domain model structure, use:
 
-- domain-template
+- domain-template-agent
 
 ---
 
@@ -726,4 +726,4 @@ If the request is about domain model structure, use:
 - Do not use feature-lifecycle-agent to initialize a missing feature skeleton.
 - Do not use documentation-guardian as architecture authority.
 - Do not use ux-navigator for backend-only technical changes unless they affect user-facing behavior.
-- Do not use domain-template for implementation details outside domain modeling.
+- Do not use domain-template-agent for implementation details outside domain modeling.

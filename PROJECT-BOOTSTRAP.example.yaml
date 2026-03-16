@@ -1,12 +1,133 @@
 project:
-  template_version: 1.0
+  name: null
+  template_version: "1.0"
+  profile: null   # allowed: web-stack, mobile-stack, api-stack, fullstack-stack
 
+profiles:
+  web-stack:
+    description: "Browser-first web application with backend, shared API contracts and development infrastructure."
+    starters:
+      backend:
+        repo: agentic-clean-backend
+        path: app/backend
+      web:
+        repo: agentic-react-spa
+        path: app/web
+      client:
+        repo: null
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
+  mobile-stack:
+    description: "Mobile-first application with Flutter client, backend, shared API contracts and development infrastructure."
+    starters:
+      backend:
+        repo: agentic-clean-backend
+        path: app/backend
+      web:
+        repo: null
+        path: app/web
+      client:
+        repo: agentic-flutter-client
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
+  api-stack:
+    description: "Headless backend/API project with contracts and development infrastructure."
+    starters:
+      backend:
+        repo: agentic-clean-backend
+        path: app/backend
+      web:
+        repo: null
+        path: app/web
+      client:
+        repo: null
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
+  fullstack-stack:
+    description: "Multi-client product with backend, React SPA, Flutter client, contracts, infrastructure and composition layer."
+    starters:
+      backend:
+        repo: agentic-clean-backend
+        path: app/backend
+      web:
+        repo: agentic-react-spa
+        path: app/web
+      client:
+        repo: agentic-flutter-client
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: agentic-fullstack-composition
+        path: app/composition
+
+# Optional explicit starter override.
+# If this section is filled, it should take precedence over the selected profile.
+# Leave repo: null for starters that are not required.
 starters:
-  backend: null
-  web: null
-  client: null
-  contracts: null
-  infra: null
+  backend:
+    repo: null
+    path: app/backend
+  web:
+    repo: null
+    path: app/web
+  client:
+    repo: null
+    path: app/client
+  contracts:
+    repo: null
+    path: app/contracts
+  infra:
+    repo: null
+    path: app/infra
+  composition:
+    repo: null
+    path: app/composition
+
+rules:
+  starter_resolution:
+    - "If project.profile is set, resolve starters from profiles.<profile>.starters"
+    - "If starters.*.repo is explicitly set, it overrides the profile value"
+    - "If both profile and manual starters are empty, project bootstrap is not ready"
+    - "Only starters with repo != null should be installed"
+  installation_order:
+    - contracts
+    - backend
+    - web
+    - client
+    - infra
+    - composition
 
 architecture:
   adr_001_created: false
@@ -19,6 +140,6 @@ agents:
     - documentation-guardian
     - test-designer
     - ux-navigator
-    - domain-template
+    - domain-template-agent
     - starter-installer
     - project-auditor

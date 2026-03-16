@@ -141,7 +141,7 @@ The repository currently includes the following agents:
 - **documentation-guardian**: Maintains documentation quality
 - **test-designer**: Creates test strategies
 - **ux-navigator**: Ensures UX consistency
-- **domain-template**: Supports domain modeling templates
+- **domain-template-agent**: Supports domain modeling templates
 - **project-auditor**: Audits structure and release readiness
 
 See: [.github/agents/](.github/agents/)
