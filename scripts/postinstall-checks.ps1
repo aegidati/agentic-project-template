@@ -11,7 +11,9 @@ $RepoRoot = (Resolve-Path (Join-Path $ScriptDir "..")).Path
 
 $StarterDefinitions = @(
     [pscustomobject]@{ Id = "agentic-clean-backend"; Key = "backend"; Path = "app/backend" },
+    [pscustomobject]@{ Id = "agentic-dotnet-backend"; Key = "backend"; Path = "app/backend" },
     [pscustomobject]@{ Id = "agentic-react-spa"; Key = "web"; Path = "app/web" },
+    [pscustomobject]@{ Id = "agentic-angular-spa"; Key = "web"; Path = "app/web" },
     [pscustomobject]@{ Id = "agentic-flutter-client"; Key = "client"; Path = "app/client" },
     [pscustomobject]@{ Id = "agentic-api-contracts-api"; Key = "contracts"; Path = "app/contracts" },
     [pscustomobject]@{ Id = "agentic-postgres-dev"; Key = "infra"; Path = "app/infra" },
@@ -266,6 +268,55 @@ function Validate-JsStarter {
     }
 }
 
+function Validate-DotnetStarter {
+    param(
+        [string]$StarterId,
+        [string]$StarterPath
+    )
+
+    Add-Result -Starter $StarterId -Check "Path exists" -Status "PASS" -Details $StarterPath
+
+    if (-not (Test-CommandAvailable -Name "dotnet")) {
+        Add-Result -Starter $StarterId -Check "dotnet availability" -Status "SKIP" -Details "dotnet CLI not found"
+        return
+    }
+    Add-Result -Starter $StarterId -Check "dotnet availability" -Status "PASS" -Details "dotnet detected"
+
+    $solution = Get-ChildItem -LiteralPath $StarterPath -Filter "*.sln" -Recurse -File -ErrorAction SilentlyContinue |
+        Sort-Object FullName |
+        Select-Object -First 1
+
+    $project = Get-ChildItem -LiteralPath $StarterPath -Filter "*.csproj" -Recurse -File -ErrorAction SilentlyContinue |
+        Sort-Object FullName |
+        Select-Object -First 1
+
+    $targetPath = $null
+    if ($null -ne $solution) {
+        $targetPath = $solution.FullName
+        Add-Result -Starter $StarterId -Check "dotnet target discovery" -Status "PASS" -Details ("Using solution: " + $solution.Name)
+    } elseif ($null -ne $project) {
+        $targetPath = $project.FullName
+        Add-Result -Starter $StarterId -Check "dotnet target discovery" -Status "PASS" -Details ("Using project: " + $project.Name)
+    } else {
+        Add-Result -Starter $StarterId -Check "dotnet target discovery" -Status "SKIP" -Details "No .sln or .csproj file found"
+        return
+    }
+
+    [void](Invoke-Step -Starter $StarterId -Check "dotnet restore" -WorkingDirectory $StarterPath -Command "dotnet" -Arguments @("restore",$targetPath))
+    [void](Invoke-Step -Starter $StarterId -Check "dotnet build" -WorkingDirectory $StarterPath -Command "dotnet" -Arguments @("build",$targetPath,"--no-restore"))
+
+    $testProjects = @(
+        Get-ChildItem -LiteralPath $StarterPath -Filter "*.csproj" -Recurse -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -match "(?i)test" -or $_.FullName -match "(?i)[\\/]tests?[\\/]" }
+    )
+
+    if (@($testProjects).Count -gt 0) {
+        [void](Invoke-Step -Starter $StarterId -Check "dotnet test" -WorkingDirectory $StarterPath -Command "dotnet" -Arguments @("test",$targetPath,"--no-build"))
+    } else {
+        Add-Result -Starter $StarterId -Check "dotnet test" -Status "SKIP" -Details "No test project discovered"
+    }
+}
+
 function Validate-ContractsStarter {
     param(
         [string]$StarterId,
@@ -473,7 +524,13 @@ foreach ($starter in $StarterDefinitions) {
         "agentic-clean-backend" {
             Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
+        "agentic-dotnet-backend" {
+            Validate-DotnetStarter -StarterId $starter.Id -StarterPath $starterPath
+        }
         "agentic-react-spa" {
+            Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
+        }
+        "agentic-angular-spa" {
             Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-flutter-client" {
