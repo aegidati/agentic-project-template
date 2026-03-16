@@ -6,11 +6,14 @@ This document defines the development workflow using agentic assistance (GitHub 
 ## Feature Development Lifecycle
 
 ### 00 REQUEST
-**Owner**: Product / Feature Lead  
+**Owner**: Product / Feature Lead (with Agent: New Feature Agent for initialization)  
 **Artifact**: `docs/features/<FEATURE-NAME>/00-REQUEST.md`
 
 - Describe the user story, acceptance criteria, and constraints.
 - No technical decisions yet.
+
+Feature folder and lifecycle artifact initialization should be executed by `new-feature-agent`.
+Feature folder naming must use kebab-case slugging.
 
 ### 01 PLAN
 **Owner**: Architect / Tech Lead (with Agent: Plan Mode)  
@@ -64,7 +67,10 @@ For changes to existing features:
 
 | Agent | Primary Responsibility |
 |-------|------------------------|
+| **new-feature-agent** | Initialize `docs/features/<feature-slug>/` and canonical lifecycle files |
+| **feature-lifecycle-agent** | Validate lifecycle stage, completeness, and transition prerequisites |
 | **feature-orchestrator** | Coordinate feature execution, enforce lifecycle discipline |
+| **feature-implementer** | Execute approved implementation work and produce evidence |
 | **architecture-guardian** | Validate architectural decisions, guard ADRs |
 | **test-designer** | Define and validate test strategies |
 | **ux-navigator** | Ensure UX consistency and design adherence |
@@ -72,6 +78,9 @@ For changes to existing features:
 
 ## Process Guardrails
 
+- **New feature initialization must be canonical**: create feature docs via `new-feature-agent` or equivalent canonical skeleton.
+- **Feature lifecycle transitions must be validated**: use `feature-lifecycle-agent` for stage and prerequisite validation.
+- **feature-orchestrator remains the high-level coordinator** across specialized feature agents.
 - **No implementation without REQUEST + PLAN**.
 - **No code review without TEST-STRATEGY**.
 - **No modification without MOD document**.

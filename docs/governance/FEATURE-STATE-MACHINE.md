@@ -38,7 +38,19 @@ REVIEW requires:
 DONE requires:
 
 - REVIEW approved
-- passing tests
+- passing validation evidence
 - documentation updated
+
+Enforcement owners:
+
+- `new-feature-agent` initializes canonical lifecycle skeleton for new features.
+- `feature-lifecycle-agent` validates stage progression and transition prerequisites.
+- `feature-orchestrator` remains the high-level coordinator.
+
+Implementation artifact compatibility:
+
+- Canonical file: `03-IMPLEMENTATION-LOG.md`
+- Backward-compatible alias: `03-IMPLEMENTATION.md`
+- Validation accepts both, but canonical reporting must prefer `03-IMPLEMENTATION-LOG.md`.
 
 Invalid transitions must be rejected.

@@ -32,7 +32,7 @@ Use this table to identify the primary source for each topic.
 | Architecture and structure | `docs/architecture/ARCHITECTURE-REQUIREMENTS.md`, `docs/architecture/PROJECT-STRUCTURE.md`, `docs/architecture/ARCHITECTURE-ONBOARDING.md`, `docs/architecture/STARTER-PACKS.md` | `docs/architecture/ARCHITECTURE-SNAPSHOT.md`, `app/README.md` |
 | Architecture decisions (ADR) | `docs/adr/ADR-INDEX.md`, `docs/adr/ADR-TEMPLATE.md`, project ADR files in `docs/adr/` | `docs/architecture/ARCHITECTURE-SNAPSHOT.md` |
 | Feature lifecycle artifacts | `docs/features/README.md`, `docs/governance/AGENTIC-WORKFLOW.md` | `docs/governance/DEFINITION-OF-DONE.md` |
-| Agent system and request routing | `docs/platform/AGENT-RESPONSIBILITIES.md`, `docs/routing/AGENT-ROUTING.md`, `docs/routing/REQUEST-PATTERNS.md` | `README.md`, `.github/agents/` |
+| Agent system and request routing | `docs/platform/AGENT-RESPONSIBILITIES.md`, `docs/routing/AGENT-ROUTING.md`, `docs/routing/REQUEST-PATTERNS.md` | `README.md`, `.github/agents/`, `.github/agents/new-feature-agent.agent.md`, `.github/agents/feature-lifecycle-agent.agent.md` |
 | Documentation routing rules | `docs/routing/ROUTING-MAP.md` | none |
 | Domain templates | `docs/domain-templates/README.md`, domain files under `docs/domain-templates/**` | `docs/architecture/ARCHITECTURE-REQUIREMENTS.md` |
 | UX guidance | `docs/ux/UX-GUIDELINES.md` | feature docs under `docs/features/` |
@@ -91,6 +91,11 @@ Read first:
 - `docs/platform/AGENT-RESPONSIBILITIES.md`
 - `docs/routing/AGENT-ROUTING.md`
 - `docs/routing/REQUEST-PATTERNS.md`
+
+For feature lifecycle specialization, also inspect:
+
+- `.github/agents/new-feature-agent.agent.md`
+- `.github/agents/feature-lifecycle-agent.agent.md`
 
 ## Domain modeling guidance
 

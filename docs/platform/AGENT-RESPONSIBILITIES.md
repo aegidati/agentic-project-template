@@ -22,6 +22,8 @@ Responsible for assembling and structuring the project.
 
 Responsible for guiding the development lifecycle.
 
+- new-feature-agent
+- feature-lifecycle-agent
 - feature-orchestrator
 - feature-implementer
 - test-designer
@@ -72,6 +74,7 @@ Responsibilities:
 - generate feature plans
 - coordinate implementation phases
 - ensure lifecycle phases are respected
+- coordinate specialized feature agents at high level
 
 Authority:
 
@@ -80,6 +83,58 @@ Authority:
 Related documents:
 
 docs/governance/AGENTIC-WORKFLOW.md
+
+---
+
+## new-feature-agent
+
+Purpose:
+
+Initialize the canonical documentation skeleton for new features.
+
+Responsibilities:
+
+- create feature folders under `docs/features/<feature-slug>/`
+- enforce kebab-case slug naming for feature folders
+- initialize lifecycle files from `00-REQUEST.md` through `05-DONE.md`
+- hand off initialized features to feature-orchestrator
+
+Authority:
+
+- feature initialization
+- lifecycle skeleton creation
+
+Related documents:
+
+docs/governance/AGENTIC-WORKFLOW.md  
+docs/governance/FEATURE-STATE-MACHINE.md  
+docs/features/README.md
+
+---
+
+## feature-lifecycle-agent
+
+Purpose:
+
+Validate lifecycle progression and completeness for existing features.
+
+Responsibilities:
+
+- inspect lifecycle artifacts under `docs/features/<feature-slug>/`
+- enforce transition prerequisites and progression order
+- report current stage, missing artifacts, invalid transitions, and next allowed step
+- preserve backward compatibility for implementation artifact naming
+
+Authority:
+
+- lifecycle validation
+- transition gate enforcement
+
+Related documents:
+
+docs/governance/AGENTIC-WORKFLOW.md  
+docs/governance/FEATURE-STATE-MACHINE.md  
+docs/governance/DEFINITION-OF-DONE.md
 
 ---
 
@@ -255,6 +310,14 @@ Feature lifecycle authority:
 
 feature-orchestrator
 
+Feature initialization authority:
+
+new-feature-agent
+
+Feature lifecycle validation authority:
+
+feature-lifecycle-agent
+
 Domain modeling authority:
 
 domain-template
@@ -271,25 +334,31 @@ A typical feature workflow involves multiple agents.
 
 Example:
 
-1. feature-orchestrator  
-   interprets the feature request
+1. new-feature-agent  
+   initializes canonical feature lifecycle artifacts for new features
 
-2. feature-implementer  
+2. feature-lifecycle-agent  
+   validates lifecycle completeness and allowed next transition
+
+3. feature-orchestrator  
+   coordinates high-level workflow execution
+
+4. feature-implementer  
    executes approved implementation increments
 
-3. architecture-guardian  
+5. architecture-guardian  
    evaluates architecture impact
 
-4. domain-template (if needed)  
+6. domain-template (if needed)  
    proposes domain model updates
 
-5. test-designer  
+7. test-designer  
    defines testing strategy
 
-6. ux-navigator (if user-facing changes exist)  
+8. ux-navigator (if user-facing changes exist)  
    verifies UX consistency
 
-7. documentation-guardian
+9. documentation-guardian
    validates documentation completeness
 
 ---
@@ -303,8 +372,18 @@ Use starter-installer when:
 
 Use feature-orchestrator when:
 
-- starting a new feature
-- planning implementation
+- coordinating feature workflow at high level
+- orchestrating specialized feature agents
+
+Use new-feature-agent when:
+
+- creating a new feature folder under docs/features
+- initializing canonical lifecycle files for a new feature
+
+Use feature-lifecycle-agent when:
+
+- validating lifecycle progression of an existing feature
+- checking missing artifacts and transition readiness
 
 Use feature-implementer when:
 

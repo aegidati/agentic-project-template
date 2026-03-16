@@ -116,6 +116,69 @@ Expected outcome:
 
 # 2. Feature Workflow Requests
 
+## Pattern 4A — Initialize a new feature lifecycle skeleton
+
+Request example:
+
+Create feature: user authentication.
+
+Primary agent:
+
+- new-feature-agent
+
+Supporting agents:
+
+- feature-orchestrator
+- documentation-guardian
+
+Documents to consult:
+
+- docs/governance/AGENTIC-WORKFLOW.md
+- docs/governance/FEATURE-STATE-MACHINE.md
+- docs/features/README.md
+- docs/routing/AGENT-ROUTING.md
+
+Expected outcome:
+
+- a new folder is created under docs/features/<feature-slug>/
+- canonical lifecycle files are initialized
+- kebab-case slug rule is applied deterministically
+- handoff to feature-orchestrator is explicit
+
+---
+
+## Pattern 4B — Validate lifecycle status and next transition
+
+Request example:
+
+Evaluate lifecycle status of feature user-authentication.
+
+Primary agent:
+
+- feature-lifecycle-agent
+
+Supporting agents:
+
+- feature-orchestrator
+- documentation-guardian
+- test-designer
+
+Documents to consult:
+
+- docs/governance/AGENTIC-WORKFLOW.md
+- docs/governance/FEATURE-STATE-MACHINE.md
+- docs/governance/DEFINITION-OF-DONE.md
+- docs/features/<feature-slug>/
+
+Expected outcome:
+
+- current lifecycle stage is identified
+- missing artifacts are listed
+- invalid transitions are rejected with reasons
+- next allowed step is clearly stated
+
+---
+
 ## Pattern 4 — Start a new feature
 
 Request example:
@@ -626,6 +689,14 @@ If the request is about feature planning or workflow progress, use:
 
 - feature-orchestrator
 
+If the request is about creating a new feature folder and lifecycle docs, use:
+
+- new-feature-agent
+
+If the request is about lifecycle transition validation and completeness, use:
+
+- feature-lifecycle-agent
+
 If the request is about structure, boundaries, or ADRs, use:
 
 - architecture-guardian
@@ -652,6 +723,7 @@ If the request is about domain model structure, use:
 
 - Do not use starter-installer for feature planning.
 - Do not use feature-orchestrator for starter installation.
+- Do not use feature-lifecycle-agent to initialize a missing feature skeleton.
 - Do not use documentation-guardian as architecture authority.
 - Do not use ux-navigator for backend-only technical changes unless they affect user-facing behavior.
 - Do not use domain-template for implementation details outside domain modeling.

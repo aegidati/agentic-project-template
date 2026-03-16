@@ -42,7 +42,27 @@ Responsible for:
 
 - feature lifecycle management
 - feature planning
-- workflow coordination
+- high-level workflow coordination across specialized feature agents
+
+---
+
+new-feature-agent
+
+Responsible for:
+
+- feature initialization
+- canonical lifecycle skeleton creation under docs/features
+- enforcing kebab-case feature slug naming
+
+---
+
+feature-lifecycle-agent
+
+Responsible for:
+
+- lifecycle validation for existing features
+- transition rule enforcement
+- reporting current stage, gaps, and next allowed step
 
 ---
 
@@ -118,6 +138,33 @@ Supporting agents:
 
 architecture-guardian  
 documentation-guardian
+
+---
+
+Feature initialization
+
+Primary agent:
+
+new-feature-agent
+
+Supporting agents:
+
+feature-orchestrator  
+documentation-guardian
+
+---
+
+Feature lifecycle validation
+
+Primary agent:
+
+feature-lifecycle-agent
+
+Supporting agents:
+
+feature-orchestrator  
+documentation-guardian  
+test-designer
 
 ---
 
@@ -239,6 +286,11 @@ Escalate to test-designer when:
 - acceptance criteria are unclear
 - testing strategy is missing
 
+Escalate to new-feature-agent when:
+
+- a feature skeleton is missing under docs/features
+- canonical lifecycle files are not initialized
+
 Escalate to ux-navigator when:
 
 - navigation changes
@@ -255,13 +307,15 @@ Escalate to domain-template when:
 
 A typical feature request follows this sequence:
 
-1 feature-orchestrator  
-2 feature-implementer  
-3 architecture-guardian  
-4 domain-template (if domain changes exist)  
-5 test-designer  
-6 ux-navigator (if user-facing behavior changes)  
-7 documentation-guardian  
+1 new-feature-agent (for new feature initialization)  
+2 feature-lifecycle-agent (lifecycle pre-check and transition validation)  
+3 feature-orchestrator (high-level coordination)  
+4 feature-implementer  
+5 architecture-guardian  
+6 domain-template (if domain changes exist)  
+7 test-designer  
+8 ux-navigator (if user-facing behavior changes)  
+9 documentation-guardian  
 
 A typical project assembly request follows this sequence:
 
