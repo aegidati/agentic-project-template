@@ -59,7 +59,9 @@ Each starter repository contains a reusable architecture module that can be inst
 Example starter repositories:
 
 agentic-clean-backend  
+agentic-dotnet-backend  
 agentic-react-spa  
+agentic-angular-spa  
 agentic-flutter-client  
 agentic-postgres-dev  
 agentic-api-contracts-api  
@@ -111,11 +113,15 @@ All projects must follow the same architecture layout.
 Starter packs are installed into these canonical paths.
 
 agentic-clean-backend → app/backend  
+agentic-dotnet-backend → app/backend  
 agentic-react-spa → app/web  
+agentic-angular-spa → app/web  
 agentic-flutter-client → app/client  
 agentic-postgres-dev → app/infra  
 agentic-api-contracts-api → app/contracts  
 agentic-fullstack-composition → app/composition  
+
+Backend and web are alternative starters per slot canonico while preserving the same install paths.
 
 This layout ensures that all projects share a consistent architecture.
 
@@ -156,6 +162,12 @@ Layers:
 
 react-spa  
 Provides the frontend application using React and Vite.
+
+dotnet-backend  
+Provides the backend service using .NET architecture conventions.
+
+angular-spa  
+Provides the frontend application using Angular.
 
 agentic-flutter-client  
 Provides a cross-platform client application using Flutter.

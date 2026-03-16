@@ -14,7 +14,9 @@ A **starter pack** is a pre-configured template that provides:
 The platform includes the following starter packs:
 
 - **agentic-clean-backend** - Backend service with Clean Architecture
+- **agentic-dotnet-backend** - Backend service for .NET-based architectures
 - **agentic-react-spa** - React single-page application for web clients
+- **agentic-angular-spa** - Angular single-page application for web clients
 - **agentic-flutter-client** - Flutter application for cross-platform clients (mobile, web, desktop)
 - **agentic-postgres-dev** - PostgreSQL database infrastructure setup
 - **agentic-api-contracts-api** - OpenAPI contract definitions for API integration
@@ -27,7 +29,9 @@ Each starter pack installs into a specific directory under `app/`:
 | Starter Pack | Installation Path |
 |---|---|
 | agentic-clean-backend | `app/backend` |
+| agentic-dotnet-backend | `app/backend` |
 | agentic-react-spa | `app/web` |
+| agentic-angular-spa | `app/web` |
 | agentic-flutter-client | `app/client` |
 | agentic-postgres-dev | `app/infra` |
 | agentic-api-contracts-api | `app/contracts` |
@@ -49,6 +53,19 @@ Provides a backend service built with Clean Architecture principles.
 
 **Installation**: `app/backend`
 
+### Dotnet Backend Starter
+
+Provides a backend service for .NET-based architectures.
+
+**Purpose**: RESTful API or backend service implemented with .NET stack conventions
+
+**Architecture**:
+- Layered backend structure
+- API-first integration through contracts
+- Infrastructure integration points
+
+**Installation**: `app/backend`
+
 ### React SPA Starter
 
 Provides a React-based single-page application for web clients.
@@ -60,6 +77,21 @@ Provides a React-based single-page application for web clients.
 - State management
 - API integration via contracts
 - Responsive design
+
+**Configuration**: Uses `API_BASE_URL` for backend integration
+
+**Installation**: `app/web`
+
+### Angular SPA Starter
+
+Provides an Angular-based single-page application for web clients.
+
+**Purpose**: Modern web client application using Angular
+
+**Architecture**:
+- Component/module-based architecture
+- API integration via contracts
+- Responsive UI structure
 
 **Configuration**: Uses `API_BASE_URL` for backend integration
 
@@ -160,7 +192,9 @@ Consult the starter pack documentation for details.
 
 Canonical starter targets:
 - `agentic-clean-backend` -> `app/backend`
+- `agentic-dotnet-backend` -> `app/backend`
 - `agentic-react-spa` -> `app/web`
+- `agentic-angular-spa` -> `app/web`
 - `agentic-flutter-client` -> `app/client`
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
@@ -184,14 +218,19 @@ To create a starter pack for your team:
 4. **Test**: Install it using one of the three methods above on a test repository.
 5. **Add to registry**: Update this file with the new starter pack link.
 
-## Client Architecture
+## Web and Client Architecture
 
-The platform supports two client starter packs:
+The platform supports alternative web starter packs and a cross-platform client starter pack:
 
 **React SPA** (`app/web`):
 - Web-only client
 - Runs in browsers
 - Modern JavaScript/TypeScript ecosystem
+
+**Angular SPA** (`app/web`):
+- Web-only client
+- Runs in browsers
+- Angular ecosystem and tooling
 
 **Flutter Client** (`app/client`):
 - Cross-platform: mobile, web, desktop

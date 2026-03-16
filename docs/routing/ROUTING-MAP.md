@@ -58,11 +58,15 @@ Then verify onboarding usage in:
 Canonical starter paths:
 
 - `agentic-clean-backend` -> `app/backend`
+- `agentic-dotnet-backend` -> `app/backend`
 - `agentic-react-spa` -> `app/web`
+- `agentic-angular-spa` -> `app/web`
 - `agentic-flutter-client` -> `app/client`
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
 - `agentic-fullstack-composition` -> `app/composition`
+
+Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 ## Workflow, quality gates, and release readiness
 
