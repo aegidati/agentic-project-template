@@ -54,6 +54,11 @@ agentic-api-contracts-api
 agentic-fullstack-composition
 → app/composition
 
+agentic-iam
+→ manual copy or subtree-vendor (docs + governance artifacts)
+
+Note: Foundation starters are manual-adoption modules and must not be installed into runtime app/* slots.
+
 
 3) Project repositories
 

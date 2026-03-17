@@ -59,7 +59,8 @@ agentic-angular-spa → installs into `app/web`
 agentic-flutter-client → installs into `app/client`  
 agentic-postgres-dev → installs into `app/infra`  
 agentic-api-contracts-api → installs into `app/contracts`  
-agentic-fullstack-composition → installs into `app/composition`
+agentic-fullstack-composition → installs into `app/composition`  
+agentic-iam → manual copy or subtree-vendor (docs + governance artifacts)
 
 Each starter repository contains:
 
@@ -149,6 +150,10 @@ flutter-client (optional) → app/client
 postgres-dev → app/infra  
 api-contracts-api → app/contracts  
 fullstack-composition → app/composition  
+
+Optional:  
+Adopt agentic-iam as a foundation starter via manual copy or subtree-vendor.  
+Keep runtime canonical paths unchanged and report adopted files plus any collisions.  
 
 3. Verify that the final structure matches the fullstack layout.
 

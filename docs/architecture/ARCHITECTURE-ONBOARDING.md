@@ -34,6 +34,10 @@ Canonical starter targets:
 
 Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
+Foundation adoption model:
+- `agentic-iam` -> manual copy or subtree-vendor (docs + governance artifacts)
+- Foundation starters are not installed into runtime `app/*` slots.
+
 Example (git subtree, backend):
 ```bash
 git subtree add --prefix app/backend https://github.com/your-org/agentic-clean-backend main

@@ -73,6 +73,12 @@ agentic-api-contracts-api
 agentic-fullstack-composition
 → installs into app/composition (docker runtime)
 
+agentic-iam
+→ manual copy or subtree-vendor (docs + governance artifacts)
+
+Foundation starters are manual-adoption only and must not be installed into runtime app/* slots.
+Keep starter examples aligned with the official catalog in docs/platform/STARTER-ECOSYSTEM.md and docs/architecture/STARTER-PACKS.md.
+
 Possible optional starters:
 
 agentic-observability

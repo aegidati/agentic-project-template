@@ -15,6 +15,7 @@ Use this sequence immediately after deriving a new repository and before regular
 | 00 | [docs/platform/prompts/00-verify-template-base.prompt.md](prompts/00-verify-template-base.prompt.md) | Verify template baseline integrity | Baseline verification summary with deviations or explicit none |
 | 01 | [docs/platform/prompts/01-create-project-bootstrap.prompt.md](prompts/01-create-project-bootstrap.prompt.md) | Create project bootstrap manifest | PROJECT-BOOTSTRAP.yaml created from template schema |
 | 02 | [docs/platform/prompts/02-install-starters.prompt.md](prompts/02-install-starters.prompt.md) | Install selected starters deterministically | Per-starter install status in canonical paths |
+| 02b (optional) | [docs/platform/prompts/02-install-starters.prompt.md](prompts/02-install-starters.prompt.md) | Adopt optional foundation starter (agentic-iam) | Foundation adoption outcome with explicit no-runtime-slot confirmation |
 | 03 | [docs/platform/prompts/03-architecture-adr-001.prompt.md](prompts/03-architecture-adr-001.prompt.md) | Record architecture strategy | ADR-001 created and aligned to selected starters |
 | 04 | [docs/platform/prompts/04-architecture-snapshot.prompt.md](prompts/04-architecture-snapshot.prompt.md) | Align architecture snapshot | Updated architecture snapshot linked to ADR-001 |
 | 05 | [docs/platform/prompts/05-bootstrap-status-update.prompt.md](prompts/05-bootstrap-status-update.prompt.md) | Update bootstrap status | Manifest status updated without schema drift |
@@ -37,6 +38,7 @@ Use this sequence immediately after deriving a new repository and before regular
 3. Keep outputs stack-agnostic and governance-first.
 4. Treat optional or unavailable checks as not-applicable (SKIP) when appropriate, with clear reasons.
 5. Do not introduce business-specific assumptions during bootstrap.
+6. Foundation starters are optional and manual-adoption only; never install them into runtime app/* slots.
 
 ## Completion Criteria
 

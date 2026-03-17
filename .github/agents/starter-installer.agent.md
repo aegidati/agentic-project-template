@@ -30,8 +30,12 @@ Given one or more requested starters, install them into the correct target paths
 - agentic-api-contracts-api -> app/contracts
 - agentic-postgres-dev -> app/infra
 - agentic-fullstack-composition -> app/composition
+- agentic-iam -> manual copy or subtree-vendor (docs + governance artifacts)
 
 Backend and web are alternative starters per slot canonic (same canonical path, selectable starter).
+
+Foundation starters are manual-adoption modules.
+They must not be installed into runtime app/* slots.
 
 ## Sources of truth
 
@@ -58,6 +62,8 @@ When installing a starter:
 6. Prefer minimal, deterministic merges.
 7. Preserve ownership boundaries between starters.
 8. Do not move starter contents outside their official target paths.
+9. If the requested starter is a foundation starter (for example agentic-iam), adopt only documentation/governance artifacts using manual copy or subtree-vendor.
+10. Do not map foundation starters to app/backend, app/web, app/client, app/contracts, app/infra, or app/composition.
 
 ## Validation rules
 
