@@ -169,7 +169,7 @@ TEST-DESIGNER:
 
 ## Configuration
 
-**Reference**: [AGENTIC-WORKFLOW.md](../docs/governance/AGENTIC-WORKFLOW.md), [DEFINITION-OF-DONE.md](../docs/governance/DEFINITION-OF-DONE.md)  
+**Reference**: [AGENTIC-WORKFLOW.md](../../docs/governance/AGENTIC-WORKFLOW.md), [DEFINITION-OF-DONE.md](../../docs/governance/DEFINITION-OF-DONE.md)  
 **Test Framework**: Stack-specific (chosen by starter pack)  
 **Reporting**: Evidence documented in feature's 03-IMPLEMENTATION-LOG.md
 

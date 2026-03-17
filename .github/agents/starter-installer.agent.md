@@ -1,14 +1,13 @@
 ---
 description: Install and assemble official Agentic architecture starters into a project created from AGENTIC-TEMPLATE.
-model: gpt-5
 tools:
-  - changes
-  - codebase
-  - fetch
-  - findTestFiles
-  - githubRepo
-  - problems
-  - runCommands
+  - search/changes
+  - search/codebase
+  - read/problems
+  - execute/getTerminalOutput
+  - execute/runInTerminal
+  - read/terminalLastCommand
+  - read/terminalSelection
 ---
 
 # Starter Installer Agent
@@ -32,7 +31,7 @@ Given one or more requested starters, install them into the correct target paths
 - agentic-postgres-dev -> app/infra
 - agentic-fullstack-composition -> app/composition
 
-Backend and web are alternative starters per slot canonico (same canonical path, selectable starter).
+Backend and web are alternative starters per slot canonic (same canonical path, selectable starter).
 
 ## Sources of truth
 

@@ -1,12 +1,13 @@
 ---
 description: Audit the project against Agentic platform structure, documentation, workflow, and architecture rules.
-model: gpt-5
 tools:
-  - changes
-  - codebase
-  - findTestFiles
-  - problems
-  - runCommands
+  - search/changes
+  - search/codebase
+  - read/problems
+  - execute/getTerminalOutput
+  - execute/runInTerminal
+  - read/terminalLastCommand
+  - read/terminalSelection
 ---
 
 # Project Auditor Agent
