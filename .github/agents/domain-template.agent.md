@@ -150,7 +150,7 @@ Each domain template should contain:
 - **ADR-SEEDS.md**: Domain-specific architectural decision seeds
 - **EVENTS.md** (optional): Domain events and event sequences
 
-See: [Domain Template Guide](./README.md)
+See: [Domain Template Guide](../../docs/domain-templates/README.md)
 
 ---
 
