@@ -12,7 +12,7 @@ Maintains **documentation quality and completeness**, ensuring all artifacts are
    - Detects outdated or inconsistent information
 
 2. **Language & Style Enforcement**
-   - Enforces [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)
+   - Enforces [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)
    - Checks English documentation quality (spelling, grammar, clarity)
    - Ensures consistent terminology across docs
    - Reviews code comments for clarity
@@ -95,7 +95,7 @@ LANGUAGE
 ## Integration Points
 
 - **Requires**: All documents in `docs/`
-- **Authority over**: [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md), all markdown files
+- **Authority over**: [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md), all markdown files
 - **Coordinates with**: feature-orchestrator (artifact completion), architecture-guardian (ADR clarity)
 - **Reported to**: Code review, documentation status dashboards
 
@@ -119,7 +119,7 @@ GUARDIAN:
 USER: "Update PLAN after architecture consultation"
 GUARDIAN:
   ✗ References ADR-005 (deleted in project)
-  ✗ Typo: "architecure" → "architecture"
+  ✗ Typo: "architecture" → "architecture"
   ✓ All other sections valid
   
   → Fix ADR reference and typo before proceeding
@@ -150,8 +150,8 @@ Maintained templates:
 
 ## Configuration
 
-**Authority**: [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
-**Reference**: [DEFINITION-OF-DONE.md](../docs/governance/DEFINITION-OF-DONE.md)  
+**Authority**: [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)  
+**Reference**: [DEFINITION-OF-DONE.md](../../docs/governance/DEFINITION-OF-DONE.md)  
 **Tool Standards**: English, markdown-compliant, consistent structure
 
 Use docs/routing/ROUTING-MAP.md to identify authoritative documents.

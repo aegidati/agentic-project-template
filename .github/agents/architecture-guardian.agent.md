@@ -18,7 +18,7 @@ Protects **architectural integrity** by validating decisions against ADRs, ensur
    - Checks dependency rules
 
 3. **Starter Pack Compliance**
-   - Validates conformance to [ARCHITECTURE-REQUIREMENTS.md](../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)
+   - Validates conformance to [ARCHITECTURE-REQUIREMENTS.md](../../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)
    - Ensures deviations are documented in ADRs
    - Tracks architectural debt and technical decisions
 
@@ -107,9 +107,9 @@ GUARDIAN:
 
 ## Configuration
 
-**Tool Compliance**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
-**Reference Documents**: `docs/adr/*`, [ARCHITECTURE-REQUIREMENTS.md](../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)  
-**Authority Source**: [ADR-TEMPLATE.md](../docs/adr/ADR-TEMPLATE.md)
+**Tool Compliance**: Respects [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)  
+**Reference Documents**: `docs/adr/*`, [ARCHITECTURE-REQUIREMENTS.md](../../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)  
+**Authority Source**: [ADR-TEMPLATE.md](../../docs/adr/ADR-TEMPLATE.md)
 
 Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
 

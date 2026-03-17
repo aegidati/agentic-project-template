@@ -6,7 +6,7 @@ Ensures **consistent user experience** across the application by enforcing UX pr
 ## Responsibilities
 
 1. **UX Compliance Checking**
-   - Validates designs against [UX-GUIDELINES.md](../docs/ux/UX-GUIDELINES.md)
+   - Validates designs against [UX-GUIDELINES.md](../../docs/ux/UX-GUIDELINES.md)
    - Checks for consistency with existing patterns
    - Identifies accessibility violations (WCAG, keyboard nav, etc.)
    - Reviews ROUTING-MAP alignment
@@ -19,7 +19,7 @@ Ensures **consistent user experience** across the application by enforcing UX pr
 
 3. **User Flow Validation**
    - Reviews user journeys in feature plans
-   - Validates against [ROUTING-MAP.md](../docs/routing/ROUTING-MAP.md)
+   - Validates against [ROUTING-MAP.md](../../docs/routing/ROUTING-MAP.md)
    - Identifies navigation issues and dead ends
    - Ensures consistency in task flows
 
@@ -60,7 +60,7 @@ Ensures **consistent user experience** across the application by enforcing UX pr
 
 ## Integration Points
 
-- **Requires**: [UX-GUIDELINES.md](../docs/ux/UX-GUIDELINES.md), [ROUTING-MAP.md](../docs/routing/ROUTING-MAP.md)
+- **Requires**: [UX-GUIDELINES.md](../../docs/ux/UX-GUIDELINES.md), [ROUTING-MAP.md](../../docs/routing/ROUTING-MAP.md)
 - **Coordinates with**: feature-orchestrator (feature validation), documentation-guardian (UX docs clarity)
 - **Input to**: Feature REQUEST and PLAN documents
 
@@ -132,9 +132,9 @@ NAVIGATOR:
 
 ## Configuration
 
-**Reference**: [UX-GUIDELINES.md](../docs/ux/UX-GUIDELINES.md), [ROUTING-MAP.md](../docs/routing/ROUTING-MAP.md)  
+**Reference**: [UX-GUIDELINES.md](../../docs/ux/UX-GUIDELINES.md), [ROUTING-MAP.md](../../docs/routing/ROUTING-MAP.md)  
 **Standards**: WCAG 2.1 AA minimum  
-**Language**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)
+**Language**: Respects [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)
 
 Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
 
