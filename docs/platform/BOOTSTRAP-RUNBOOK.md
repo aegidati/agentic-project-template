@@ -14,7 +14,7 @@ Key references:
 
 ## Operational Rules
 
-1. Run the prompts in order from 00 to 09.
+1. Run the prompts in order from 00 to 09, including optional step 02b when IAM foundation adoption is in scope.
 2. Do not start real feature development before completing at least step 06.
 3. Use canonical starter paths:
    - app/backend
@@ -23,6 +23,7 @@ Key references:
    - app/contracts
    - app/infra
    - app/composition
+   Runtime starters must use these canonical paths. Foundation starters (for example agentic-iam) are adopted manually and must not be installed into runtime app/* slots.
 4. Do not use ADD-STARTER-PROFILES for this derived repository: it is a template-evolution prompt, not a project bootstrap prompt.
 5. If a step produces blockers, resolve them before continuing.
 
@@ -156,6 +157,34 @@ Stop if:
 - There are unresolved collisions.
 - Installed starters are inconsistent with `project.profile`.
 
+### 02b - Optional IAM Foundation Adoption
+
+File:
+[docs/platform/prompts/02-install-starters.prompt.md](./prompts/02-install-starters.prompt.md)
+
+Recommended mode:
+Agent
+
+Objective:
+Adopt AGENTIC-IAM as an optional foundation starter using manual copy or subtree-vendor, without changing runtime canonical slots.
+
+Copy-paste chat text:
+
+```text
+Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not install it into runtime canonical paths (app/backend, app/web, app/client, app/contracts, app/infra, app/composition). Report adopted files, collisions, and unresolved decisions.
+```
+
+Expected output:
+1. Foundation adoption status: adopted or deferred.
+2. List of adopted IAM files (if adopted).
+3. Any collisions reported without blind overwrite.
+4. Explicit statement that no runtime canonical path was repurposed for IAM.
+
+Stop if:
+- IAM is placed into a runtime canonical slot.
+- Foundation collisions are unresolved.
+- Adoption status is ambiguous.
+
 ### 03 - Architecture ADR 001
 
 File:
@@ -170,7 +199,7 @@ Formalize the initial architecture strategy.
 Copy-paste chat text:
 
 ```text
-Create docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md documenting selected starters, rationale, constraints, and initial architecture decisions. Keep it governance-first and consistent with template boundaries.
+Create docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md documenting selected runtime starters, optional foundation starters, rationale, constraints, and initial architecture decisions. Keep it governance-first and consistent with template boundaries.
 ```
 
 Expected output:
@@ -182,7 +211,7 @@ Minimum content to verify:
 - Selected starters
 - Rationale for the choice
 - Team or project constraints
-- Decisions on backend, frontend, contracts, infra
+- Decisions on backend, frontend, contracts, infra, and foundation adoption (if any)
 - Any deliberate exclusions
 
 ### 04 - Architecture Snapshot
@@ -335,7 +364,7 @@ Declare whether the project is ready to enter normal development or not.
 Copy-paste chat text:
 
 ```text
-Run a final gate and declare READY or NOT READY. Validate structure, documentation consistency, canonical starter paths unchanged (app/backend, app/web, app/client, app/contracts, app/infra, app/composition), and post-install validation outcomes.
+Run a final gate and declare READY or NOT READY. Validate structure, documentation consistency, canonical runtime starter paths unchanged (app/backend, app/web, app/client, app/contracts, app/infra, app/composition), optional foundation adoption consistency, no foundation starter forced into runtime slots, and post-install validation outcomes.
 ```
 
 Expected output:
@@ -355,6 +384,7 @@ Start real feature development only after a READY outcome.
 5. Validation has no open blocking FAILs.
 6. FEAT-0001-INITIAL-BOOTSTRAP exists.
 7. Final gate is READY, or blockers are clearly documented.
+8. If IAM is in scope, AGENTIC-IAM is either adopted via manual model or explicitly deferred with rationale.
 
 ## What to Do After Bootstrap
 
