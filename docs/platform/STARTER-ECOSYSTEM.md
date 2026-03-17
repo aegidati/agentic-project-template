@@ -67,12 +67,25 @@ agentic-postgres-dev
 agentic-api-contracts-api  
 agentic-fullstack-composition  
 
+Foundation starter repositories may also exist:
+
+agentic-iam
+
 Optional starters may also exist:
 
 agentic-observability  
 agentic-auth-foundation  
 agentic-domain-customers  
 agentic-domain-invoices  
+
+Starter categories in the platform include:
+
+- Backend
+- Frontend
+- Contracts
+- Infrastructure
+- Composition
+- Foundation
 
 Each starter repository typically contains:
 
@@ -108,7 +121,7 @@ Validation is starter-aware and evaluates only selected or installed modules.
 
 # STANDARD INSTALL LOCATIONS
 
-All projects must follow the same architecture layout.
+All projects must follow the same architecture layout for runtime starters.
 
 Starter packs are installed into these canonical paths.
 
@@ -122,6 +135,12 @@ agentic-api-contracts-api → app/contracts
 agentic-fullstack-composition → app/composition  
 
 Backend and web are alternative starters per slot canonico while preserving the same install paths.
+
+Foundation starters use a manual-adoption model and are not installed into a fixed runtime slot under `app/`.
+
+Example:
+
+agentic-iam → manual copy or subtree-vendor (docs + governance artifacts)
 
 This layout ensures that all projects share a consistent architecture.
 
@@ -142,7 +161,9 @@ app/
 docs/  
 .github/agents/  
 
-This structure represents the fullstack system architecture.
+This structure represents the fullstack runtime architecture.
+
+Foundation starters complement this structure through domain and governance artifacts.
 
 ---
 
@@ -274,11 +295,17 @@ Template provides:
 - feature lifecycle
 - Copilot agents
 
-Starter packs provide:
+Runtime starter packs provide:
 
 - architecture modules
 - runtime services
 - infrastructure configuration
+
+Foundation starter packs provide:
+
+- domain language baselines
+- policy and governance baselines
+- ADR seed guidance for downstream projects
 
 Projects combine both layers to produce a full application.
 

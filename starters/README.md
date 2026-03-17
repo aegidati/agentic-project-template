@@ -16,8 +16,11 @@ This directory contains **metadata and references** to available starter packs.
 | agentic-api-contracts-api | OpenAPI contracts | `app/contracts` | Official |
 | agentic-postgres-dev | PostgreSQL development infra | `app/infra` | Official |
 | agentic-fullstack-composition | Fullstack Docker composition | `app/composition` | Official |
+| agentic-iam | Documentation-first IAM foundation | manual-copy or subtree-vendor (docs + governance artifacts) | Official |
 
 Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
+
+Foundation starters are manual-adoption modules and are not installed into runtime `app/*` slots.
 
 ## How to Use
 

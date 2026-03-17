@@ -34,6 +34,10 @@ agentic-api-contracts-api → app/contracts
 agentic-postgres-dev → app/infra  
 agentic-fullstack-composition → app/composition  
 
+Optional foundation starter mapping:
+
+agentic-iam → manual copy or subtree-vendor (docs + governance artifacts)
+
 Do not invent alternative install paths.
 
 ---
@@ -84,10 +88,12 @@ Architecture modules are installed via official starters.
 Starter installation must:
 
 - follow starter.manifest.yaml
-- install into official paths
+- install runtime starters into official runtime paths
 - avoid overwriting existing files
 - detect and report collisions
 - validate project structure after installation
+
+Foundation starters use manual-adoption guidance and must not be forced into runtime `app/*` slots.
 
 Starter ecosystem documentation:
 

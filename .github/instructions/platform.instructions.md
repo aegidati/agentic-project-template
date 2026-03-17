@@ -100,7 +100,9 @@ Starter ecosystem documentation:
 docs/platform/STARTER-ECOSYSTEM.md  
 docs/architecture/STARTER-PACKS.md  
 
-Starter installation must follow the official install paths.
+Runtime starter installation must follow the official install paths.
+
+Foundation starters (for example agentic-iam) follow a manual-adoption model and are not installed into runtime `app/*` slots.
 
 ---
 

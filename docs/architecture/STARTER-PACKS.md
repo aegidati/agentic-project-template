@@ -9,6 +9,8 @@ A **starter pack** is a pre-configured template that provides:
 - **Suggested ADR-001** for architecture strategy
 - **Build & run instructions**
 
+Foundation starters are also supported as documentation-first modules that provide reusable domain and governance baselines without shipping runtime application code.
+
 ## Starter Ecosystem Overview
 
 The platform includes the following starter packs:
@@ -21,10 +23,11 @@ The platform includes the following starter packs:
 - **agentic-postgres-dev** - PostgreSQL database infrastructure setup
 - **agentic-api-contracts-api** - OpenAPI contract definitions for API integration
 - **agentic-fullstack-composition** - Orchestration layer for full-stack applications
+- **agentic-iam** - Documentation-first Identity and Access foundation starter (manual-adoption)
 
 ## Standard Installation Locations
 
-Each starter pack installs into a specific directory under `app/`:
+Runtime starter packs install into specific directories under `app/`:
 
 | Starter Pack | Installation Path |
 |---|---|
@@ -36,6 +39,11 @@ Each starter pack installs into a specific directory under `app/`:
 | agentic-postgres-dev | `app/infra` |
 | agentic-api-contracts-api | `app/contracts` |
 | agentic-fullstack-composition | `app/composition` |
+
+Foundation starter adoption model:
+
+- `agentic-iam` -> manual copy or subtree-vendor (docs + governance artifacts)
+- Foundation starters are not installed into a single canonical runtime `app/*` slot
 
 ## Available Starter Packs
 
@@ -142,7 +150,18 @@ Provides orchestration for full-stack applications.
 
 **Installation**: `app/composition`
 
+### IAM Foundation Starter
+
+Provides a reusable, documentation-first Identity and Access domain foundation.
+
+**Purpose**: Standardize IAM domain language, policies, ADR seeds, and starter consumption guidance before runtime implementation.
+
+**Installation**: manual copy or subtree-vendor (docs + governance artifacts)
+
 ## How to Install a Starter Pack
+
+Runtime starters are installed into canonical `app/*` targets.
+Foundation starters are adopted manually via documentation/governance artifacts and do not require a runtime target path.
 
 ### Option 1: Git Subtree (Recommended)
 
@@ -199,6 +218,10 @@ Canonical starter targets:
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
 - `agentic-fullstack-composition` -> `app/composition`
+
+Foundation starter targets:
+
+- `agentic-iam` -> manual copy or subtree-vendor (docs + governance artifacts)
 
 ## Creating Your Own Starter Pack
 

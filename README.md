@@ -20,7 +20,7 @@ This is a **template repository** that provides:
 1. **Select an architecture**:
    - Review [docs/architecture/STARTER-PACKS.md](docs/architecture/STARTER-PACKS.md)
    - Choose one or more starters
-   - Install each starter into its canonical subdirectory under `app/`:
+   - Install each runtime starter into its canonical subdirectory under `app/`:
      - `agentic-clean-backend` -> `app/backend`
        - `agentic-dotnet-backend` -> `app/backend`
      - `agentic-react-spa` -> `app/web`
@@ -30,7 +30,12 @@ This is a **template repository** that provides:
      - `agentic-postgres-dev` -> `app/infra`
      - `agentic-fullstack-composition` -> `app/composition`
 
+   - Optional foundation starter:
+     - `agentic-iam` -> manual copy or subtree-vendor (docs + governance artifacts)
+
     Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
+
+    Foundation starters are manual-adoption modules and are not installed into runtime `app/*` slots.
 
 2. **Document your architecture**:
    - Create `docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md`
@@ -115,13 +120,15 @@ starters/                    # Metadata and references to starter packs
 The `app/` directory is intentionally empty in the template.
 
 Application code appears only after installing starter packs.
-Starter packs populate the canonical subdirectories such as:
+Runtime starter packs populate the canonical subdirectories such as:
 
 - app/backend
 - app/web
 - app/contracts
 - app/infra
 - app/composition
+
+Foundation starters (for example `agentic-iam`) are adopted manually via documentation/governance artifacts and do not map to a single runtime `app/*` slot.
 
 ## Core Concepts
 
@@ -131,7 +138,7 @@ Features undergo structured lifecycle: **REQUEST → PLAN → TEST → IMPLEMENT
 See: [docs/governance/AGENTIC-WORKFLOW.md](docs/governance/AGENTIC-WORKFLOW.md)
 
 ### Architecture Readiness
-Install a starter pack to provide your technology stack. Every decision is documented in ADRs.
+Install runtime starter packs to provide your technology stack. Optionally adopt foundation starters for reusable domain and governance baselines. Every decision is documented in ADRs.
 
 See: [docs/architecture/ARCHITECTURE-ONBOARDING.md](docs/architecture/ARCHITECTURE-ONBOARDING.md)
 
