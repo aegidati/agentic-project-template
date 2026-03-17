@@ -13,12 +13,12 @@ Copilot should follow the rules defined in this document when assisting developm
 The project uses a deterministic structure.
 
 app/
-  backend/
-  web/
-  client/
-  infra/
-  contracts/
-  composition/
+   backend/
+   web/
+   client/
+   infra/
+   contracts/
+   composition/
 
 docs/
 .github/
