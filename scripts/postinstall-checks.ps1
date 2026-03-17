@@ -58,7 +58,10 @@ function Invoke-Step {
 
     Push-Location $WorkingDirectory
     try {
-        $output = & $Command @Arguments 2>&1
+        $previousErrorActionPreference = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        $output = @(& $Command @Arguments 2>&1 | ForEach-Object { $_.ToString() })
+        $ErrorActionPreference = $previousErrorActionPreference
         $exitCode = $LASTEXITCODE
         if ($null -eq $exitCode) { $exitCode = 0 }
 
@@ -76,6 +79,46 @@ function Invoke-Step {
         return $false
     }
     finally {
+        $ErrorActionPreference = "Stop"
+        Pop-Location
+    }
+}
+
+function Invoke-DockerComposeStep {
+    param(
+        [string]$Starter,
+        [string]$Check,
+        [string]$WorkingDirectory,
+        [string]$ComposeFile,
+        [string[]]$ComposeArguments
+    )
+
+    if ([string]::IsNullOrWhiteSpace($WorkingDirectory)) { $WorkingDirectory = $RepoRoot }
+    try {
+        Push-Location $WorkingDirectory
+        $previousErrorActionPreference = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        $output = @(& docker compose -f $ComposeFile @ComposeArguments 2>&1 | ForEach-Object { $_.ToString() })
+        $ErrorActionPreference = $previousErrorActionPreference
+
+        $exitCode = $LASTEXITCODE
+        if ($null -eq $exitCode) { $exitCode = 0 }
+
+        if ($exitCode -eq 0) {
+            Add-Result -Starter $Starter -Check $Check -Status "PASS" -Details "Command succeeded: docker compose -f $ComposeFile $($ComposeArguments -join ' ')"
+            return $true
+        }
+
+        $preview = @($output | Select-Object -Last 3) -join " | "
+        Add-Result -Starter $Starter -Check $Check -Status "FAIL" -Details "Exit code $exitCode. $preview"
+        return $false
+    }
+    catch {
+        Add-Result -Starter $Starter -Check $Check -Status "FAIL" -Details ("Exception: " + $_.Exception.Message)
+        return $false
+    }
+    finally {
+        $ErrorActionPreference = "Stop"
         Pop-Location
     }
 }
@@ -128,43 +171,124 @@ function Test-PackageDependency {
 }
 
 function Get-BootstrapInfo {
-    $candidatePaths = @(
-        (Join-Path $RepoRoot "PROJECT-BOOTSTRAP.yaml"),
-        (Join-Path $RepoRoot "PROJECT-BOOTSTRAP.example.yaml")
-    )
+    $bootstrapPath = Join-Path $RepoRoot "PROJECT-BOOTSTRAP.yaml"
+    if (-not (Test-Path -LiteralPath $bootstrapPath)) {
+        return $null
+    }
 
-    foreach ($path in $candidatePaths) {
-        if (-not (Test-Path -LiteralPath $path)) {
-            continue
+    function Normalize-RepoValue {
+        param([string]$Value)
+
+        if ($null -eq $Value) { return $null }
+        $normalized = $Value.Trim()
+        if ($normalized -match "^(.*?)(\s+#.*)?$") {
+            $normalized = $matches[1].Trim()
         }
+        $normalized = $normalized.Trim("'").Trim('"')
+        if ([string]::IsNullOrWhiteSpace($normalized)) { return $null }
+        if ($normalized -in @("null","~","false","False","FALSE")) { return $null }
+        return $normalized
+    }
 
-        $starters = @{}
-        $inStarters = $false
+    $lines = @(Get-Content -LiteralPath $bootstrapPath)
+    $activeProfile = $null
 
-        foreach ($line in (Get-Content -LiteralPath $path)) {
-            if ($line -match "^\s*starters\s*:\s*$") {
-                $inStarters = $true
-                continue
-            }
-
-            if ($inStarters -and $line -match "^\S") {
-                break
-            }
-
-            if ($inStarters -and $line -match "^\s+([a-zA-Z0-9_-]+)\s*:\s*(.*?)\s*$") {
-                $k = $matches[1]
-                $v = $matches[2]
-                $starters[$k] = $v
-            }
-        }
-
-        return [pscustomobject]@{
-            Source = $path
-            Starters = $starters
+    foreach ($line in $lines) {
+        if ($line -match "^\s*profile\s*:\s*([a-zA-Z0-9_-]+)") {
+            $activeProfile = $matches[1]
+            break
         }
     }
 
-    return $null
+    $manualStarters = @{}
+    $inManualStarters = $false
+    $currentManualKey = $null
+
+    foreach ($line in $lines) {
+        if ($line -match "^\s*starters\s*:\s*$") {
+            $inManualStarters = $true
+            $currentManualKey = $null
+            continue
+        }
+
+        if ($inManualStarters -and $line -match "^\S") {
+            break
+        }
+
+        if ($inManualStarters -and $line -match "^\s{2}([a-zA-Z0-9_-]+)\s*:\s*$") {
+            $currentManualKey = $matches[1]
+            continue
+        }
+
+        if ($inManualStarters -and $null -ne $currentManualKey -and $line -match "^\s{4}repo\s*:\s*(.*?)\s*$") {
+            $manualStarters[$currentManualKey] = Normalize-RepoValue -Value $matches[1]
+        }
+    }
+
+    $profileStarters = @{}
+    if (-not [string]::IsNullOrWhiteSpace($activeProfile)) {
+        $profileHeaderRegex = "^\s{2}" + [regex]::Escape($activeProfile) + "\s*:\s*$"
+        $profileStart = -1
+
+        for ($i = 0; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match $profileHeaderRegex) {
+                $profileStart = $i
+                break
+            }
+        }
+
+        if ($profileStart -ge 0) {
+            $inProfileStarters = $false
+            $currentProfileKey = $null
+
+            for ($j = $profileStart + 1; $j -lt $lines.Count; $j++) {
+                $line = $lines[$j]
+
+                if ($line -match "^\s{2}[a-zA-Z0-9_-]+\s*:\s*$") {
+                    break
+                }
+
+                if (-not $inProfileStarters -and $line -match "^\s{4}starters\s*:\s*$") {
+                    $inProfileStarters = $true
+                    continue
+                }
+
+                if ($inProfileStarters -and $line -match "^\s{4}[a-zA-Z0-9_-]+\s*:\s*$") {
+                    break
+                }
+
+                if ($inProfileStarters -and $line -match "^\s{6}([a-zA-Z0-9_-]+)\s*:\s*$") {
+                    $currentProfileKey = $matches[1]
+                    continue
+                }
+
+                if ($inProfileStarters -and $null -ne $currentProfileKey -and $line -match "^\s{8}repo\s*:\s*(.*?)\s*$") {
+                    $profileStarters[$currentProfileKey] = Normalize-RepoValue -Value $matches[1]
+                }
+            }
+        }
+    }
+
+    $resolvedStarters = @{}
+    $allKeys = @("backend","web","client","contracts","infra","composition")
+    foreach ($key in $allKeys) {
+        $value = $null
+        if ($profileStarters.ContainsKey($key)) {
+            $value = $profileStarters[$key]
+        }
+        if ($manualStarters.ContainsKey($key) -and $null -ne $manualStarters[$key]) {
+            $value = $manualStarters[$key]
+        }
+        $resolvedStarters[$key] = $value
+    }
+
+    return [pscustomobject]@{
+        Source = $bootstrapPath
+        Profile = $activeProfile
+        ProfileStarters = $profileStarters
+        ManualStarters = $manualStarters
+        ResolvedStarters = $resolvedStarters
+    }
 }
 
 function Test-StarterSelected {
@@ -176,19 +300,34 @@ function Test-StarterSelected {
     if ($null -eq $BootstrapInfo) {
         return $false
     }
-    if (-not $BootstrapInfo.Starters.ContainsKey($StarterKey)) {
+
+    if (-not $BootstrapInfo.ResolvedStarters.ContainsKey($StarterKey)) {
         return $false
     }
 
-    $raw = "$($BootstrapInfo.Starters[$StarterKey])".Trim()
-    if ([string]::IsNullOrWhiteSpace($raw)) { return $false }
+    return $null -ne $BootstrapInfo.ResolvedStarters[$StarterKey]
+}
 
-    $normalized = $raw.Trim().Trim("'").Trim('"')
-    if ($normalized -in @("null","~","false","False","FALSE")) {
+function Test-StarterApplied {
+    param(
+        [object]$BootstrapInfo,
+        [object]$StarterDefinition
+    )
+
+    if ($null -eq $BootstrapInfo) {
         return $false
     }
 
-    return $true
+    if (-not $BootstrapInfo.ResolvedStarters.ContainsKey($StarterDefinition.Key)) {
+        return $false
+    }
+
+    $resolvedRepo = $BootstrapInfo.ResolvedStarters[$StarterDefinition.Key]
+    if ($null -eq $resolvedRepo) {
+        return $false
+    }
+
+    return $resolvedRepo -eq $StarterDefinition.Id
 }
 
 function Get-ComposeFiles {
@@ -218,12 +357,24 @@ function Validate-JsStarter {
 
     Add-Result -Starter $StarterId -Check "Path exists" -Status "PASS" -Details $StarterPath
 
-    $packageJsonPath = Join-Path $StarterPath "package.json"
+    $packageJsonCandidates = @(
+        (Join-Path $StarterPath "package.json"),
+        (Join-Path $StarterPath "app\package.json")
+    )
+    $packageJsonPath = $null
+    foreach ($candidate in $packageJsonCandidates) {
+        if (Test-Path -LiteralPath $candidate) {
+            $packageJsonPath = $candidate
+            break
+        }
+    }
+
     if (-not (Test-Path -LiteralPath $packageJsonPath)) {
         Add-Result -Starter $StarterId -Check "package.json" -Status "SKIP" -Details "No package.json found"
         return
     }
-    Add-Result -Starter $StarterId -Check "package.json" -Status "PASS" -Details "Found"
+    $packageDir = Split-Path -Parent $packageJsonPath
+    Add-Result -Starter $StarterId -Check "package.json" -Status "PASS" -Details ("Found: " + $packageJsonPath)
 
     $hasNode = Test-CommandAvailable -Name "node"
     $hasNpm = Test-CommandAvailable -Name "npm"
@@ -245,11 +396,11 @@ function Validate-JsStarter {
         return
     }
 
-    $nodeModules = Join-Path $StarterPath "node_modules"
+    $nodeModules = Join-Path $packageDir "node_modules"
     if ($SkipNpmCiIfNodeModules -and (Test-Path -LiteralPath $nodeModules)) {
         Add-Result -Starter $StarterId -Check "npm ci" -Status "SKIP" -Details "Skipped due to -SkipNpmCiIfNodeModules and existing node_modules"
     } else {
-        [void](Invoke-Step -Starter $StarterId -Check "npm ci" -WorkingDirectory $StarterPath -Command "npm" -Arguments @("ci","--no-audit","--fund=false"))
+        [void](Invoke-Step -Starter $StarterId -Check "npm ci" -WorkingDirectory $packageDir -Command "npm" -Arguments @("ci","--no-audit","--fund=false"))
     }
 
     $pkg = Read-JsonFile -Path $packageJsonPath
@@ -261,7 +412,7 @@ function Validate-JsStarter {
     $scriptCandidates = @("build","test","smoke","lint","typecheck")
     foreach ($scriptName in $scriptCandidates) {
         if (Test-NpmScript -PackageJson $pkg -ScriptName $scriptName) {
-            [void](Invoke-Step -Starter $StarterId -Check ("npm run " + $scriptName) -WorkingDirectory $StarterPath -Command "npm" -Arguments @("run",$scriptName))
+            [void](Invoke-Step -Starter $StarterId -Check ("npm run " + $scriptName) -WorkingDirectory $packageDir -Command "npm" -Arguments @("run",$scriptName))
         } else {
             Add-Result -Starter $StarterId -Check ("npm run " + $scriptName) -Status "SKIP" -Details "Script not defined"
         }
@@ -376,6 +527,34 @@ function Validate-ContractsStarter {
         return
     }
 
+    $validateScriptPath = Join-Path $StarterPath "app\scripts\validate.sh"
+    if (Test-Path -LiteralPath $validateScriptPath) {
+        $isWindowsOs = $env:OS -eq "Windows_NT"
+        if ((-not $isWindowsOs) -and (Test-CommandAvailable -Name "bash")) {
+            $validateOk = Invoke-Step -Starter $StarterId -Check "contracts validate.sh" -WorkingDirectory $StarterPath -Command "bash" -Arguments @("./app/scripts/validate.sh")
+            if ($validateOk) {
+                return
+            }
+        }
+    }
+
+    $primarySpec = @($specs | Select-Object -First 1)[0]
+    if ($null -ne $primarySpec -and (Test-Path -LiteralPath $primarySpec)) {
+        $hasOpenApiField = @(
+            Get-Content -LiteralPath $primarySpec -ErrorAction SilentlyContinue |
+                Where-Object { $_ -match "^\s*openapi\s*:\s*" } |
+                Select-Object -First 1
+        ).Count -gt 0
+
+        if ($hasOpenApiField) {
+            Add-Result -Starter $StarterId -Check "OpenAPI basic fallback validation" -Status "PASS" -Details ("Found required openapi field in " + (Split-Path -Leaf $primarySpec))
+            return
+        }
+
+        Add-Result -Starter $StarterId -Check "OpenAPI basic fallback validation" -Status "FAIL" -Details ("Missing required openapi field in " + (Split-Path -Leaf $primarySpec))
+        return
+    }
+
     Add-Result -Starter $StarterId -Check "Contracts validation tooling" -Status "SKIP" -Details "Spec found, but no safely discoverable validator is available"
 }
 
@@ -411,15 +590,30 @@ function Validate-ComposeStarter {
     }
     Add-Result -Starter $StarterId -Check "docker daemon" -Status "PASS" -Details "docker daemon reachable"
 
-    $composeFiles = Get-ComposeFiles -Path $StarterPath
+    $composeFiles = @(Get-ComposeFiles -Path $StarterPath)
     if (@($composeFiles).Count -eq 0) {
         Add-Result -Starter $StarterId -Check "compose file discovery" -Status "SKIP" -Details "No compose file found"
         return
     }
     Add-Result -Starter $StarterId -Check "compose file discovery" -Status "PASS" -Details ("Found " + @($composeFiles).Count + " file(s)")
 
+    $repoRootFull = [System.IO.Path]::GetFullPath($RepoRoot).TrimEnd('\\')
+
+    function Get-ComposeFileArgument {
+        param([string]$AbsolutePath)
+
+        $absoluteFull = [System.IO.Path]::GetFullPath($AbsolutePath)
+        if ($absoluteFull.StartsWith($repoRootFull, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $relativePart = $absoluteFull.Substring($repoRootFull.Length).TrimStart('\\')
+            return (".\\" + $relativePart)
+        }
+        return $absoluteFull
+    }
+
     foreach ($composeFile in $composeFiles) {
-        [void](Invoke-Step -Starter $StarterId -Check ("docker compose config: " + (Split-Path -Leaf $composeFile)) -WorkingDirectory $StarterPath -Command "docker" -Arguments @("compose","-f",$composeFile,"config","-q"))
+        $composeName = Split-Path -Leaf $composeFile
+        $composeRelative = Get-ComposeFileArgument -AbsolutePath $composeFile
+        [void](Invoke-DockerComposeStep -Starter $StarterId -Check ("docker compose config: " + $composeName) -WorkingDirectory $RepoRoot -ComposeFile $composeRelative -ComposeArguments @("config","-q"))
     }
 
     if (-not $RunLifecycle) {
@@ -427,14 +621,16 @@ function Validate-ComposeStarter {
         return
     }
 
-    $primary = $composeFiles[0]
-    [void](Invoke-Step -Starter $StarterId -Check "docker compose up -d" -WorkingDirectory $StarterPath -Command "docker" -Arguments @("compose","-f",$primary,"up","-d"))
-    [void](Invoke-Step -Starter $StarterId -Check "docker compose ps" -WorkingDirectory $StarterPath -Command "docker" -Arguments @("compose","-f",$primary,"ps"))
+    $primary = @($composeFiles | Select-Object -First 1)[0]
+    $primaryName = Split-Path -Leaf $primary
+    $primaryRelative = Get-ComposeFileArgument -AbsolutePath $primary
+    [void](Invoke-DockerComposeStep -Starter $StarterId -Check "docker compose up -d" -WorkingDirectory $RepoRoot -ComposeFile $primaryRelative -ComposeArguments @("up","-d"))
+    [void](Invoke-DockerComposeStep -Starter $StarterId -Check "docker compose ps" -WorkingDirectory $RepoRoot -ComposeFile $primaryRelative -ComposeArguments @("ps"))
 
     if ($KeepInfraUp) {
         Add-Result -Starter $StarterId -Check "docker compose down" -Status "SKIP" -Details "Skipped due to -KeepInfraUp"
     } else {
-        [void](Invoke-Step -Starter $StarterId -Check "docker compose down" -WorkingDirectory $StarterPath -Command "docker" -Arguments @("compose","-f",$primary,"down","--remove-orphans"))
+        [void](Invoke-DockerComposeStep -Starter $StarterId -Check "docker compose down" -WorkingDirectory $RepoRoot -ComposeFile $primaryRelative -ComposeArguments @("down","--remove-orphans"))
     }
 }
 
@@ -491,6 +687,27 @@ function Get-StarterOverallStatus {
     return "SKIP"
 }
 
+function Test-ActionableSkip {
+    param([object]$Row)
+
+    if ($Row.Status -ne "SKIP") { return $false }
+
+    $knownNonActionablePatterns = @(
+        "Slot not selected by resolved profile",
+        "Alternative starter in same slot not selected by resolved profile",
+        "Skipped due to -SkipNpmCiIfNodeModules and existing node_modules",
+        "Script not defined"
+    )
+
+    foreach ($pattern in $knownNonActionablePatterns) {
+        if ($Row.Details -like ("*" + $pattern + "*")) {
+            return $false
+        }
+    }
+
+    return $true
+}
+
 Write-Host "============================================================"
 Write-Host "Template Post-Install Validation"
 Write-Host "Repository: $RepoRoot"
@@ -498,24 +715,45 @@ Write-Host "SkipNpmCiIfNodeModules: $SkipNpmCiIfNodeModules"
 Write-Host "KeepInfraUp: $KeepInfraUp"
 Write-Host "============================================================"
 
+$requiredBootstrapPath = Join-Path $RepoRoot "PROJECT-BOOTSTRAP.yaml"
+if (-not (Test-Path -LiteralPath $requiredBootstrapPath)) {
+    Add-Result -Starter "bootstrap" -Check "bootstrap manifest" -Status "FAIL" -Details "PROJECT-BOOTSTRAP.yaml not found"
+    Write-Host ""
+    Write-Host "=========================== Overall Result ==========================="
+    Write-Host "PASS: 0  FAIL: 1  SKIP: 0"
+    Write-Host "OVERALL: FAIL"
+    exit 1
+}
+
 $bootstrapInfo = Get-BootstrapInfo
 if ($null -ne $bootstrapInfo) {
     Write-Host ("Bootstrap source detected: " + $bootstrapInfo.Source)
 } else {
-    Write-Host "No bootstrap file detected. Falling back to path discovery only."
+    Add-Result -Starter "bootstrap" -Check "bootstrap manifest" -Status "FAIL" -Details "Unable to load PROJECT-BOOTSTRAP.yaml"
+    Write-Host ""
+    Write-Host "=========================== Overall Result ==========================="
+    Write-Host "PASS: 0  FAIL: 1  SKIP: 0"
+    Write-Host "OVERALL: FAIL"
+    exit 1
 }
 
 foreach ($starter in $StarterDefinitions) {
     $starterPath = Join-Path $RepoRoot $starter.Path
     $pathExists = Test-Path -LiteralPath $starterPath
     $selected = Test-StarterSelected -BootstrapInfo $bootstrapInfo -StarterKey $starter.Key
+    $applied = Test-StarterApplied -BootstrapInfo $bootstrapInfo -StarterDefinition $starter
 
-    if (-not $selected -and -not $pathExists) {
-        Add-Result -Starter $starter.Id -Check "starter selection/install state" -Status "SKIP" -Details "Not selected in bootstrap and canonical path not found"
+    if (-not $selected) {
+        Add-Result -Starter $starter.Id -Check "starter selection/install state" -Status "SKIP" -Details "Slot not selected by resolved profile"
         continue
     }
 
-    if ($selected -and -not $pathExists) {
+    if ($selected -and -not $applied) {
+        Add-Result -Starter $starter.Id -Check "starter selection/install state" -Status "SKIP" -Details "Alternative starter in same slot not selected by resolved profile"
+        continue
+    }
+
+    if ($selected -and $applied -and -not $pathExists) {
         Add-Result -Starter $starter.Id -Check "starter selection/install state" -Status "SKIP" -Details "Selected in bootstrap but canonical path not found"
         continue
     }
@@ -552,9 +790,26 @@ foreach ($starter in $StarterDefinitions) {
 }
 
 Write-Host ""
-Write-Host "======================== Per-Starter Summary ========================"
+Write-Host "================== Per-Starter Summary (Applied Only) ================"
+
+$appliedStarterIds = @(
+    $StarterDefinitions |
+        Where-Object { Test-StarterApplied -BootstrapInfo $bootstrapInfo -StarterDefinition $_ } |
+        Select-Object -ExpandProperty Id
+)
+
+$notApplicableStarterIds = @(
+    $StarterDefinitions |
+        Where-Object { -not (Test-StarterApplied -BootstrapInfo $bootstrapInfo -StarterDefinition $_) } |
+        Select-Object -ExpandProperty Id
+)
+
 $summaryRows = @()
 foreach ($starter in $StarterDefinitions) {
+    if (-not ($appliedStarterIds -contains $starter.Id)) {
+        continue
+    }
+
     $rows = @($CheckResults | Where-Object { $_.Starter -eq $starter.Id })
     $summaryRows += [pscustomobject]@{
         Starter = $starter.Id
@@ -566,9 +821,37 @@ foreach ($starter in $StarterDefinitions) {
 }
 $summaryRows | Format-Table -AutoSize
 
-$totalPass = @($CheckResults | Where-Object { $_.Status -eq "PASS" }).Count
-$totalFail = @($CheckResults | Where-Object { $_.Status -eq "FAIL" }).Count
-$totalSkip = @($CheckResults | Where-Object { $_.Status -eq "SKIP" }).Count
+Write-Host ""
+Write-Host "====================== Not Applicable Starters ======================="
+if (@($notApplicableStarterIds).Count -eq 0) {
+    Write-Host "(none)"
+} else {
+    foreach ($starterId in $notApplicableStarterIds) {
+        Write-Host ("- " + $starterId)
+    }
+}
+
+$actionableSkipRows = @(
+    $CheckResults |
+        Where-Object {
+            ($appliedStarterIds -contains $_.Starter) -and (Test-ActionableSkip -Row $_)
+        }
+)
+
+Write-Host ""
+Write-Host "======================== Actionable SKIP Checks ======================"
+if (@($actionableSkipRows).Count -eq 0) {
+    Write-Host "(none)"
+} else {
+    foreach ($row in $actionableSkipRows) {
+        Write-Host ("- " + $row.Starter + " :: " + $row.Check + " -> " + $row.Details)
+    }
+}
+
+$appliedRows = @($CheckResults | Where-Object { $appliedStarterIds -contains $_.Starter })
+$totalPass = @($appliedRows | Where-Object { $_.Status -eq "PASS" }).Count
+$totalFail = @($appliedRows | Where-Object { $_.Status -eq "FAIL" }).Count
+$totalSkip = @($appliedRows | Where-Object { $_.Status -eq "SKIP" }).Count
 
 Write-Host ""
 Write-Host "=========================== Overall Result ==========================="
