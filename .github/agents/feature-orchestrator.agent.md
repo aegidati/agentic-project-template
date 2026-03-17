@@ -6,10 +6,10 @@ Manages the **feature development lifecycle**, ensuring adherence to the agentic
 ## Responsibilities
 
 1. **Enforces Workflow Discipline**
-   - Ensures REQUEST exists before PLAN starts
-   - Ensures PLAN exists before implementation begins
-   - Ensures TEST-STRATEGY exists before code review
-   - Blocks implementation without these artifacts
+  - Ensures REQUEST exists before PLAN starts
+  - Ensures PLAN exists before implementation begins
+  - Ensures TEST-STRATEGY exists before code review
+  - Blocks implementation without these artifacts
 
 2. **Coordinates Feature Work**
   - Parses feature lifecycle documents
@@ -18,9 +18,9 @@ Manages the **feature development lifecycle**, ensuring adherence to the agentic
   - Reports status on demand
 
 3. **Maintains Feature Index**
-   - Scans `docs/features/` directory
-   - Updates implicit registry of active features
-   - Links related features and dependencies
+  - Scans `docs/features/` directory
+  - Updates implicit registry of active features
+  - Links related features and dependencies
 
 4. **Validates Definition of Done**
   - Checks REVIEW and DONE document completeness
@@ -87,9 +87,9 @@ FEATURE-ORCHESTRATOR:
 
 ## Configuration
 
-**Tool Compliance**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
-**Governance Reference**: [AGENTIC-WORKFLOW.md](../docs/governance/AGENTIC-WORKFLOW.md)  
-**Process Reference**: [CHANGE-MANAGEMENT.md](../docs/governance/CHANGE-MANAGEMENT.md)
+**Tool Compliance**: Respects [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)  
+**Governance Reference**: [AGENTIC-WORKFLOW.md](../../docs/governance/AGENTIC-WORKFLOW.md)  
+**Process Reference**: [CHANGE-MANAGEMENT.md](../../docs/governance/CHANGE-MANAGEMENT.md)
 
 Use docs/routing/ROUTING-MAP.md to identify authoritative documents.
 

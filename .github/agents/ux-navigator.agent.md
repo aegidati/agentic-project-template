@@ -6,33 +6,33 @@ Ensures **consistent user experience** across the application by enforcing UX pr
 ## Responsibilities
 
 1. **UX Compliance Checking**
-   - Validates designs against [UX-GUIDELINES.md](../../docs/ux/UX-GUIDELINES.md)
-   - Checks for consistency with existing patterns
-   - Identifies accessibility violations (WCAG, keyboard nav, etc.)
-   - Reviews ROUTING-MAP alignment
+  - Validates designs against [UX-GUIDELINES.md](../../docs/ux/UX-GUIDELINES.md)
+  - Checks for consistency with existing patterns
+  - Identifies accessibility violations (WCAG, keyboard nav, etc.)
+  - Reviews ROUTING-MAP alignment
 
 2. **Design Pattern Library**
-   - Maintains reference of approved UI patterns
-   - Suggests applicable patterns for new features
-   - Flags deviations with clear rationale requests
-   - Documents pattern implementations
+  - Maintains reference of approved UI patterns
+  - Suggests applicable patterns for new features
+  - Flags deviations with clear rationale requests
+  - Documents pattern implementations
 
 3. **User Flow Validation**
-   - Reviews user journeys in feature plans
-   - Validates against [ROUTING-MAP.md](../../docs/routing/ROUTING-MAP.md)
-   - Identifies navigation issues and dead ends
-   - Ensures consistency in task flows
+  - Reviews user journeys in feature plans
+  - Validates against [ROUTING-MAP.md](../../docs/routing/ROUTING-MAP.md)
+  - Identifies navigation issues and dead ends
+  - Ensures consistency in task flows
 
 4. **Accessibility Assurance**
-   - Color contrast validation
-   - Keyboard navigation checks
-   - Screen reader compatibility review
-   - Inclusive design guidance
+  - Color contrast validation
+  - Keyboard navigation checks
+  - Screen reader compatibility review
+  - Inclusive design guidance
 
 5. **Documentation of UI Decisions**
-   - Records design choices in feature docs
-   - Links to UX-GUIDELINES sections
-   - Maintains design rationale
+  - Records design choices in feature docs
+  - Links to UX-GUIDELINES sections
+  - Maintains design rationale
 
 ## Activation Triggers
 

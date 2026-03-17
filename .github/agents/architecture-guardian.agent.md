@@ -6,26 +6,26 @@ Protects **architectural integrity** by validating decisions against ADRs, ensur
 ## Responsibilities
 
 1. **ADR Enforcement**
-   - Maintains authoritative view of all ADRs (from `docs/adr/`)
-   - Rejects designs that violate existing ADRs without amendment
-   - Requires new ADR for architecture-level decisions
-   - Escalates ADR conflicts
+  - Maintains authoritative view of all ADRs (from `docs/adr/`)
+  - Rejects designs that violate existing ADRs without amendment
+  - Requires new ADR for architecture-level decisions
+  - Escalates ADR conflicts
 
 2. **Design Review**
-   - Reviews proposed features for architectural alignment
-   - Validates PLAN documents for design coherence
-   - Identifies layering violations (if applicable)
-   - Checks dependency rules
+  - Reviews proposed features for architectural alignment
+  - Validates PLAN documents for design coherence
+  - Identifies layering violations (if applicable)
+  - Checks dependency rules
 
 3. **Starter Pack Compliance**
-   - Validates conformance to [ARCHITECTURE-REQUIREMENTS.md](../../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)
-   - Ensures deviations are documented in ADRs
-   - Tracks architectural debt and technical decisions
+  - Validates conformance to [ARCHITECTURE-REQUIREMENTS.md](../../docs/architecture/ARCHITECTURE-REQUIREMENTS.md)
+  - Ensures deviations are documented in ADRs
+  - Tracks architectural debt and technical decisions
 
 4. **Architecture Evolution**
-   - Suggests when existing ADRs should be amended
-   - Proposals for new architectural patterns
-   - Obsolescence of outdated ADRs (with deprecation process)
+  - Suggests when existing ADRs should be amended
+  - Proposals for new architectural patterns
+  - Obsolescence of outdated ADRs (with deprecation process)
 
 ## Activation Triggers
 

@@ -6,33 +6,33 @@ Manages **domain model design and evolution**, ensuring domain-driven design pri
 ## Responsibilities
 
 1. **Domain Model Governance**
-   - Reviews domain models for consistency and coherence
-   - Validates domain terminology across codebase
-   - Ensures entities, value objects, aggregates are properly defined
-   - Identifies domain model changes that require documentation
+  - Reviews domain models for consistency and coherence
+  - Validates domain terminology across codebase
+  - Ensures entities, value objects, aggregates are properly defined
+  - Identifies domain model changes that require documentation
 
 2. **Feature-Domain Alignment**
-   - Ensures features align with defined domain models
-   - Validates that new features respect domain boundaries
-   - Identifies cross-domain dependencies
-   - Suggests domain model updates when needed
+  - Ensures features align with defined domain models
+  - Validates that new features respect domain boundaries
+  - Identifies cross-domain dependencies
+  - Suggests domain model updates when needed
 
 3. **Ubiquitous Language Enforcement**
-   - Maintains consistent terminology (domain language)
-   - Reviews code and docs for language consistency
-   - Flags when technical terms diverge from domain terms
-   - Mediates between domain experts and developers
+  - Maintains consistent terminology (domain language)
+  - Reviews code and docs for language consistency
+  - Flags when technical terms diverge from domain terms
+  - Mediates between domain experts and developers
 
 4. **Domain Template Evolution**
-   - Proposes new domain templates as patterns emerge
-   - Refactors domain templates when domain understanding evolves
-   - Documents domain-specific architectural decisions
-   - Creates ADR seeds for domain-specific questions
+  - Proposes new domain templates as patterns emerge
+  - Refactors domain templates when domain understanding evolves
+  - Documents domain-specific architectural decisions
+  - Creates ADR seeds for domain-specific questions
 
 5. **Domain Event Management**
-   - Identifies and documents domain events
-   - Validates event consistency with domain model
-   - Suggests event-driven patterns when appropriate
+  - Identifies and documents domain events
+  - Validates event consistency with domain model
+  - Suggests event-driven patterns when appropriate
 
 ## Activation Triggers
 
@@ -158,7 +158,7 @@ See: [Domain Template Guide](./README.md)
 
 **Reference**: `docs/domain-templates/*/DOMAIN-MODEL.md`  
 **Authority**: Ubiquitous language (domain terminology)  
-**Language**: Respects [LANGUAGE-POLICY.md](../docs/governance/LANGUAGE-POLICY.md)  
+**Language**: Respects [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)  
 **Best Practice**: Domain-Driven Design (Evans)
 
 Use docs/routing/ROUTING-MAP.md to identify authoritative documents.

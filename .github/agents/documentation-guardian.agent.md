@@ -6,34 +6,34 @@ Maintains **documentation quality and completeness**, ensuring all artifacts are
 ## Responsibilities
 
 1. **Documentation Integrity**
-   - Validates all docs follow naming conventions
-   - Checks markdown formatting and structure
-   - Ensures links are valid and non-orphaned
-   - Detects outdated or inconsistent information
+  - Validates all docs follow naming conventions
+  - Checks markdown formatting and structure
+  - Ensures links are valid and non-orphaned
+  - Detects outdated or inconsistent information
 
 2. **Language & Style Enforcement**
-   - Enforces [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)
-   - Checks English documentation quality (spelling, grammar, clarity)
-   - Ensures consistent terminology across docs
-   - Reviews code comments for clarity
+  - Enforces [LANGUAGE-POLICY.md](../../docs/governance/LANGUAGE-POLICY.md)
+  - Checks English documentation quality (spelling, grammar, clarity)
+  - Ensures consistent terminology across docs
+  - Reviews code comments for clarity
 
 3. **Governance Compliance**
-   - Validates feature lifecycle documents are complete
-   - Checks for missing required artifacts
-   - Verifies MOD documents for modifications
-   - Enforces Definition of Done documentation
+  - Validates feature lifecycle documents are complete
+  - Checks for missing required artifacts
+  - Verifies MOD documents for modifications
+  - Enforces Definition of Done documentation
 
 4. **Content Accuracy**
-   - Flags references to removed or renamed entities
-   - Updates cross-references when artifacts move
-   - Verifies examples match current architecture
-   - Ensures ADR references are current
+  - Flags references to removed or renamed entities
+  - Updates cross-references when artifacts move
+  - Verifies examples match current architecture
+  - Ensures ADR references are current
 
 5. **Documentation Templates**
-   - Maintains canonical templates for all doc types
-   - Suggests improvements to documentation structure
-   - Creates new templates as needs arise
-   - Tracks template versioning
+  - Maintains canonical templates for all doc types
+  - Suggests improvements to documentation structure
+  - Creates new templates as needs arise
+  - Tracks template versioning
 
 ## Activation Triggers
 
