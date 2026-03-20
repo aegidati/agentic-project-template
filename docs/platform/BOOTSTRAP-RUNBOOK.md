@@ -38,6 +38,7 @@ Key references:
    - web-stack-angular
    - api-stack-dotnet
    - fullstack-angular-dotnet
+   - flutter-standalone
 3. Local tooling available based on selected starters:
    - Node.js and npm for JavaScript/TypeScript stacks
    - .NET SDK for .NET backend
@@ -60,6 +61,9 @@ Key references:
 
 5. **fullstack-angular-dotnet**
    Choose this for Angular + .NET + Flutter + composition.
+
+6. **flutter-standalone**
+   Choose this for a standalone Flutter client with no backend runtime starters.
 
 ## Full Sequence
 
@@ -107,7 +111,7 @@ If `project.profile` has not been explicitly decided yet, the agent will ask you
 Copy-paste chat text:
 
 ```text
-Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml. Keep schema and keys unchanged. Before creating the file, if the project profile has not been explicitly chosen yet, ask the user to choose one profile from the allowed options below and briefly describe each option so the choice is unambiguous. Do not assume a default when project.profile is null. Allowed profiles: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet. When creating the file: use project.profile as the recommended default starter selection mechanism, use starters: only for explicit manual overrides, keep unselected manual overrides as repo: null, do not add business-specific fields.
+Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml. Keep schema and keys unchanged. Before creating the file, if the project profile has not been explicitly chosen yet, ask the user to choose one profile from the allowed options below and briefly describe each option so the choice is unambiguous. Do not assume a default when project.profile is null. Allowed profiles: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, flutter-standalone. When creating the file: use project.profile as the recommended default starter selection mechanism, use starters: only for explicit manual overrides, keep unselected manual overrides as repo: null, do not add business-specific fields.
 ```
 
 Expected output:

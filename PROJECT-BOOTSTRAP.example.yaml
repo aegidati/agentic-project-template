@@ -1,7 +1,7 @@
 project:
   name: null
   template_version: "1.0"
-  profile: null   # allowed: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet
+  profile: null   # allowed: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, flutter-standalone
 
 profiles:
   web-stack:
@@ -156,6 +156,28 @@ profiles:
         path: app/infra
       composition:
         repo: agentic-fullstack-composition
+        path: app/composition
+
+  flutter-standalone:
+    description: "Standalone Flutter client application (no backend)."
+    starters:
+      backend:
+        repo: null
+        path: app/backend
+      web:
+        repo: null
+        path: app/web
+      client:
+        repo: agentic-flutter-client
+        path: app/client
+      contracts:
+        repo: null
+        path: app/contracts
+      infra:
+        repo: null
+        path: app/infra
+      composition:
+        repo: null
         path: app/composition
 
 # Optional explicit starter override.

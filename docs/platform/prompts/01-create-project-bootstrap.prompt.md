@@ -24,6 +24,7 @@ Allowed profile options:
 - `web-stack-angular` — browser-first web application with Angular SPA, .NET backend, shared API contracts, and development infrastructure
 - `api-stack-dotnet` — headless .NET backend/API project with contracts and development infrastructure
 - `fullstack-angular-dotnet` — multi-client product with .NET backend, Angular SPA, Flutter client, contracts, infrastructure, and composition layer
+- `flutter-standalone` — standalone Flutter client application with no backend runtime starters
 
 When creating PROJECT-BOOTSTRAP.yaml:
 - use `project.profile` as the recommended default starter selection mechanism

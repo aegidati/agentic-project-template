@@ -177,6 +177,17 @@ Implement these profiles.
 
 ---
 
+### flutter-standalone
+
+- backend → null → `app/backend`
+- web → null → `app/web`
+- client → `agentic-flutter-client` → `app/client`
+- contracts → null → `app/contracts`
+- infra → null → `app/infra`
+- composition → null → `app/composition`
+
+---
+
 Backend and web are alternative starters per slot canonico while keeping canonical install paths unchanged.
 
 ---

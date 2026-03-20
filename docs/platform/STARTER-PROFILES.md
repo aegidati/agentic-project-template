@@ -66,6 +66,7 @@ Installation order:
 | `web-stack-angular` | Browser-first web application (Angular + .NET backend) | contracts, backend, web, infra |
 | `api-stack-dotnet` | Headless API/backend service (.NET backend) | contracts, backend, infra |
 | `fullstack-angular-dotnet` | Multi-client fullstack system (Angular + .NET backend) | contracts, backend, web, client, infra, composition |
+| `flutter-standalone` | Standalone Flutter client application | client |
 
 ---
 
@@ -148,6 +149,17 @@ Use when both web and mobile clients are required with Angular + .NET backend an
 - infra -> `agentic-postgres-dev` -> `app/infra`
 - composition -> `agentic-fullstack-composition` -> `app/composition`
 
+## flutter-standalone
+
+Use when only a standalone Flutter client is required and no backend runtime starters are needed.
+
+- backend -> `null` -> `app/backend`
+- web -> `null` -> `app/web`
+- client -> `agentic-flutter-client` -> `app/client`
+- contracts -> `null` -> `app/contracts`
+- infra -> `null` -> `app/infra`
+- composition -> `null` -> `app/composition`
+
 ---
 
 # How To Choose A Profile
@@ -161,6 +173,7 @@ Use this quick rule:
 - Choose `web-stack-angular` for Angular web-first delivery.
 - Choose `api-stack-dotnet` for .NET service/API-only projects.
 - Choose `fullstack-angular-dotnet` when Angular web + .NET backend are required with local composition.
+- Choose `flutter-standalone` for a standalone Flutter client with no backend runtime starters.
 
 If uncertain, start with `web-stack` and apply explicit overrides only when needed.
 
