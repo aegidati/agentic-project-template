@@ -20,7 +20,49 @@ This file complements:
 
 ---
 
-# 1. Starter Installation Requests
+# 1. Bootstrap and Starter Installation Requests
+
+## Pattern 0 — Run bootstrap prompts 00 to 09 in strict-interactive mode
+
+Request example:
+
+Run prompts 00 to 09 in batch, one step at a time, with PASS/FAIL gate and confirmation before moving forward.
+
+Primary agent:
+
+- feature-orchestrator
+
+Supporting agents:
+
+- project-auditor
+- starter-installer
+- architecture-guardian
+- documentation-guardian
+- new-feature-agent
+- feature-lifecycle-agent
+
+Documents to consult:
+
+- docs/platform/prompts/00-09-bootstrap-orchestrator.prompt.md
+- docs/platform/prompts/00-verify-template-base.prompt.md
+- docs/platform/prompts/01-create-project-bootstrap.prompt.md
+- docs/platform/prompts/02-install-starters.prompt.md
+- docs/platform/prompts/03-architecture-adr-001.prompt.md
+- docs/platform/prompts/04-architecture-snapshot.prompt.md
+- docs/platform/prompts/05-bootstrap-status-update.prompt.md
+- docs/platform/prompts/06-post-install-validation.prompt.md
+- docs/platform/prompts/07-first-feature-bootstrap.prompt.md
+- docs/platform/prompts/08-project-initialization-report.prompt.md
+- docs/platform/prompts/09-final-gate.prompt.md
+
+Expected outcome:
+
+- prompts are executed sequentially (00 to 09)
+- each step has explicit PASS/FAIL gate and evidence
+- next step requires explicit YES/NO confirmation
+- batch stops immediately on FAIL with remediation actions
+
+---
 
 ## Pattern 1 — Install a single starter
 

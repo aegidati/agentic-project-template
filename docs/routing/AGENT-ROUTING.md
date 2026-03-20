@@ -227,6 +227,23 @@ test-designer
 
 ---
 
+Bootstrap batch orchestration (prompts 00 to 09, strict-interactive mode)
+
+Primary agent:
+
+feature-orchestrator
+
+Supporting agents:
+
+project-auditor
+starter-installer
+architecture-guardian
+documentation-guardian
+new-feature-agent
+feature-lifecycle-agent
+
+---
+
 Testing strategy
 
 Primary agent:

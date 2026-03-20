@@ -48,6 +48,23 @@ This sequence must be executed **after creating a repository from the template**
 
 ---
 
+# Strict-Interactive Bootstrap Orchestrator (00 to 09)
+
+For deterministic bootstrap execution with explicit gates, use:
+
+docs/platform/prompts/00-09-bootstrap-orchestrator.prompt.md
+
+This orchestration mode enforces:
+
+- sequential execution of prompts 00 to 09
+- one step at a time
+- explicit PASS/FAIL gate per step with evidence
+- explicit user confirmation (YES/NO) before the next step
+- immediate stop on FAIL with remediation actions
+- explicit continuation question: "Proceed to next step (YES/NO)?"
+
+---
+
 # Starter Installation
 
 Starter repositories contain the **initial application code**.
