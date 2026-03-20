@@ -14,7 +14,7 @@ Key references:
 
 ## Operational Rules
 
-1. Run the prompts in order from 00 to 09, including optional step 02b when IAM foundation adoption is in scope.
+1. Run the prompts in order from 00 to 09, including optional step 02b when IAM foundation adoption is in scope, and optional step 02c when Authentication foundation adoption is in scope.
 2. Do not start real feature development before completing at least step 06.
 3. Use canonical starter paths:
    - app/backend
@@ -183,6 +183,41 @@ Expected output:
 Stop if:
 - IAM is placed into a runtime canonical slot.
 - Foundation collisions are unresolved.
+- Adoption status is ambiguous.
+
+### 02c - Optional Authentication Foundation Adoption
+
+File:
+[docs/platform/prompts/02-install-starters.prompt.md](./prompts/02-install-starters.prompt.md)
+
+Recommended mode:
+Agent
+
+Objective:
+Adopt AGENTIC-AUTH-FOUNDATION as an optional foundation starter using manual copy or subtree-vendor, extending the IAM foundation with profile-driven authentication guidance.
+
+Prerequisite:
+Step 02b (AGENTIC-IAM adoption) must be completed before this step.
+
+Copy-paste chat text:
+
+```text
+Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Read the profile recipe matching project.profile from docs/profiles/. Do not install it into runtime canonical paths. Report adopted files, collisions, and unresolved ADR seeds.
+```
+
+Expected output:
+1. Authentication foundation adoption status: adopted or deferred.
+2. Profile recipe identified from project.profile.
+3. List of adopted auth-foundation files (if adopted).
+4. Any collisions reported without blind overwrite.
+5. List of ADR seeds promoted into project ADRs or explicitly deferred with rationale.
+6. Explicit statement that no runtime canonical path was repurposed.
+
+Stop if:
+- AGENTIC-IAM is not already adopted.
+- project.profile is not set in PROJECT-BOOTSTRAP.yaml.
+- Auth foundation is placed into a runtime canonical slot.
+- ADR seeds are neither promoted nor explicitly deferred.
 - Adoption status is ambiguous.
 
 ### 03 - Architecture ADR 001
