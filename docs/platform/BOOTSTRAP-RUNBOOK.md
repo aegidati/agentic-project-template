@@ -420,6 +420,7 @@ Start real feature development only after a READY outcome.
 6. FEAT-0001-INITIAL-BOOTSTRAP exists.
 7. Final gate is READY, or blockers are clearly documented.
 8. If IAM is in scope, AGENTIC-IAM is either adopted via manual model or explicitly deferred with rationale.
+9. If Authentication is in scope, AGENTIC-AUTH-FOUNDATION is either adopted via step 02c or explicitly deferred with rationale.
 
 ## What to Do After Bootstrap
 
