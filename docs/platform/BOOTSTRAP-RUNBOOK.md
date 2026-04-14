@@ -33,12 +33,16 @@ Key references:
 2. Preliminary architectural profile decision:
    - web-stack
    - mobile-stack
+   - mobile-stack-react-native
    - api-stack
    - fullstack-stack
+   - fullstack-stack-react-native
    - web-stack-angular
    - api-stack-dotnet
    - fullstack-angular-dotnet
+   - fullstack-angular-dotnet-react-native
    - flutter-standalone
+   - react-native-standalone
 3. Local tooling available based on selected starters:
    - Node.js and npm for JavaScript/TypeScript stacks
    - .NET SDK for .NET backend
@@ -50,20 +54,38 @@ Key references:
 1. **web-stack**
    Choose this for a web application with React, Clean Architecture backend, API contracts, and Postgres.
 
-2. **api-stack**
+2. **mobile-stack**
+   Choose this for a mobile-first project with Flutter, backend, API contracts, and Postgres.
+
+3. **mobile-stack-react-native**
+   Choose this for a mobile-first project with React Native, backend, API contracts, and Postgres.
+
+4. **api-stack**
    Choose this for a backend-first project without a frontend.
 
-3. **web-stack-angular**
+5. **fullstack-stack**
+   Choose this for React web plus Flutter client, with backend, shared contracts, infra, and composition.
+
+6. **fullstack-stack-react-native**
+   Choose this for React web plus React Native client, with backend, shared contracts, infra, and composition.
+
+7. **web-stack-angular**
    Choose this if the team works with Angular and .NET.
 
-4. **fullstack-stack**
-   Choose this for both web and mobile/cross-platform client, including a composition layer.
+8. **api-stack-dotnet**
+   Choose this for a .NET backend-first project without a frontend.
 
-5. **fullstack-angular-dotnet**
+9. **fullstack-angular-dotnet**
    Choose this for Angular + .NET + Flutter + composition.
 
-6. **flutter-standalone**
+10. **fullstack-angular-dotnet-react-native**
+   Choose this for Angular + .NET + React Native + composition.
+
+11. **flutter-standalone**
    Choose this for a standalone Flutter client with no backend runtime starters.
+
+12. **react-native-standalone**
+   Choose this for a standalone React Native client with no backend runtime starters.
 
 ## Full Sequence
 
@@ -111,7 +133,7 @@ If `project.profile` has not been explicitly decided yet, the agent will ask you
 Copy-paste chat text:
 
 ```text
-Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml. Keep schema and keys unchanged. Before creating the file, if the project profile has not been explicitly chosen yet, ask the user to choose one profile from the allowed options below and briefly describe each option so the choice is unambiguous. Do not assume a default when project.profile is null. Allowed profiles: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, flutter-standalone. When creating the file: use project.profile as the recommended default starter selection mechanism, use starters: only for explicit manual overrides, keep unselected manual overrides as repo: null, do not add business-specific fields.
+Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml. Keep schema and keys unchanged. Before creating the file, if the project profile has not been explicitly chosen yet, ask the user to choose one profile from the allowed options below and briefly describe each option so the choice is unambiguous. Do not assume a default when project.profile is null. Allowed profiles: web-stack, mobile-stack, mobile-stack-react-native, api-stack, fullstack-stack, fullstack-stack-react-native, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, fullstack-angular-dotnet-react-native, flutter-standalone, react-native-standalone. When creating the file: use project.profile as the recommended default starter selection mechanism, use starters: only for explicit manual overrides, keep unselected manual overrides as repo: null, do not add business-specific fields.
 ```
 
 Expected output:

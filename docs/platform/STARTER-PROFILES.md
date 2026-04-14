@@ -61,12 +61,16 @@ Installation order:
 |---|---|---|
 | `web-stack` | Browser-first web application | contracts, backend, web, infra |
 | `mobile-stack` | Mobile-first application | contracts, backend, client, infra |
+| `mobile-stack-react-native` | Mobile-first application (React Native client) | contracts, backend, client, infra |
 | `api-stack` | Headless API/backend service | contracts, backend, infra |
 | `fullstack-stack` | Multi-client fullstack system | contracts, backend, web, client, infra, composition |
+| `fullstack-stack-react-native` | Multi-client fullstack system (React + React Native) | contracts, backend, web, client, infra, composition |
 | `web-stack-angular` | Browser-first web application (Angular + .NET backend) | contracts, backend, web, infra |
 | `api-stack-dotnet` | Headless API/backend service (.NET backend) | contracts, backend, infra |
 | `fullstack-angular-dotnet` | Multi-client fullstack system (Angular + .NET backend) | contracts, backend, web, client, infra, composition |
+| `fullstack-angular-dotnet-react-native` | Multi-client fullstack system (Angular + .NET + React Native) | contracts, backend, web, client, infra, composition |
 | `flutter-standalone` | Standalone Flutter client application | client |
+| `react-native-standalone` | Standalone React Native client application | client |
 
 ---
 
@@ -94,6 +98,17 @@ Use when the primary client is Flutter/mobile.
 - infra -> `agentic-postgres-dev` -> `app/infra`
 - composition -> `null` -> `app/composition`
 
+## mobile-stack-react-native
+
+Use when the primary client is React Native/mobile.
+
+- backend -> `agentic-clean-backend` -> `app/backend`
+- web -> `null` -> `app/web`
+- client -> `agentic-react-native` -> `app/client`
+- contracts -> `agentic-api-contracts-api` -> `app/contracts`
+- infra -> `agentic-postgres-dev` -> `app/infra`
+- composition -> `null` -> `app/composition`
+
 ## api-stack
 
 Use when no default UI starter is needed.
@@ -112,6 +127,17 @@ Use when both web and mobile clients are required with composition support.
 - backend -> `agentic-clean-backend` -> `app/backend`
 - web -> `agentic-react-spa` -> `app/web`
 - client -> `agentic-flutter-client` -> `app/client`
+- contracts -> `agentic-api-contracts-api` -> `app/contracts`
+- infra -> `agentic-postgres-dev` -> `app/infra`
+- composition -> `agentic-fullstack-composition` -> `app/composition`
+
+## fullstack-stack-react-native
+
+Use when both web and React Native clients are required with composition support.
+
+- backend -> `agentic-clean-backend` -> `app/backend`
+- web -> `agentic-react-spa` -> `app/web`
+- client -> `agentic-react-native` -> `app/client`
 - contracts -> `agentic-api-contracts-api` -> `app/contracts`
 - infra -> `agentic-postgres-dev` -> `app/infra`
 - composition -> `agentic-fullstack-composition` -> `app/composition`
@@ -149,6 +175,17 @@ Use when both web and mobile clients are required with Angular + .NET backend an
 - infra -> `agentic-postgres-dev` -> `app/infra`
 - composition -> `agentic-fullstack-composition` -> `app/composition`
 
+## fullstack-angular-dotnet-react-native
+
+Use when both web and React Native clients are required with Angular + .NET backend and composition support.
+
+- backend -> `agentic-dotnet-backend` -> `app/backend`
+- web -> `agentic-angular-spa` -> `app/web`
+- client -> `agentic-react-native` -> `app/client`
+- contracts -> `agentic-api-contracts-api` -> `app/contracts`
+- infra -> `agentic-postgres-dev` -> `app/infra`
+- composition -> `agentic-fullstack-composition` -> `app/composition`
+
 ## flutter-standalone
 
 Use when only a standalone Flutter client is required and no backend runtime starters are needed.
@@ -156,6 +193,17 @@ Use when only a standalone Flutter client is required and no backend runtime sta
 - backend -> `null` -> `app/backend`
 - web -> `null` -> `app/web`
 - client -> `agentic-flutter-client` -> `app/client`
+- contracts -> `null` -> `app/contracts`
+- infra -> `null` -> `app/infra`
+- composition -> `null` -> `app/composition`
+
+## react-native-standalone
+
+Use when only a standalone React Native client is required and no backend runtime starters are needed.
+
+- backend -> `null` -> `app/backend`
+- web -> `null` -> `app/web`
+- client -> `agentic-react-native` -> `app/client`
 - contracts -> `null` -> `app/contracts`
 - infra -> `null` -> `app/infra`
 - composition -> `null` -> `app/composition`
@@ -168,12 +216,16 @@ Use this quick rule:
 
 - Choose `web-stack` for web-first delivery.
 - Choose `mobile-stack` for mobile-first delivery.
+- Choose `mobile-stack-react-native` for React Native mobile-first delivery.
 - Choose `api-stack` for service/API-only projects.
 - Choose `fullstack-stack` when multiple clients and local composition are needed.
+- Choose `fullstack-stack-react-native` when you need React web plus React Native with local composition.
 - Choose `web-stack-angular` for Angular web-first delivery.
 - Choose `api-stack-dotnet` for .NET service/API-only projects.
 - Choose `fullstack-angular-dotnet` when Angular web + .NET backend are required with local composition.
+- Choose `fullstack-angular-dotnet-react-native` when Angular web + .NET backend + React Native are required with local composition.
 - Choose `flutter-standalone` for a standalone Flutter client with no backend runtime starters.
+- Choose `react-native-standalone` for a standalone React Native client with no backend runtime starters.
 
 If uncertain, start with `web-stack` and apply explicit overrides only when needed.
 

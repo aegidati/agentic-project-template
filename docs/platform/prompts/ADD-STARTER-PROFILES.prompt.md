@@ -122,6 +122,17 @@ Implement these profiles.
 
 ---
 
+### mobile-stack-react-native
+
+- backend → `agentic-clean-backend` → `app/backend`
+- web → null → `app/web`
+- client → `agentic-react-native` → `app/client`
+- contracts → `agentic-api-contracts-api` → `app/contracts`
+- infra → `agentic-postgres-dev` → `app/infra`
+- composition → null → `app/composition`
+
+---
+
 ### api-stack
 
 - backend → `agentic-clean-backend` → `app/backend`
@@ -138,6 +149,17 @@ Implement these profiles.
 - backend → `agentic-clean-backend` → `app/backend`
 - web → `agentic-react-spa` → `app/web`
 - client → `agentic-flutter-client` → `app/client`
+- contracts → `agentic-api-contracts-api` → `app/contracts`
+- infra → `agentic-postgres-dev` → `app/infra`
+- composition → `agentic-fullstack-composition` → `app/composition`
+
+---
+
+### fullstack-stack-react-native
+
+- backend → `agentic-clean-backend` → `app/backend`
+- web → `agentic-react-spa` → `app/web`
+- client → `agentic-react-native` → `app/client`
 - contracts → `agentic-api-contracts-api` → `app/contracts`
 - infra → `agentic-postgres-dev` → `app/infra`
 - composition → `agentic-fullstack-composition` → `app/composition`
@@ -177,11 +199,33 @@ Implement these profiles.
 
 ---
 
+### fullstack-angular-dotnet-react-native
+
+- backend → `agentic-dotnet-backend` → `app/backend`
+- web → `agentic-angular-spa` → `app/web`
+- client → `agentic-react-native` → `app/client`
+- contracts → `agentic-api-contracts-api` → `app/contracts`
+- infra → `agentic-postgres-dev` → `app/infra`
+- composition → `agentic-fullstack-composition` → `app/composition`
+
+---
+
 ### flutter-standalone
 
 - backend → null → `app/backend`
 - web → null → `app/web`
 - client → `agentic-flutter-client` → `app/client`
+- contracts → null → `app/contracts`
+- infra → null → `app/infra`
+- composition → null → `app/composition`
+
+---
+
+### react-native-standalone
+
+- backend → null → `app/backend`
+- web → null → `app/web`
+- client → `agentic-react-native` → `app/client`
 - contracts → null → `app/contracts`
 - infra → null → `app/infra`
 - composition → null → `app/composition`
