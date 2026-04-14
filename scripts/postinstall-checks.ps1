@@ -177,7 +177,7 @@ function Get-BootstrapInfo {
         return $null
     }
 
-    function Normalize-RepoValue {
+    function Resolve-RepoValue {
         param([string]$Value)
 
         if ($null -eq $Value) { return $null }
@@ -222,7 +222,7 @@ function Get-BootstrapInfo {
         }
 
         if ($inManualStarters -and $null -ne $currentManualKey -and $line -match "^\s{4}repo\s*:\s*(.*?)\s*$") {
-            $manualStarters[$currentManualKey] = Normalize-RepoValue -Value $matches[1]
+            $manualStarters[$currentManualKey] = Resolve-RepoValue -Value $matches[1]
         }
     }
 
@@ -264,7 +264,7 @@ function Get-BootstrapInfo {
                 }
 
                 if ($inProfileStarters -and $null -ne $currentProfileKey -and $line -match "^\s{8}repo\s*:\s*(.*?)\s*$") {
-                    $profileStarters[$currentProfileKey] = Normalize-RepoValue -Value $matches[1]
+                    $profileStarters[$currentProfileKey] = Resolve-RepoValue -Value $matches[1]
                 }
             }
         }
@@ -350,7 +350,7 @@ function Get-ComposeFiles {
     return @($files | Sort-Object -Unique)
 }
 
-function Validate-JsStarter {
+function Test-JsStarter {
     param(
         [string]$StarterId,
         [string]$StarterPath
@@ -420,7 +420,7 @@ function Validate-JsStarter {
     }
 }
 
-function Validate-DotnetStarter {
+function Test-DotnetStarter {
     param(
         [string]$StarterId,
         [string]$StarterPath
@@ -469,7 +469,7 @@ function Validate-DotnetStarter {
     }
 }
 
-function Validate-ContractsStarter {
+function Test-ContractsStarter {
     param(
         [string]$StarterId,
         [string]$StarterPath
@@ -559,7 +559,7 @@ function Validate-ContractsStarter {
     Add-Result -Starter $StarterId -Check "Contracts validation tooling" -Status "SKIP" -Details "Spec found, but no safely discoverable validator is available"
 }
 
-function Validate-ComposeStarter {
+function Test-ComposeStarter {
     param(
         [string]$StarterId,
         [string]$StarterPath,
@@ -623,7 +623,6 @@ function Validate-ComposeStarter {
     }
 
     $primary = @($composeFiles | Select-Object -First 1)[0]
-    $primaryName = Split-Path -Leaf $primary
     $primaryRelative = Get-ComposeFileArgument -AbsolutePath $primary
     [void](Invoke-DockerComposeStep -Starter $StarterId -Check "docker compose up -d" -WorkingDirectory $RepoRoot -ComposeFile $primaryRelative -ComposeArguments @("up","-d"))
     [void](Invoke-DockerComposeStep -Starter $StarterId -Check "docker compose ps" -WorkingDirectory $RepoRoot -ComposeFile $primaryRelative -ComposeArguments @("ps"))
@@ -635,7 +634,7 @@ function Validate-ComposeStarter {
     }
 }
 
-function Validate-FlutterStarter {
+function Test-FlutterStarter {
     param(
         [string]$StarterId,
         [string]$StarterPath
@@ -761,31 +760,31 @@ foreach ($starter in $StarterDefinitions) {
 
     switch ($starter.Id) {
         "agentic-clean-backend" {
-            Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-dotnet-backend" {
-            Validate-DotnetStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-DotnetStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-react-spa" {
-            Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-angular-spa" {
-            Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-flutter-client" {
-            Validate-FlutterStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-FlutterStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-react-native" {
-            Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-api-contracts-api" {
-            Validate-ContractsStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-ContractsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-postgres-dev" {
-            Validate-ComposeStarter -StarterId $starter.Id -StarterPath $starterPath -RunLifecycle
+            Test-ComposeStarter -StarterId $starter.Id -StarterPath $starterPath -RunLifecycle
         }
         "agentic-fullstack-composition" {
-            Validate-ComposeStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-ComposeStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         default {
             Add-Result -Starter $starter.Id -Check "starter dispatch" -Status "SKIP" -Details "No validator registered"
