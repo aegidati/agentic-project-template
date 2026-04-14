@@ -61,6 +61,9 @@ agentic-angular-spa
 agentic-flutter-client
 → installs into app/client
 
+agentic-react-native
+→ installs into app/client
+
 agentic-flutter-design-system
 → reusable Flutter UI package
 

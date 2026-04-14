@@ -13,7 +13,7 @@ When assembling an Agentic project:
 - Prefer installation in this order when multiple starters are requested:
   1. agentic-api-contracts-api
   2. agentic-clean-backend or agentic-dotnet-backend
-  3. agentic-react-spa or agentic-angular-spa or agentic-flutter-client
+  3. agentic-react-spa or agentic-angular-spa or agentic-flutter-client or agentic-react-native
   4. agentic-postgres-dev
   5. agentic-fullstack-composition
 

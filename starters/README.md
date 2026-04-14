@@ -13,6 +13,7 @@ This directory contains **metadata and references** to available starter packs.
 | agentic-react-spa | React SPA web client | `app/web` | Official |
 | agentic-angular-spa | Angular SPA web client | `app/web` | Official |
 | agentic-flutter-client | Flutter cross-platform client | `app/client` | Official |
+| agentic-react-native | React Native mobile client | `app/client` | Official |
 | agentic-api-contracts-api | OpenAPI contracts | `app/contracts` | Official |
 | agentic-postgres-dev | PostgreSQL development infra | `app/infra` | Official |
 | agentic-fullstack-composition | Fullstack Docker composition | `app/composition` | Official |

@@ -27,6 +27,7 @@ Given one or more requested starters, install them into the correct target paths
 - agentic-react-spa -> app/web
 - agentic-angular-spa -> app/web
 - agentic-flutter-client -> app/client
+- agentic-react-native -> app/client
 - agentic-api-contracts-api -> app/contracts
 - agentic-postgres-dev -> app/infra
 - agentic-fullstack-composition -> app/composition

@@ -133,6 +133,7 @@ agentic-dotnet-backend
 agentic-react-spa  
 agentic-angular-spa  
 agentic-flutter-client  
+agentic-react-native  
 agentic-postgres-dev  
 agentic-api-contracts-api  
 agentic-fullstack-composition  
@@ -192,7 +193,7 @@ agentic-clean-backend → app/backend
 agentic-dotnet-backend → app/backend  
 agentic-react-spa → app/web  
 agentic-angular-spa → app/web  
-agentic-flutter-client → app/client  
+agentic-flutter-client OR agentic-react-native → app/client  
 agentic-postgres-dev → app/infra  
 agentic-api-contracts-api → app/contracts  
 agentic-fullstack-composition → app/composition  

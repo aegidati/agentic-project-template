@@ -65,6 +65,7 @@ agentic-dotnet-backend
 agentic-react-spa  
 agentic-angular-spa  
 agentic-flutter-client  
+agentic-react-native  
 agentic-api-contracts-api  
 agentic-postgres-dev  
 agentic-fullstack-composition  

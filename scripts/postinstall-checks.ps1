@@ -15,6 +15,7 @@ $StarterDefinitions = @(
     [pscustomobject]@{ Id = "agentic-react-spa"; Key = "web"; Path = "app/web" },
     [pscustomobject]@{ Id = "agentic-angular-spa"; Key = "web"; Path = "app/web" },
     [pscustomobject]@{ Id = "agentic-flutter-client"; Key = "client"; Path = "app/client" },
+    [pscustomobject]@{ Id = "agentic-react-native"; Key = "client"; Path = "app/client" },
     [pscustomobject]@{ Id = "agentic-api-contracts-api"; Key = "contracts"; Path = "app/contracts" },
     [pscustomobject]@{ Id = "agentic-postgres-dev"; Key = "infra"; Path = "app/infra" },
     [pscustomobject]@{ Id = "agentic-fullstack-composition"; Key = "composition"; Path = "app/composition" }
@@ -773,6 +774,9 @@ foreach ($starter in $StarterDefinitions) {
         }
         "agentic-flutter-client" {
             Validate-FlutterStarter -StarterId $starter.Id -StarterPath $starterPath
+        }
+        "agentic-react-native" {
+            Validate-JsStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-api-contracts-api" {
             Validate-ContractsStarter -StarterId $starter.Id -StarterPath $starterPath

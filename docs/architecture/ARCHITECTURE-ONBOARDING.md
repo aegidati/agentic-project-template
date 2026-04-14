@@ -27,7 +27,7 @@ Canonical starter targets:
 - `agentic-dotnet-backend` -> `app/backend`
 - `agentic-react-spa` -> `app/web`
 - `agentic-angular-spa` -> `app/web`
-- `agentic-flutter-client` -> `app/client`
+- `agentic-flutter-client` or `agentic-react-native` -> `app/client`
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
 - `agentic-fullstack-composition` -> `app/composition`

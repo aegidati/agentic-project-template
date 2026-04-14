@@ -29,7 +29,7 @@ Starter mapping:
 
 agentic-clean-backend OR agentic-dotnet-backend → app/backend  
 agentic-react-spa OR agentic-angular-spa → app/web  
-agentic-flutter-client → app/client  
+agentic-flutter-client OR agentic-react-native → app/client  
 agentic-api-contracts-api → app/contracts  
 agentic-postgres-dev → app/infra  
 agentic-fullstack-composition → app/composition  

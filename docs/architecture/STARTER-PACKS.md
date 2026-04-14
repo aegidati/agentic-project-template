@@ -20,6 +20,7 @@ The platform includes the following starter packs:
 - **agentic-react-spa** - React single-page application for web clients
 - **agentic-angular-spa** - Angular single-page application for web clients
 - **agentic-flutter-client** - Flutter application for cross-platform clients (mobile, web, desktop)
+- **agentic-react-native** - React Native application for mobile clients
 - **agentic-postgres-dev** - PostgreSQL database infrastructure setup
 - **agentic-api-contracts-api** - OpenAPI contract definitions for API integration
 - **agentic-fullstack-composition** - Orchestration layer for full-stack applications
@@ -36,6 +37,7 @@ Runtime starter packs install into specific directories under `app/`:
 | agentic-react-spa | `app/web` |
 | agentic-angular-spa | `app/web` |
 | agentic-flutter-client | `app/client` |
+| agentic-react-native | `app/client` |
 | agentic-postgres-dev | `app/infra` |
 | agentic-api-contracts-api | `app/contracts` |
 | agentic-fullstack-composition | `app/composition` |
@@ -214,7 +216,7 @@ Canonical starter targets:
 - `agentic-dotnet-backend` -> `app/backend`
 - `agentic-react-spa` -> `app/web`
 - `agentic-angular-spa` -> `app/web`
-- `agentic-flutter-client` -> `app/client`
+- `agentic-flutter-client` or `agentic-react-native` -> `app/client`
 - `agentic-api-contracts-api` -> `app/contracts`
 - `agentic-postgres-dev` -> `app/infra`
 - `agentic-fullstack-composition` -> `app/composition`

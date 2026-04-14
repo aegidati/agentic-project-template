@@ -1,7 +1,7 @@
 project:
   name: null
   template_version: "1.0"
-  profile: null   # allowed: web-stack, mobile-stack, api-stack, fullstack-stack, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, flutter-standalone
+  profile: null   # allowed: web-stack, mobile-stack, mobile-stack-react-native, api-stack, fullstack-stack, fullstack-stack-react-native, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, fullstack-angular-dotnet-react-native, flutter-standalone, react-native-standalone
 
 profiles:
   web-stack:
@@ -48,6 +48,28 @@ profiles:
         repo: null
         path: app/composition
 
+  mobile-stack-react-native:
+    description: "Mobile-first application with React Native client, backend, shared API contracts and development infrastructure."
+    starters:
+      backend:
+        repo: agentic-clean-backend
+        path: app/backend
+      web:
+        repo: null
+        path: app/web
+      client:
+        repo: agentic-react-native
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
   api-stack:
     description: "Headless backend/API project with contracts and development infrastructure."
     starters:
@@ -81,6 +103,28 @@ profiles:
         path: app/web
       client:
         repo: agentic-flutter-client
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: agentic-fullstack-composition
+        path: app/composition
+
+  fullstack-stack-react-native:
+    description: "Multi-client product with backend, React SPA, React Native client, contracts, infrastructure and composition layer."
+    starters:
+      backend:
+        repo: agentic-clean-backend
+        path: app/backend
+      web:
+        repo: agentic-react-spa
+        path: app/web
+      client:
+        repo: agentic-react-native
         path: app/client
       contracts:
         repo: agentic-api-contracts-api
@@ -158,6 +202,28 @@ profiles:
         repo: agentic-fullstack-composition
         path: app/composition
 
+  fullstack-angular-dotnet-react-native:
+    description: "Multi-client product with .NET backend, Angular SPA, React Native client, contracts, infrastructure and composition layer."
+    starters:
+      backend:
+        repo: agentic-dotnet-backend
+        path: app/backend
+      web:
+        repo: agentic-angular-spa
+        path: app/web
+      client:
+        repo: agentic-react-native
+        path: app/client
+      contracts:
+        repo: agentic-api-contracts-api
+        path: app/contracts
+      infra:
+        repo: agentic-postgres-dev
+        path: app/infra
+      composition:
+        repo: agentic-fullstack-composition
+        path: app/composition
+
   flutter-standalone:
     description: "Standalone Flutter client application (no backend)."
     starters:
@@ -169,6 +235,28 @@ profiles:
         path: app/web
       client:
         repo: agentic-flutter-client
+        path: app/client
+      contracts:
+        repo: null
+        path: app/contracts
+      infra:
+        repo: null
+        path: app/infra
+      composition:
+        repo: null
+        path: app/composition
+
+  react-native-standalone:
+    description: "Standalone React Native client application (no backend)."
+    starters:
+      backend:
+        repo: null
+        path: app/backend
+      web:
+        repo: null
+        path: app/web
+      client:
+        repo: agentic-react-native
         path: app/client
       contracts:
         repo: null
