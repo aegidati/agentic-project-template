@@ -40,7 +40,7 @@ Adopt agentic-iam as an optional foundation starter using manual copy or subtree
 ### 02c - Optional Authentication Foundation Adoption
 
 #### Prompt To Run In Copilot Chat (02c)
-Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Read the profile recipe matching `project.profile` from `docs/profiles/`. Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, and unresolved ADR seeds.
+Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Resolve the profile recipe from `docs/profiles/` by first checking whether `docs/profiles/<project.profile>.md` exists before reading it. If the matching file does not exist, do not fail the step: use the closest available profile recipe as reference, record the mapping rationale, and mark the profile recipe item as explicitly deferred (partial deferral). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, resolved or deferred recipe mapping, and unresolved ADR seeds.
 
 #### Additional Done Criteria (02c)
 5. Authentication foundation adoption status is explicit: `adopted` or `deferred`.
@@ -49,7 +49,8 @@ Adopt agentic-auth-foundation as an optional foundation starter using manual cop
 8. Foundation collisions are reported without destructive overwrite.
 9. Auth-foundation repository source is explicit (full URL or explicit owner/repo), never inferred implicitly.
 10. If auth-foundation repository is unavailable, final status is `deferred` with rationale and next action.
-11. Output includes promoted ADR seeds or explicit deferrals with rationale.
+11. If `docs/profiles/<project.profile>.md` is missing, output includes the fallback recipe used (if any), mapping rationale, and explicit partial deferral.
+12. Output includes promoted ADR seeds or explicit deferrals with rationale.
 
 #### Stop if (02c)
 - AGENTIC-IAM is not already adopted.
