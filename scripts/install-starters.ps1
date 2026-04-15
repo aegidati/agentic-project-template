@@ -1,7 +1,8 @@
 param(
     [string]$WorkspaceRoot,
     [string]$BootstrapPath,
-    [string]$StarterRepoBaseUri
+    [string]$StarterRepoBaseUri,
+    [string]$DefaultGitHubOwner = "aegidati"
 )
 
 Set-StrictMode -Version Latest
@@ -106,7 +107,8 @@ function Resolve-StarterCloneSource {
         [Parameter(Mandatory = $true)]
         [string]$Repo,
         [string]$RepositoryRoot,
-        [string]$ConfiguredBaseUri
+        [string]$ConfiguredBaseUri,
+        [string]$DefaultGitHubOwner
     )
 
     if ($Repo -match "^[a-zA-Z][a-zA-Z0-9+.-]*://") {
@@ -140,16 +142,24 @@ function Resolve-StarterCloneSource {
         $baseUri = Get-OriginBaseUri -RepositoryRoot $RepositoryRoot
     }
 
-    if (-not [string]::IsNullOrWhiteSpace($baseUri)) {
-        $trimmedBaseUri = $baseUri.TrimEnd('/')
-        if ($Repo.EndsWith('.git', [System.StringComparison]::OrdinalIgnoreCase)) {
-            return "$trimmedBaseUri/$Repo"
+    if ([string]::IsNullOrWhiteSpace($baseUri)) {
+        $owner = $DefaultGitHubOwner
+        if ([string]::IsNullOrWhiteSpace($owner)) {
+            $owner = $env:AGENTIC_STARTER_GITHUB_OWNER
+        }
+        if ([string]::IsNullOrWhiteSpace($owner)) {
+            throw "Unable to resolve starter base URI. Set -StarterRepoBaseUri or -DefaultGitHubOwner."
         }
 
-        return "$trimmedBaseUri/$Repo.git"
+        $baseUri = "https://github.com/$owner"
     }
 
-    return $Repo
+    $trimmedBaseUri = $baseUri.TrimEnd('/')
+    if ($Repo.EndsWith('.git', [System.StringComparison]::OrdinalIgnoreCase)) {
+        return "$trimmedBaseUri/$Repo"
+    }
+
+    return "$trimmedBaseUri/$Repo.git"
 }
 
 function Get-BootstrapInfo {
@@ -393,7 +403,7 @@ if ($null -ne $generalReason) {
             New-Item -ItemType Directory -Path $tempPath -Force | Out-Null
             $tempPath = (Resolve-Path -LiteralPath $tempPath).Path
 
-            $cloneSource = Resolve-StarterCloneSource -Repo $resolvedRepo -RepositoryRoot $WorkspaceRoot -ConfiguredBaseUri $StarterRepoBaseUri
+            $cloneSource = Resolve-StarterCloneSource -Repo $resolvedRepo -RepositoryRoot $WorkspaceRoot -ConfiguredBaseUri $StarterRepoBaseUri -DefaultGitHubOwner $DefaultGitHubOwner
             $cloneResult = Invoke-NativeCommand -Command "git" -Arguments @("clone", "--depth", "1", $cloneSource, $tempPath) -WorkingDirectory $WorkspaceRoot
             if ($cloneResult.ExitCode -ne 0) {
                 $clonePreview = @($cloneResult.Output | Select-Object -Last 3) -join " | "
