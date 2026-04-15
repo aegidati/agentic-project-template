@@ -19,9 +19,42 @@ Run the official hardened installer script `scripts/install-starters.ps1` for st
 
 ## Optional Foundation Adoption
 
-### Prompt To Run In Copilot Chat (Foundation)
-Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Report adopted files, collisions, and unresolved decisions.
+### 02b - Optional IAM Foundation Adoption
 
-### Additional Done Criteria
-5. If foundation adoption is requested, report explicit confirmation that no runtime canonical app/* path was used.
-6. Foundation collisions are reported without destructive overwrite.
+#### Prompt To Run In Copilot Chat (02b)
+Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit IAM repository URL (or explicit owner/repo), do not infer owner from origin. If IAM repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, and unresolved decisions.
+
+#### Additional Done Criteria (02b)
+5. Foundation adoption status is explicit: `adopted` or `deferred`.
+6. Explicit confirmation that no runtime canonical app/* path was used.
+7. Foundation collisions are reported without destructive overwrite.
+8. IAM repository source is explicit (full URL or explicit owner/repo), never inferred implicitly.
+9. If IAM repository is unavailable, final status is `deferred` with rationale and next action.
+
+#### Stop if (02b)
+- IAM is placed into a runtime canonical slot.
+- Foundation collisions are unresolved.
+- Adoption status is ambiguous.
+- IAM repository source is implicit (owner/repo inferred automatically).
+
+### 02c - Optional Authentication Foundation Adoption
+
+#### Prompt To Run In Copilot Chat (02c)
+Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Read the profile recipe matching `project.profile` from `docs/profiles/`. Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, and unresolved ADR seeds.
+
+#### Additional Done Criteria (02c)
+5. Authentication foundation adoption status is explicit: `adopted` or `deferred`.
+6. AGENTIC-IAM prerequisite is validated before 02c execution.
+7. Explicit confirmation that no runtime canonical app/* path was used.
+8. Foundation collisions are reported without destructive overwrite.
+9. Auth-foundation repository source is explicit (full URL or explicit owner/repo), never inferred implicitly.
+10. If auth-foundation repository is unavailable, final status is `deferred` with rationale and next action.
+11. Output includes promoted ADR seeds or explicit deferrals with rationale.
+
+#### Stop if (02c)
+- AGENTIC-IAM is not already adopted.
+- project.profile is not set in PROJECT-BOOTSTRAP.yaml.
+- Auth foundation is placed into a runtime canonical slot.
+- ADR seeds are neither promoted nor explicitly deferred.
+- Adoption status is ambiguous.
+- Auth foundation repository source is implicit (owner/repo inferred automatically).
