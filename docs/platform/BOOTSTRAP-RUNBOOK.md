@@ -159,10 +159,19 @@ Agent
 Objective:
 Install the starters selected in the manifest.
 
+Operational rules for this step:
+1. Use the official hardened script: `scripts/install-starters.ps1`.
+2. Resolve starters profile-first from `project.profile` via `profiles.<profile>.starters`, then apply explicit overrides from `starters.*.repo`.
+3. Install only slots where the resolved `repo` is not `null`.
+4. Use only canonical runtime paths: `app/backend`, `app/web`, `app/client`, `app/contracts`, `app/infra`, `app/composition`.
+5. Handle collisions non-destructively: if a target slot exists and is not empty, classify it as `SKIP` with `collision=yes`, without overwrite or delete, then continue with remaining slots.
+6. Use temp cleanup safety based on `[System.IO.Path]::GetTempPath()` with `Test-Path -LiteralPath`, `Remove-Item -LiteralPath`, and `finally`; cleanup is best-effort and must not turn a successful install into a failure.
+7. Produce both machine-readable JSON output and a human-readable per-slot summary.
+
 Copy-paste chat text:
 
 ```text
-Install starters from PROJECT-BOOTSTRAP.yaml using profile-first resolution: resolve from project.profile via profiles.<profile>.starters, then apply explicit overrides from starters.*.repo. Install only starters where repo != null, using canonical target paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Report collisions without overwriting blindly and provide per-starter install status.
+Run the official hardened installer script scripts/install-starters.ps1 for step 02. Resolve starters from PROJECT-BOOTSTRAP.yaml using profile-first resolution via profiles.<profile>.starters, then apply explicit overrides from starters.*.repo. Install only slots where repo != null, enforce canonical runtime paths app/backend, app/web, app/client, app/contracts, app/infra, app/composition, classify non-empty target collisions as SKIP with collision=yes without overwrite/delete, keep temp cleanup best-effort with Test-Path -LiteralPath and Remove-Item -LiteralPath inside finally, and report per-slot results as both JSON and human-readable summary.
 ```
 
 Installation order:
@@ -175,12 +184,13 @@ Installation order:
 
 Expected output:
 1. Starters installed only in canonical paths.
-2. Collisions reported without blind overwrite.
-3. Per-starter install status.
+2. Collisions reported as non-destructive `SKIP` without blind overwrite.
+3. Per-slot install status with `slot`, `repo`, `path`, `result`, `collision`, `reason`.
+4. Final output includes JSON plus a human-readable summary.
 
 Stop if:
 - A starter is proposed at a non-canonical path.
-- There are unresolved collisions.
+- The official hardened script is bypassed.
 - Installed starters are inconsistent with `project.profile`.
 
 ### 02b - Optional IAM Foundation Adoption

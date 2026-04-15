@@ -43,6 +43,45 @@ function Add-Result {
     Write-Host ("[{0}] {1} :: {2} - {3}" -f $Status, $Starter, $Check, $Details)
 }
 
+function Test-InstallStarterHardening {
+    $installScriptPath = Join-Path $ScriptDir "install-starters.ps1"
+
+    if (-not (Test-Path -LiteralPath $installScriptPath)) {
+        Add-Result -Starter "bootstrap-step-02" -Check "official install script" -Status "FAIL" -Details "scripts/install-starters.ps1 not found"
+        return
+    }
+
+    $content = Get-Content -LiteralPath $installScriptPath -Raw
+
+    if ($content -match "Test-Path\s+-LiteralPath") {
+        Add-Result -Starter "bootstrap-step-02" -Check "temp cleanup uses Test-Path -LiteralPath" -Status "PASS" -Details "Found Test-Path -LiteralPath"
+    } else {
+        Add-Result -Starter "bootstrap-step-02" -Check "temp cleanup uses Test-Path -LiteralPath" -Status "FAIL" -Details "Missing Test-Path -LiteralPath usage in scripts/install-starters.ps1"
+    }
+
+    if ($content -match "Remove-Item\s+-LiteralPath") {
+        Add-Result -Starter "bootstrap-step-02" -Check "temp cleanup uses Remove-Item -LiteralPath" -Status "PASS" -Details "Found Remove-Item -LiteralPath"
+    } else {
+        Add-Result -Starter "bootstrap-step-02" -Check "temp cleanup uses Remove-Item -LiteralPath" -Status "FAIL" -Details "Missing Remove-Item -LiteralPath usage in scripts/install-starters.ps1"
+    }
+
+    if ($content -match "finally\s*\{[\s\S]*?Test-Path\s+-LiteralPath[\s\S]*?Remove-Item\s+-LiteralPath") {
+        Add-Result -Starter "bootstrap-step-02" -Check "temp cleanup finally block" -Status "PASS" -Details "Found finally block with literal-path cleanup"
+    } else {
+        Add-Result -Starter "bootstrap-step-02" -Check "temp cleanup finally block" -Status "FAIL" -Details "Missing finally block with literal-path cleanup in scripts/install-starters.ps1"
+    }
+
+    if (
+        ($content -match 'Target slot exists and is not empty') -and
+        ($content -match 'Result "SKIP"') -and
+        ($content -match 'Collision "yes"')
+    ) {
+        Add-Result -Starter "bootstrap-step-02" -Check "non-destructive collision classification" -Status "PASS" -Details "Found SKIP collision=yes classification"
+    } else {
+        Add-Result -Starter "bootstrap-step-02" -Check "non-destructive collision classification" -Status "FAIL" -Details "Missing non-destructive collision classification in scripts/install-starters.ps1"
+    }
+}
+
 function Test-CommandAvailable {
     param([string]$Name)
     return $null -ne (Get-Command -Name $Name -ErrorAction SilentlyContinue)
@@ -715,6 +754,8 @@ Write-Host "SkipNpmCiIfNodeModules: $SkipNpmCiIfNodeModules"
 Write-Host "KeepInfraUp: $KeepInfraUp"
 Write-Host "============================================================"
 
+Test-InstallStarterHardening
+
 $requiredBootstrapPath = Join-Path $RepoRoot "PROJECT-BOOTSTRAP.yaml"
 if (-not (Test-Path -LiteralPath $requiredBootstrapPath)) {
     Add-Result -Starter "bootstrap" -Check "bootstrap manifest" -Status "FAIL" -Details "PROJECT-BOOTSTRAP.yaml not found"
@@ -851,7 +892,12 @@ if (@($actionableSkipRows).Count -eq 0) {
     }
 }
 
-$appliedRows = @($CheckResults | Where-Object { $appliedStarterIds -contains $_.Starter })
+$appliedRows = @(
+    $CheckResults |
+        Where-Object {
+            ($appliedStarterIds -contains $_.Starter) -or ($_.Starter -eq "bootstrap-step-02")
+        }
+)
 $totalPass = @($appliedRows | Where-Object { $_.Status -eq "PASS" }).Count
 $totalFail = @($appliedRows | Where-Object { $_.Status -eq "FAIL" }).Count
 $totalSkip = @($appliedRows | Where-Object { $_.Status -eq "SKIP" }).Count
