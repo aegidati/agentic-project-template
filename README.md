@@ -60,7 +60,7 @@ Checks are starter-dependent and adapt to selected or installed modules instead 
 
 - Node.js and npm for JavaScript/TypeScript starters
 - .NET SDK for .NET backend starters
-- Docker Desktop for infra/composition starters
+- Docker Desktop for infra/composition starters (Docker CLI required; daemon can be temporarily unavailable)
 - PowerShell on Windows
 
 ### Run The Checks
@@ -90,6 +90,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\postinstall-checks
 - SKIP: check not applicable or required tooling/starter not present
 
 Checks are starter-dependent and run only for starters that are selected and/or installed.
+
+Additional validation behavior:
+
+- If Docker CLI is available but daemon is unreachable, infra/composition checks report `SKIP` with explicit reason and validation continues safely.
+- For `agentic-react-spa`, post-install validation checks starter metadata plus minimum web structure (`src`, web entrypoint, HTML host) before running npm scripts.
+- When a React SPA defines a test script without `passWithNoTests`, validation requires test artifacts and reports clear `FAIL` when missing.
+- For `agentic-react-native`, validation performs lockfile synchronization before `npm ci` to avoid lock/package mismatch failures on clean environments.
 
 ## First-Run Prompt Sequence
 

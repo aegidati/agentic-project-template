@@ -9,4 +9,6 @@ Run validation using scripts/run-checks.cmd and scripts/postinstall-checks.ps1. 
 ## Done Criteria
 1. Validation executes from repository root.
 2. PASS/FAIL/SKIP results are reported per check and per starter.
-3. No unresolved FAIL remains, or blockers are explicitly reported.
+3. If Docker CLI is present but daemon is unreachable, infra/composition checks are classified as SKIP with explicit reason and execution continues.
+4. React SPA validation detects partial installations early (metadata + minimal source/test completeness when test scripts require tests) and reports clear reasons.
+5. No unresolved FAIL remains, or blockers are explicitly reported.

@@ -389,10 +389,145 @@ function Get-ComposeFiles {
     return @($files | Sort-Object -Unique)
 }
 
+function Test-ReactSpaCompleteness {
+    param(
+        [string]$StarterId,
+        [string]$StarterPath,
+        [string]$PackageJsonPath,
+        [object]$PackageJson
+    )
+
+    $metadataCandidates = @(
+        (Join-Path $StarterPath "starter.manifest.yaml"),
+        (Join-Path $StarterPath "starter.manifest.yml"),
+        (Join-Path $StarterPath ".starter\starter.manifest.yaml"),
+        (Join-Path $StarterPath ".starter\starter.manifest.yml"),
+        (Join-Path $StarterPath "app\starter.manifest.yaml"),
+        (Join-Path $StarterPath "app\starter.manifest.yml")
+    )
+
+    $metadataPath = $metadataCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+    if ([string]::IsNullOrWhiteSpace($metadataPath)) {
+        Add-Result -Starter $StarterId -Check "starter metadata" -Status "FAIL" -Details "Missing starter.manifest.yaml/yml in expected locations"
+    } else {
+        Add-Result -Starter $StarterId -Check "starter metadata" -Status "PASS" -Details ("Found: " + $metadataPath)
+    }
+
+    $webRoot = Split-Path -Parent $PackageJsonPath
+    $srcDir = Join-Path $webRoot "src"
+    $hasSrc = Test-Path -LiteralPath $srcDir
+    if ($hasSrc) {
+        Add-Result -Starter $StarterId -Check "web source directory" -Status "PASS" -Details "src directory found"
+    } else {
+        Add-Result -Starter $StarterId -Check "web source directory" -Status "FAIL" -Details "src directory missing"
+    }
+
+    $entryCandidates = @(
+        (Join-Path $srcDir "main.tsx"),
+        (Join-Path $srcDir "main.jsx"),
+        (Join-Path $srcDir "index.tsx"),
+        (Join-Path $srcDir "index.jsx")
+    )
+    $entryPath = $entryCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+    if ([string]::IsNullOrWhiteSpace($entryPath)) {
+        Add-Result -Starter $StarterId -Check "web entrypoint" -Status "FAIL" -Details "Missing src/main.tsx (or equivalent entrypoint)"
+    } else {
+        Add-Result -Starter $StarterId -Check "web entrypoint" -Status "PASS" -Details ("Found: " + $entryPath)
+    }
+
+    $htmlCandidates = @(
+        (Join-Path $webRoot "index.html"),
+        (Join-Path $webRoot "public\index.html")
+    )
+    $htmlHostPath = $htmlCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+    if ([string]::IsNullOrWhiteSpace($htmlHostPath)) {
+        Add-Result -Starter $StarterId -Check "web html host" -Status "FAIL" -Details "Missing index.html (root or public/)"
+    } else {
+        Add-Result -Starter $StarterId -Check "web html host" -Status "PASS" -Details ("Found: " + $htmlHostPath)
+    }
+
+    if (Test-NpmScript -PackageJson $PackageJson -ScriptName "build") {
+        if ($hasSrc -and (-not [string]::IsNullOrWhiteSpace($entryPath)) -and (-not [string]::IsNullOrWhiteSpace($htmlHostPath))) {
+            Add-Result -Starter $StarterId -Check "build prerequisites" -Status "PASS" -Details "Minimum web build structure detected"
+        } else {
+            Add-Result -Starter $StarterId -Check "build prerequisites" -Status "FAIL" -Details "Build script exists but required source/html structure is incomplete"
+        }
+    } else {
+        Add-Result -Starter $StarterId -Check "build prerequisites" -Status "SKIP" -Details "Build script not defined"
+    }
+
+    if (Test-NpmScript -PackageJson $PackageJson -ScriptName "test") {
+        $testScriptText = [string]$PackageJson.scripts.test
+        if ($testScriptText -match "passWithNoTests") {
+            Add-Result -Starter $StarterId -Check "test artifacts" -Status "SKIP" -Details "Test script allows zero tests (passWithNoTests)"
+        } else {
+            $testFiles = @(
+                Get-ChildItem -LiteralPath $webRoot -Recurse -File -ErrorAction SilentlyContinue |
+                    Where-Object {
+                        ($_.Name -match "(?i)\.(test|spec)\.(ts|tsx|js|jsx)$") -or
+                        ($_.FullName -match "(?i)[\\/]__tests__[\\/]")
+                    }
+            )
+
+            if (@($testFiles).Count -gt 0) {
+                Add-Result -Starter $StarterId -Check "test artifacts" -Status "PASS" -Details ("Found " + @($testFiles).Count + " test file(s)")
+            } else {
+                Add-Result -Starter $StarterId -Check "test artifacts" -Status "FAIL" -Details "Test script exists but no test files were found"
+            }
+        }
+    } else {
+        Add-Result -Starter $StarterId -Check "test artifacts" -Status "SKIP" -Details "Test script not defined"
+    }
+
+    $completenessRows = @(
+        $CheckResults |
+            Where-Object {
+                ($_.Starter -eq $StarterId) -and
+                ($_.Check -in @("starter metadata","web source directory","web entrypoint","web html host","build prerequisites","test artifacts"))
+            }
+    )
+
+    return @($completenessRows | Where-Object { $_.Status -eq "FAIL" }).Count -eq 0
+}
+
+function Test-DockerDaemonReachability {
+    param([string]$WorkingDirectory)
+
+    Push-Location $WorkingDirectory
+    try {
+        $previousErrorActionPreference = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        $output = @(& docker info 2>&1 | ForEach-Object { $_.ToString() })
+        $ErrorActionPreference = $previousErrorActionPreference
+
+        $exitCode = $LASTEXITCODE
+        if ($null -eq $exitCode) { $exitCode = 1 }
+
+        if ($exitCode -eq 0) {
+            return [pscustomobject]@{ Reachable = $true; Reason = "docker daemon reachable" }
+        }
+
+        $preview = @($output | Select-Object -Last 2) -join " | "
+        if ([string]::IsNullOrWhiteSpace($preview)) {
+            $preview = "docker info exited with code $exitCode"
+        }
+
+        return [pscustomobject]@{ Reachable = $false; Reason = $preview }
+    }
+    catch {
+        return [pscustomobject]@{ Reachable = $false; Reason = ("Exception: " + $_.Exception.Message) }
+    }
+    finally {
+        $ErrorActionPreference = "Stop"
+        Pop-Location
+    }
+}
+
 function Test-JsStarter {
     param(
         [string]$StarterId,
-        [string]$StarterPath
+        [string]$StarterPath,
+        [switch]$SyncLockfileBeforeCi
     )
 
     Add-Result -Starter $StarterId -Check "Path exists" -Status "PASS" -Details $StarterPath
@@ -436,17 +571,29 @@ function Test-JsStarter {
         return
     }
 
+    $pkg = Read-JsonFile -Path $packageJsonPath
+    if ($null -eq $pkg) {
+        Add-Result -Starter $StarterId -Check "package.json parsing" -Status "SKIP" -Details "Could not parse JSON; skipping script discovery"
+        return
+    }
+
+    if ($StarterId -eq "agentic-react-spa") {
+        $reactSpaComplete = Test-ReactSpaCompleteness -StarterId $StarterId -StarterPath $StarterPath -PackageJsonPath $packageJsonPath -PackageJson $pkg
+        if (-not $reactSpaComplete) {
+            Add-Result -Starter $StarterId -Check "npm checks" -Status "SKIP" -Details "Skipped due to incomplete React SPA structure"
+            return
+        }
+    }
+
+    if ($SyncLockfileBeforeCi) {
+        [void](Invoke-Step -Starter $StarterId -Check "npm lockfile sync" -WorkingDirectory $packageDir -Command "npm" -Arguments @("install","--package-lock-only","--ignore-scripts","--no-audit","--fund=false"))
+    }
+
     $nodeModules = Join-Path $packageDir "node_modules"
     if ($SkipNpmCiIfNodeModules -and (Test-Path -LiteralPath $nodeModules)) {
         Add-Result -Starter $StarterId -Check "npm ci" -Status "SKIP" -Details "Skipped due to -SkipNpmCiIfNodeModules and existing node_modules"
     } else {
         [void](Invoke-Step -Starter $StarterId -Check "npm ci" -WorkingDirectory $packageDir -Command "npm" -Arguments @("ci","--no-audit","--fund=false"))
-    }
-
-    $pkg = Read-JsonFile -Path $packageJsonPath
-    if ($null -eq $pkg) {
-        Add-Result -Starter $StarterId -Check "package.json parsing" -Status "SKIP" -Details "Could not parse JSON; skipping script discovery"
-        return
     }
 
     $scriptCandidates = @("build","test","smoke","lint","typecheck")
@@ -613,22 +760,12 @@ function Test-ComposeStarter {
     }
     Add-Result -Starter $StarterId -Check "docker availability" -Status "PASS" -Details "docker detected"
 
-    $dockerInfoExit = 1
-    Push-Location $StarterPath
-    try {
-        & docker info *> $null 2>&1
-        $dockerInfoExit = $LASTEXITCODE
-        if ($null -eq $dockerInfoExit) { $dockerInfoExit = 1 }
-    }
-    finally {
-        Pop-Location
-    }
-
-    if ($dockerInfoExit -ne 0) {
-        Add-Result -Starter $StarterId -Check "docker daemon" -Status "SKIP" -Details "docker daemon unreachable"
+    $dockerDaemon = Test-DockerDaemonReachability -WorkingDirectory $StarterPath
+    if (-not $dockerDaemon.Reachable) {
+        Add-Result -Starter $StarterId -Check "docker daemon" -Status "SKIP" -Details ("docker daemon unreachable: " + $dockerDaemon.Reason)
         return
     }
-    Add-Result -Starter $StarterId -Check "docker daemon" -Status "PASS" -Details "docker daemon reachable"
+    Add-Result -Starter $StarterId -Check "docker daemon" -Status "PASS" -Details $dockerDaemon.Reason
 
     $composeFiles = @(Get-ComposeFiles -Path $StarterPath)
     if (@($composeFiles).Count -eq 0) {
@@ -816,7 +953,7 @@ foreach ($starter in $StarterDefinitions) {
             Test-FlutterStarter -StarterId $starter.Id -StarterPath $starterPath
         }
         "agentic-react-native" {
-            Test-JsStarter -StarterId $starter.Id -StarterPath $starterPath
+            Test-JsStarter -StarterId $starter.Id -StarterPath $starterPath -SyncLockfileBeforeCi
         }
         "agentic-api-contracts-api" {
             Test-ContractsStarter -StarterId $starter.Id -StarterPath $starterPath
