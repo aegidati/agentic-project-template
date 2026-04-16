@@ -4,7 +4,7 @@
 Align architecture snapshot with the installed baseline and ADR-001.
 
 ## Prompt To Run In Copilot Chat
-Update docs/architecture/ARCHITECTURE-SNAPSHOT.md to reflect installed starter modules and ADR-001 decisions. Keep it high-level, deterministic, and aligned with canonical starter paths.
+@architecture-guardian Update docs/architecture/ARCHITECTURE-SNAPSHOT.md to reflect installed starter modules and ADR-001 decisions. Keep it high-level, deterministic, and aligned with canonical starter paths.
 
 ## Done Criteria
 1. docs/architecture/ARCHITECTURE-SNAPSHOT.md is updated.

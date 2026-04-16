@@ -4,7 +4,7 @@
 Create initial feature docs aligned to governance workflow.
 
 ## Prompt To Run In Copilot Chat
-Create docs/features/FEAT-0001-INITIAL-BOOTSTRAP with at least 00-REQUEST.md and 01-PLAN.md aligned to AGENTIC-WORKFLOW. Keep scope generic and focused on initialization outcomes.
+@new-feature-agent Create docs/features/FEAT-0001-INITIAL-BOOTSTRAP with at least 00-REQUEST.md and 01-PLAN.md aligned to AGENTIC-WORKFLOW. Keep scope generic and focused on initialization outcomes.
 
 ## Done Criteria
 1. docs/features/FEAT-0001-INITIAL-BOOTSTRAP exists.

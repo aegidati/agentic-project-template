@@ -6,7 +6,7 @@ Create the project bootstrap manifest from template defaults.
 If the project profile has not been explicitly chosen yet, determine it before creating the manifest.
 
 ## Prompt To Run In Copilot Chat
-Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml.
+@starter-installer Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml.
 
 Keep schema and keys unchanged.
 

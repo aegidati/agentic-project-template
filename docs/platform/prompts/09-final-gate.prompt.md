@@ -4,7 +4,7 @@
 Run final readiness gate before normal feature delivery starts.
 
 ## Prompt To Run In Copilot Chat
-Run a final gate and declare READY or NOT READY. Validate structure, documentation consistency, canonical starter paths unchanged (app/backend, app/web, app/client, app/contracts, app/infra, app/composition), optional foundation adoption consistency, no foundation starter forced into runtime slots, and post-install validation outcomes.
+@feature-lifecycle-agent Run a final gate and declare READY or NOT READY. Validate structure, documentation consistency, canonical starter paths unchanged (app/backend, app/web, app/client, app/contracts, app/infra, app/composition), optional foundation adoption consistency, no foundation starter forced into runtime slots, and post-install validation outcomes.
 
 Also validate ADR index consistency: scan docs/adr/ for concrete ADR-*.md files (excluding ADR-TEMPLATE.md and ADR-INDEX.md itself), then verify that each file is registered in docs/adr/ADR-INDEX.md with matching ID, title, status, date, and link. Report the following checklist:
 

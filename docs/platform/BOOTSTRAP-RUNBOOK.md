@@ -103,7 +103,7 @@ Verify that the derived repository is a clean template baseline.
 Copy-paste chat text:
 
 ```text
-Verify this derived repository is a clean template baseline. Confirm required template directories and governance docs exist, list any structural deviations, and confirm canonical starter targets are unchanged: app/backend, app/web, app/client, app/contracts, app/infra, app/composition.
+@project-auditor Verify this derived repository is a clean template baseline. Confirm required template directories and governance docs exist, list any structural deviations, and confirm canonical starter targets are unchanged: app/backend, app/web, app/client, app/contracts, app/infra, app/composition.
 ```
 
 Expected output:
@@ -133,7 +133,7 @@ If `project.profile` has not been explicitly decided yet, the agent will ask you
 Copy-paste chat text:
 
 ```text
-Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml. Keep schema and keys unchanged. Before creating the file, if the project profile has not been explicitly chosen yet, ask the user to choose one profile from the allowed options below and briefly describe each option so the choice is unambiguous. Do not assume a default when project.profile is null. Allowed profiles: web-stack, mobile-stack, mobile-stack-react-native, api-stack, fullstack-stack, fullstack-stack-react-native, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, fullstack-angular-dotnet-react-native, flutter-standalone, react-native-standalone. When creating the file: use project.profile as the recommended default starter selection mechanism, use starters: only for explicit manual overrides, keep unselected manual overrides as repo: null, do not add business-specific fields.
+@starter-installer Create PROJECT-BOOTSTRAP.yaml from PROJECT-BOOTSTRAP.example.yaml. Keep schema and keys unchanged. Before creating the file, if the project profile has not been explicitly chosen yet, ask the user to choose one profile from the allowed options below and briefly describe each option so the choice is unambiguous. Do not assume a default when project.profile is null. Allowed profiles: web-stack, mobile-stack, mobile-stack-react-native, api-stack, fullstack-stack, fullstack-stack-react-native, web-stack-angular, api-stack-dotnet, fullstack-angular-dotnet, fullstack-angular-dotnet-react-native, flutter-standalone, react-native-standalone. When creating the file: use project.profile as the recommended default starter selection mechanism, use starters: only for explicit manual overrides, keep unselected manual overrides as repo: null, do not add business-specific fields.
 ```
 
 Expected output:
@@ -171,7 +171,7 @@ Operational rules for this step:
 Copy-paste chat text:
 
 ```text
-Run the official hardened installer script scripts/install-starters.ps1 for step 02. Resolve starters from PROJECT-BOOTSTRAP.yaml using profile-first resolution via profiles.<profile>.starters, then apply explicit overrides from starters.*.repo. Install only slots where repo != null, enforce canonical runtime paths app/backend, app/web, app/client, app/contracts, app/infra, app/composition, classify non-empty target collisions as SKIP with collision=yes without overwrite/delete, keep temp cleanup best-effort with Test-Path -LiteralPath and Remove-Item -LiteralPath inside finally, and report per-slot results as both JSON and human-readable summary.
+@starter-installer Run the official hardened installer script scripts/install-starters.ps1 for step 02. Resolve starters from PROJECT-BOOTSTRAP.yaml using profile-first resolution via profiles.<profile>.starters, then apply explicit overrides from starters.*.repo. Install only slots where repo != null, enforce canonical runtime paths app/backend, app/web, app/client, app/contracts, app/infra, app/composition, classify non-empty target collisions as SKIP with collision=yes without overwrite/delete, keep temp cleanup best-effort with Test-Path -LiteralPath and Remove-Item -LiteralPath inside finally, and report per-slot results as both JSON and human-readable summary.
 ```
 
 Installation order:
@@ -207,7 +207,7 @@ Adopt AGENTIC-IAM as an optional foundation starter using manual copy or subtree
 Prompt To Run In Copilot Chat (02b):
 
 ```text
-Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths (app/backend, app/web, app/client, app/contracts, app/infra, app/composition). Use an explicit IAM repository URL (or explicit owner/repo), do not infer owner from origin. If IAM repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, and unresolved decisions.
+@starter-installer Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths (app/backend, app/web, app/client, app/contracts, app/infra, app/composition). Use an explicit IAM repository URL (or explicit owner/repo), do not infer owner from origin. If IAM repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, and unresolved decisions.
 ```
 
 Additional Done Criteria (02b):
@@ -240,7 +240,7 @@ Step 02b (AGENTIC-IAM adoption) must be completed before this step.
 Prompt To Run In Copilot Chat (02c):
 
 ```text
-Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Resolve the profile recipe from `docs/profiles/` by first checking whether `docs/profiles/<project.profile>.md` exists before reading it. If the matching file does not exist, do not fail the step: use the closest available profile recipe as reference, record the mapping rationale, and mark the profile recipe item as explicitly deferred (partial deferral). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, resolved or deferred recipe mapping, and unresolved ADR seeds.
+@starter-installer Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Resolve the profile recipe from `docs/profiles/` by first checking whether `docs/profiles/<project.profile>.md` exists before reading it. If the matching file does not exist, do not fail the step: use the closest available profile recipe as reference, record the mapping rationale, and mark the profile recipe item as explicitly deferred (partial deferral). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, resolved or deferred recipe mapping, and unresolved ADR seeds.
 ```
 
 Additional Done Criteria (02c):
@@ -275,7 +275,7 @@ Formalize the initial architecture strategy.
 Copy-paste chat text:
 
 ```text
-Create docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md documenting selected runtime starters, optional foundation starters, rationale, constraints, and initial architecture decisions. Keep it governance-first and consistent with template boundaries.
+@architecture-guardian Create docs/adr/ADR-001-ARCHITECTURE-STRATEGY.md documenting selected runtime starters, optional foundation starters, rationale, constraints, and initial architecture decisions. Keep it governance-first and consistent with template boundaries.
 ```
 
 Expected output:
@@ -304,7 +304,7 @@ Align the architecture snapshot to the installed baseline.
 Copy-paste chat text:
 
 ```text
-Update docs/architecture/ARCHITECTURE-SNAPSHOT.md to reflect installed starter modules and ADR-001 decisions. Keep it high-level, deterministic, and aligned with canonical starter paths.
+@architecture-guardian Update docs/architecture/ARCHITECTURE-SNAPSHOT.md to reflect installed starter modules and ADR-001 decisions. Keep it high-level, deterministic, and aligned with canonical starter paths.
 ```
 
 Expected output:
@@ -330,7 +330,7 @@ Update bootstrap status flags in the manifest.
 Copy-paste chat text:
 
 ```text
-Update PROJECT-BOOTSTRAP.yaml to reflect completed bootstrap status (installation and architecture documentation readiness) without changing schema or adding new keys.
+@documentation-guardian Update PROJECT-BOOTSTRAP.yaml to reflect completed bootstrap status (installation and architecture documentation readiness) without changing schema or adding new keys.
 ```
 
 Expected output:
@@ -360,7 +360,7 @@ References:
 Copy-paste chat text:
 
 ```text
-Run validation using scripts/run-checks.cmd and scripts/postinstall-checks.ps1. Provide per-check and per-starter PASS/FAIL/SKIP results, classify not-applicable checks as SKIP with reason, and summarize unresolved blockers. If either script is missing, generate and validate an equivalent safe check workflow before reporting results.
+@project-auditor Run validation using scripts/run-checks.cmd and scripts/postinstall-checks.ps1. Provide per-check and per-starter PASS/FAIL/SKIP results, classify not-applicable checks as SKIP with reason, and summarize unresolved blockers. If either script is missing, generate and validate an equivalent safe check workflow before reporting results.
 ```
 
 Expected output:
@@ -385,7 +385,7 @@ Open the first documentation feature, dedicated to the bootstrap itself.
 Copy-paste chat text:
 
 ```text
-Create docs/features/FEAT-0001-INITIAL-BOOTSTRAP with at least 00-REQUEST.md and 01-PLAN.md aligned to AGENTIC-WORKFLOW. Keep scope generic and focused on initialization outcomes.
+@new-feature-agent Create docs/features/FEAT-0001-INITIAL-BOOTSTRAP with at least 00-REQUEST.md and 01-PLAN.md aligned to AGENTIC-WORKFLOW. Keep scope generic and focused on initialization outcomes.
 ```
 
 Expected output:
@@ -410,7 +410,7 @@ Produce a concise initialization report.
 Copy-paste chat text:
 
 ```text
-Create docs/features/FEAT-0001-INITIAL-BOOTSTRAP/03-IMPLEMENTATION-LOG.md summarizing selected starters, install outcome, ADR/snapshot updates, validation outcomes, and pending follow-ups.
+@documentation-guardian Create docs/features/FEAT-0001-INITIAL-BOOTSTRAP/03-IMPLEMENTATION-LOG.md summarizing selected starters, install outcome, ADR/snapshot updates, validation outcomes, and pending follow-ups.
 ```
 
 Expected output:
@@ -440,7 +440,16 @@ Declare whether the project is ready to enter normal development or not.
 Copy-paste chat text:
 
 ```text
-Run a final gate and declare READY or NOT READY. Validate structure, documentation consistency, canonical runtime starter paths unchanged (app/backend, app/web, app/client, app/contracts, app/infra, app/composition), optional foundation adoption consistency, no foundation starter forced into runtime slots, and post-install validation outcomes.
+@feature-lifecycle-agent Run a final gate and declare READY or NOT READY. Validate structure, documentation consistency, canonical starter paths unchanged (app/backend, app/web, app/client, app/contracts, app/infra, app/composition), optional foundation adoption consistency, no foundation starter forced into runtime slots, and post-install validation outcomes.
+
+Also validate ADR index consistency: scan docs/adr/ for concrete ADR-*.md files (excluding ADR-TEMPLATE.md and ADR-INDEX.md itself), then verify that each file is registered in docs/adr/ADR-INDEX.md with matching ID, title, status, date, and link. Report the following checklist:
+
+ADR Index Consistency Checklist:
+- [ ] All concrete ADR files are present in the index table
+- [ ] No index row has placeholder status (_Template_) for an existing concrete ADR
+- [ ] No index row has placeholder date (TBD) for an existing concrete ADR
+- [ ] Each index link resolves to an existing file
+- [ ] No index row exists without a corresponding file
 ```
 
 Expected output:
