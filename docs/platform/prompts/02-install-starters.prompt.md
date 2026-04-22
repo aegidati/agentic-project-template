@@ -22,7 +22,7 @@ Use the official hardened script `scripts/install-starters.ps1` for runtime star
 ### 02b - Optional IAM Foundation Adoption
 
 #### Prompt To Run In Copilot Chat (02b)
-@starter-installer Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit IAM repository URL (or explicit owner/repo), do not infer owner from origin. If IAM repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, and unresolved decisions.
+@starter-installer Adopt agentic-iam as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit IAM repository URL (or explicit owner/repo), do not infer owner from origin. If IAM repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, unresolved decisions, and whether the adopted IAM baseline documents Superadmin as a platform-scope role separate from TenantRole with IAM-owned privileged resolution.
 
 #### Additional Done Criteria (02b)
 5. Foundation adoption status is explicit: `adopted` or `deferred`.
@@ -30,17 +30,20 @@ Use the official hardened script `scripts/install-starters.ps1` for runtime star
 7. Foundation collisions are reported without destructive overwrite.
 8. IAM repository source is explicit (full URL or explicit owner/repo), never inferred implicitly.
 9. If IAM repository is unavailable, final status is `deferred` with rationale and next action.
+10. If IAM foundation is adopted, the output explicitly confirms Superadmin baseline coherence: platform-scope, separate from TenantRole, and IAM-owned privileged resolution.
 
 #### Stop if (02b)
 - IAM is placed into a runtime canonical slot.
 - Foundation collisions are unresolved.
 - Adoption status is ambiguous.
 - IAM repository source is implicit (owner/repo inferred automatically).
+- Superadmin baseline is described as a TenantRole or as implicit tenant-wide ownership.
+- Superadmin baseline is in scope but neither confirmed nor explicitly deferred.
 
 ### 02c - Optional Authentication Foundation Adoption
 
 #### Prompt To Run In Copilot Chat (02c)
-@starter-installer Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Resolve the profile recipe from `docs/profiles/` by first checking whether `docs/profiles/<project.profile>.md` exists before reading it. If the matching file does not exist, do not fail the step: use the closest available profile recipe as reference, record the mapping rationale, and mark the profile recipe item as explicitly deferred (partial deferral). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, resolved or deferred recipe mapping, and unresolved ADR seeds.
+@starter-installer Adopt agentic-auth-foundation as an optional foundation starter using manual copy or subtree-vendor (docs + governance artifacts). Confirm agentic-iam is already adopted. Resolve the profile recipe from `docs/profiles/` by first checking whether `docs/profiles/<project.profile>.md` exists before reading it. If the matching file does not exist, do not fail the step: use the closest available profile recipe as reference, record the mapping rationale, and mark the profile recipe item as explicitly deferred (partial deferral). Do not run scripts/install-starters.ps1 for this step. Do not install it into runtime canonical paths: app/backend, app/web, app/client, app/contracts, app/infra, app/composition. Use an explicit auth-foundation repository URL (or explicit owner/repo), do not infer owner from origin. If auth-foundation repository is missing or inaccessible, mark status as deferred (not failed). Report adopted files, collisions, resolved or deferred recipe mapping, unresolved ADR seeds, and whether verified claims or groups are documented only as provider-agnostic signals aligned with IAM-owned privileged resolution for Superadmin baseline.
 
 #### Additional Done Criteria (02c)
 5. Authentication foundation adoption status is explicit: `adopted` or `deferred`.
@@ -51,6 +54,7 @@ Use the official hardened script `scripts/install-starters.ps1` for runtime star
 10. If auth-foundation repository is unavailable, final status is `deferred` with rationale and next action.
 11. If `docs/profiles/<project.profile>.md` is missing, output includes the fallback recipe used (if any), mapping rationale, and explicit partial deferral.
 12. Output includes promoted ADR seeds or explicit deferrals with rationale.
+13. If Authentication foundation is adopted, the output explicitly confirms Superadmin baseline coherence with IAM: provider-agnostic signal normalization and no direct privileged grant from provider claims or groups.
 
 #### Stop if (02c)
 - AGENTIC-IAM is not already adopted.
@@ -59,3 +63,5 @@ Use the official hardened script `scripts/install-starters.ps1` for runtime star
 - ADR seeds are neither promoted nor explicitly deferred.
 - Adoption status is ambiguous.
 - Auth foundation repository source is implicit (owner/repo inferred automatically).
+- Authentication foundation text assigns Superadmin directly from provider-specific claims or groups.
+- Authentication foundation output conflicts with the IAM baseline on platform-scope privileged resolution.

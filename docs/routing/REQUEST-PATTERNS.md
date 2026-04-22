@@ -61,6 +61,7 @@ Expected outcome:
 - each step has explicit PASS/FAIL gate and evidence
 - next step requires explicit YES/NO confirmation
 - batch stops immediately on FAIL with remediation actions
+- optional IAM/Auth foundation adoption checks validate governance-level Superadmin baseline coherence without introducing runtime slot changes
 
 ---
 
@@ -93,6 +94,7 @@ Expected outcome:
 - collisions are detected if present
 - the final structure is validated
 - post-install checks are reported
+- foundation adoption concerns, if any, remain documentation-first and outside runtime canonical slots
 
 ---
 
@@ -124,6 +126,7 @@ Expected outcome:
 - target paths are respected
 - structural conflicts are reported
 - project layout remains deterministic
+- optional foundation adoption remains a separate governance/documentation concern, not part of runtime slot assembly
 
 ---
 
@@ -153,6 +156,37 @@ Expected outcome:
 - compatibility is assessed
 - conflicts or missing prerequisites are reported
 - safe next steps are proposed
+
+---
+
+## Pattern 3A — Adopt IAM/Auth foundation starters during bootstrap
+
+Request example:
+
+Adopt `agentic-iam` and `agentic-auth-foundation` during bootstrap and confirm Superadmin baseline coherence.
+
+Primary agent:
+
+- starter-installer
+
+Supporting agents:
+
+- architecture-guardian
+- documentation-guardian
+
+Documents to consult:
+
+- docs/platform/BOOTSTRAP-RUNBOOK.md
+- docs/platform/prompts/02-install-starters.prompt.md
+- docs/platform/prompts/09-final-gate.prompt.md
+- docs/architecture/STARTER-PACKS.md
+
+Expected outcome:
+
+- foundation adoption remains outside runtime canonical app/* slots
+- IAM baseline, if adopted, explicitly documents Superadmin as platform-scope and separate from TenantRole
+- Authentication guidance, if adopted, explicitly treats claims/groups as provider-agnostic signals rather than direct privileged grants
+- any Superadmin baseline gap is marked as adopted, deferred, or partial deferral with rationale
 
 ---
 

@@ -216,12 +216,16 @@ Additional Done Criteria (02b):
 3. Foundation collisions are reported without destructive overwrite.
 4. IAM repository source is explicit (full URL or explicit owner/repo), never inferred implicitly.
 5. If IAM repository is unavailable, final status is `deferred` with rationale and next action.
+6. If IAM foundation is adopted, output confirms that Superadmin is documented as a platform-scope baseline separate from TenantRole.
+7. If IAM foundation is adopted, output confirms that privileged role resolution remains owned by the IAM foundation and is not treated as a runtime starter concern.
 
 Stop if (02b):
 - IAM is placed into a runtime canonical slot.
 - Foundation collisions are unresolved.
 - Adoption status is ambiguous.
 - IAM repository source is implicit (owner/repo inferred automatically).
+- Superadmin baseline is in scope but neither documented nor explicitly deferred.
+- Superadmin is described as a TenantRole or as an implicit extension of TenantRole.
 
 ### 02c - Optional Authentication Foundation Adoption
 
@@ -252,6 +256,8 @@ Additional Done Criteria (02c):
 6. If auth-foundation repository is unavailable, final status is `deferred` with rationale and next action.
 7. If `docs/profiles/<project.profile>.md` is missing, output includes the fallback recipe used (if any), mapping rationale, and explicit partial deferral.
 8. Output includes promoted ADR seeds or explicit deferrals with rationale.
+9. If Authentication foundation is adopted, output confirms that verified claims or groups are treated as provider-agnostic signals and not as direct Superadmin grants.
+10. If Authentication foundation is adopted, output confirms alignment with IAM-owned privileged resolution for platform-scope access.
 
 Stop if (02c):
 - AGENTIC-IAM is not already adopted.
@@ -260,6 +266,8 @@ Stop if (02c):
 - ADR seeds are neither promoted nor explicitly deferred.
 - Adoption status is ambiguous.
 - Auth foundation repository source is implicit (owner/repo inferred automatically).
+- Authentication foundation text assigns Superadmin directly from provider-specific claims or groups without IAM alignment.
+- Authentication foundation output conflicts with the IAM baseline on platform-scope privileged resolution.
 
 ### 03 - Architecture ADR 001
 
@@ -471,6 +479,7 @@ Start real feature development only after a READY outcome.
 7. Final gate is READY, or blockers are clearly documented.
 8. If IAM is in scope, AGENTIC-IAM is either adopted via manual model or explicitly deferred with rationale.
 9. If Authentication is in scope, AGENTIC-AUTH-FOUNDATION is either adopted via step 02c or explicitly deferred with rationale.
+10. If IAM and/or Authentication foundations are in scope, Superadmin baseline coherence is either documented explicitly or deferred explicitly with rationale.
 
 ## What to Do After Bootstrap
 
